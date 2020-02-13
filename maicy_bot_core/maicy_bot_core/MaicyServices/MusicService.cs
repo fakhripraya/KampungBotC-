@@ -35,7 +35,7 @@ namespace maicy_bot_core.MaicyServices
             return Task.CompletedTask;
         }
 
-        //queue not loop
+        //on song finish
         private async Task Lava_socket_client_OnTrackFinished(
             LavaPlayer player,
             LavaTrack track,
@@ -48,14 +48,32 @@ namespace maicy_bot_core.MaicyServices
 
             if(Gvar.loop_flag is true)
             {
-                await player.PlayAsync(Gvar.loop_track);
-                //await player.TextChannel.SendMessageAsync($"Now playing: {Gvar.loop_track.Title}");
-                await now_async();
+                if (!player.Queue.TryDequeue(out var item)
+                || !(item is LavaTrack next_track))
+                {
+                    if (!lava_player.IsPlaying)
+                    {
+                        await lava_player.PlayAsync(Gvar.loop_track);
+                        await now_async();
+                    }
+
+                    foreach (var loop_item in Gvar.list_loop_track)
+                    {
+                        lava_player.Queue.Enqueue(loop_item);
+                    }
+                }
+                else
+                {
+                    await player.PlayAsync(next_track);
+                    await now_async();
+                }
+                //await player.PlayAsync(Gvar.loop_track);
+                //await now_async();
             }
             else
             {
-                if (!player.Queue.TryDequeue(out var item)
-                || !(item is LavaTrack next_track))
+                if (!player.Queue.TryDequeue(out var item) 
+                    || !(item is LavaTrack next_track))
                 {
                     await player.TextChannel.SendMessageAsync
                         ("There are no more tracks in the queue.");
@@ -63,12 +81,11 @@ namespace maicy_bot_core.MaicyServices
                 }
 
                 await player.PlayAsync(next_track);
-                //await player.TextChannel.SendMessageAsync($"Now playing: {track.Title}");
                 await now_async();
             }
         }
 
-        //player check
+        //player loop check
         public string player_check()
         {
             if (lava_player == null)
@@ -83,6 +100,7 @@ namespace maicy_bot_core.MaicyServices
             }
             else
             {
+                Gvar.loop_track = lava_player.CurrentTrack;
                 Gvar.loop_flag = true;
                 return "Loop On";
             }
@@ -133,16 +151,17 @@ namespace maicy_bot_core.MaicyServices
             }
 
             var track = results.Tracks.FirstOrDefault();
-            Gvar.loop_track = track;
 
             if (lava_player.IsPlaying)
             {
                 lava_player.Queue.Enqueue(track);
+                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
                 await lava_player.TextChannel.SendMessageAsync($"{track.Title} has been added to the queue");
             }
             else
             {
                 await lava_player.PlayAsync(track);
+                Gvar.loop_track = track;
                 await now_async();
             }
         }
@@ -213,18 +232,11 @@ namespace maicy_bot_core.MaicyServices
                 s_second = "0" + second.ToString();
             }
 
-
-            //new EmbedAuthorBuilder()
-            //        .WithName(current_track_author)
-
             var embed = new EmbedBuilder
             {
-                // Embed property can be set within object initializer
-                Title = "Now Playing",
                 Description = $"By : {current_track_author}" +
                               $"\nSource : {desc}"
             };
-            // Or with methods
             var ready = embed.AddField("Duration",
                 s_hour + ":" +
                 s_minute + ":" +
@@ -238,6 +250,42 @@ namespace maicy_bot_core.MaicyServices
                 .Build();
 
             await lava_player.TextChannel.SendMessageAsync(default,default,ready);
+            return;
+        }
+
+        //queue
+        public async Task queue_async()
+        {
+            if (lava_player == null)
+            {
+                return;
+            }
+
+            string queue_string = "";
+            int queue_count = 1;
+            var queue_list = lava_player.Queue.Items.ToList();
+
+            foreach(var item in queue_list)
+            {
+                if (item is null)
+                {
+                    continue;
+                }
+                var next_track = item as LavaTrack;
+                queue_string += $"{queue_count}. " + $"{next_track.Title}\n";
+                queue_count++;
+            }
+
+            // Or with methods
+            var ready = new EmbedBuilder()
+                .WithAuthor("Queue")
+                .WithDescription(queue_string)
+                .WithColor(Color.Green)
+                .WithFooter($"There is total {queue_list.Count.ToString()} tracks in the queue")
+                .WithCurrentTimestamp()
+                .Build();
+
+            await lava_player.TextChannel.SendMessageAsync(default, default, ready);
             return;
         }
 
@@ -264,7 +312,6 @@ namespace maicy_bot_core.MaicyServices
             await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
             await now_async();
             return " ";
-               //+ $"\nNow Playing: {lava_player.CurrentTrack.Title}";
         }
 
         //volume adjustment

@@ -166,5 +166,11 @@ namespace maicy_bot_core.MaicyModule
 
             await maicy_music_service.lyric_async();
         }
+
+        [Command("Queue")]
+        public async Task Queue()
+        {
+            await maicy_music_service.queue_async();
+        }
     }
 }

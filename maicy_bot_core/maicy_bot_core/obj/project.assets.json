@@ -2142,11 +2142,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Windows\\source\\repos\\maicy_bot_core\\maicy_bot_core\\maicy_bot_core.csproj",
+      "projectUniqueName": "D:\\GIT_REPO\\KampungBotC-\\maicy_bot_core\\maicy_bot_core\\maicy_bot_core.csproj",
       "projectName": "maicy_bot_core",
-      "projectPath": "C:\\Users\\Windows\\source\\repos\\maicy_bot_core\\maicy_bot_core\\maicy_bot_core.csproj",
+      "projectPath": "D:\\GIT_REPO\\KampungBotC-\\maicy_bot_core\\maicy_bot_core\\maicy_bot_core.csproj",
       "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Windows\\source\\repos\\maicy_bot_core\\maicy_bot_core\\obj\\",
+      "outputPath": "D:\\GIT_REPO\\KampungBotC-\\maicy_bot_core\\maicy_bot_core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
