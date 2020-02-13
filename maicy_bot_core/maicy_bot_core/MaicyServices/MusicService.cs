@@ -95,12 +95,15 @@ namespace maicy_bot_core.MaicyServices
 
             if (Gvar.loop_flag is true)
             {
+                Gvar.loop_track = null;
+                Gvar.list_loop_track = null;
                 Gvar.loop_flag = false;
                 return "Loop Off";
             }
             else
             {
                 Gvar.loop_track = lava_player.CurrentTrack;
+                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
                 Gvar.loop_flag = true;
                 return "Loop On";
             }

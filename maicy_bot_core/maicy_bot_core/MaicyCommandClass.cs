@@ -50,15 +50,20 @@ namespace maicy_bot_core
             //    return;
             //}
 
-            //if (!user_message.HasStringPrefix("my!", ref arg_pos)) // maicy
+            if (!user_message.HasStringPrefix("my!", ref arg_pos)) // maicy
+            {
+                return;
+            }
+
+            //if (!user_message.HasStringPrefix("euy!", ref arg_pos)) // euy
             //{
             //    return;
             //}
 
-            if (!user_message.HasStringPrefix("euy!", ref arg_pos)) // euy
-            {
-                return;
-            }
+            //if (!user_message.HasStringPrefix("cc", ref arg_pos)) // cave
+            //{
+            //    return;
+            //}
 
             var context = new SocketCommandContext(maicy_client, user_message);
             var result = await maicy_cmd_serv.ExecuteAsync(context, arg_pos, maicy_services);
