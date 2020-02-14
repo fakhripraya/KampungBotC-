@@ -376,7 +376,10 @@ namespace maicy_bot_core.MaicyServices
 
         private async Task Maicy_client_Ready_async()
         {
-            await lava_socket_client.StartAsync(maicy_client);
+            await lava_socket_client.StartAsync(maicy_client, new Configuration
+            {
+                AutoDisconnect = false
+            });
         }
     }
 }
