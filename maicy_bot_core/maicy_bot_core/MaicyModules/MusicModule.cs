@@ -32,7 +32,7 @@ namespace maicy_bot_core.MaicyModule
             }
             else
             {
-                await maicy_music_service.connect_async(user.VoiceChannel , Context.Channel as ITextChannel);
+                await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
                 await ReplyAsync($"Successfully connected to {user.VoiceChannel.Name}");
             }
         }
@@ -64,18 +64,12 @@ namespace maicy_bot_core.MaicyModule
                 return;
             }
 
-            //await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
-            //await ReplyAsync($"Successfully connected to {user.VoiceChannel.Name}");
-
             await maicy_music_service.play_async(
                 search,
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name,"YT");
-
-            //await ReplyAsync(result);
-            //await maicy_music_service.now_async();
+                user.VoiceChannel.Name, "YT");
         }
 
         [Command("Sc")]
@@ -89,25 +83,19 @@ namespace maicy_bot_core.MaicyModule
                 return;
             }
 
-            //await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
-            //await ReplyAsync($"Successfully connected to {user.VoiceChannel.Name}");
-
             await maicy_music_service.play_async(
                 search,
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name,"SC");
-
-            //await ReplyAsync(result);
-            //await maicy_music_service.now_async();
+                user.VoiceChannel.Name, "SC");
         }
 
-        [Command("Stop")]
+        [Command("Clear")]
         public async Task Stop()
         {
-            await maicy_music_service.stop_async();
-            await ReplyAsync("Player Stopped.");
+            string reply_msg = await maicy_music_service.clear_not_async();
+            await ReplyAsync(reply_msg);
         }
 
         [Command("Pause")]
@@ -156,21 +144,30 @@ namespace maicy_bot_core.MaicyModule
         [Command("Now")]
         public async Task Now()
         {
-
-            await maicy_music_service.now_async();
+            string reply_msg = await maicy_music_service.now_async();
+            await ReplyAsync(reply_msg);
         }
 
         [Command("Lyric")]
         public async Task Lyric()
         {
 
-            await maicy_music_service.lyric_async();
+            string reply_msg = await maicy_music_service.lyric_async();
+            await ReplyAsync(reply_msg);
         }
 
         [Command("Queue")]
         public async Task Queue()
         {
-            await maicy_music_service.queue_async();
+            string reply_msg = await maicy_music_service.queue_async();
+            await ReplyAsync(reply_msg);
+        }
+
+        [Command("Shuffle")]
+        public async Task Shuffle()
+        {
+            string reply_msg = maicy_music_service.shuffle_async();
+            await ReplyAsync(reply_msg);
         }
     }
 }

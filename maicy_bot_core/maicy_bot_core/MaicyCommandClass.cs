@@ -15,7 +15,7 @@ namespace maicy_bot_core
         private readonly CommandService maicy_cmd_serv;
         private readonly IServiceProvider maicy_services;
 
-        public MaicyCommandClass(DiscordSocketClient client , CommandService cmd , IServiceProvider services)
+        public MaicyCommandClass(DiscordSocketClient client, CommandService cmd, IServiceProvider services)
         {
             maicy_client = client;
             maicy_cmd_serv = cmd;
@@ -33,7 +33,7 @@ namespace maicy_bot_core
         {
             var arg_pos = 0;
 
-            if(msg.Author.IsBot)
+            if (msg.Author.IsBot)
             {
                 return;
             }

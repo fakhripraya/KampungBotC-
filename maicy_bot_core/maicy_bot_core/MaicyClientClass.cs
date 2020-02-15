@@ -41,11 +41,15 @@ namespace maicy_bot_core
             await maicy_client.StartAsync();
             maicy_client.Log += Maicy_client_Log;
             maicy_services = SetupServices();
+
             //MaicyCommandClass
             var cmd_handler = new MaicyCommandClass(maicy_client, maicy_cmd_serv, maicy_services);
             await cmd_handler.InitializeAsync();
+
             //MusicService
             await maicy_services.GetRequiredService<MusicService>().InitializeAsync();
+
+            //bot live forever
             await Task.Delay(-1);
         }
 
