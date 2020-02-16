@@ -190,7 +190,15 @@ namespace maicy_bot_core.MaicyServices
             if (lava_player.IsPlaying)
             {
                 lava_player.Queue.Enqueue(track);
-                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+
+                if (Gvar.list_loop_track != null)
+                {
+                    Gvar.list_loop_track.Add(track);
+                }
+                else
+                {
+                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                }
                 await lava_player.TextChannel.SendMessageAsync($"{track.Title} has been added to the queue");
             }
             else
@@ -317,7 +325,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 Description = $"By : {current_track_author}" +
                               $"\nSource : {desc}" +
-                              $"\nPlayback Volume : {lava_player.CurrentVolume}"
+                              $"\nVolume : {lava_player.CurrentVolume}"
             };
             var ready = embed.AddField("Duration",
                 s_hour_current + ":" +
@@ -342,36 +350,77 @@ namespace maicy_bot_core.MaicyServices
         //queue
         public async Task<string> queue_async()
         {
+            string now_playing_title = "";
+
             if (lava_player == null)
             {
                 return "There are no more tracks in the queue.";
+            }
+
+            if (!lava_player.IsPlaying)
+            {
+                now_playing_title = "There are no currently playing track right now";
+            }
+            else
+            {
+                now_playing_title = lava_player.CurrentTrack.Title;
             }
 
             string queue_string = "";
             int queue_count = 0;
             var queue_list = lava_player.Queue.Items.ToList();
 
-            foreach (var item in queue_list)
+            if (Gvar.loop_flag == false)
             {
-                if (item is null)
+                foreach (var item in queue_list)
                 {
-                    continue;
+                    if (item is null)
+                    {
+                        continue;
+                    }
+                    var next_track = item as LavaTrack;
+                    queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
+                    queue_count++;
                 }
-                var next_track = item as LavaTrack;
-                queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
-                queue_count++;
+
+                // Or with methods
+                var ready = new EmbedBuilder()
+                    .WithAuthor("Queue")
+                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + queue_string + "```")
+                    .WithColor(Color.Green)
+                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                    .WithCurrentTimestamp()
+                    .Build();
+
+                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
             }
+            else
+            {
+                queue_count = 1;
+                queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
+                queue_list = Gvar.list_loop_track;
+                foreach (var item in queue_list)
+                {
+                    if (item is null)
+                    {
+                        continue;
+                    }
+                    var next_track = item as LavaTrack;
+                    queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
+                    queue_count++;
+                }
 
-            // Or with methods
-            var ready = new EmbedBuilder()
-                .WithAuthor("Queue")
-                .WithDescription(queue_string)
-                .WithColor(Color.Green)
-                .WithFooter($"There are total {queue_list.Count.ToString()} tracks in the queue")
-                .WithCurrentTimestamp()
-                .Build();
+                // Or with methods
+                var ready = new EmbedBuilder()
+                    .WithAuthor("Queue")
+                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Looping Queue List\"\n```\n" + "```" + queue_string + "```")
+                    .WithColor(Color.Green)
+                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                    .WithCurrentTimestamp()
+                    .Build();
 
-            await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+            }
             return "";
         }
 
@@ -412,9 +461,14 @@ namespace maicy_bot_core.MaicyServices
                 return "Player need to be connected to the channel first";
             }
 
-            if (vol < 0 || vol > 150)
+            //if (vol < 0 || vol > 150)
+            //{
+            //    return "Volume must between 0 - 150";
+            //}
+
+            if (vol < 0 || vol > 100)
             {
-                return "Volume must between 0 - 150";
+                return "Volume must between 0 - 100";
             }
 
             await lava_player.SetVolumeAsync(vol);

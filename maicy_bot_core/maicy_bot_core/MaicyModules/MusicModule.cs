@@ -20,7 +20,7 @@ namespace maicy_bot_core.MaicyModule
             maicy_music_service = music_service;
         }
 
-        [Command("Join")]
+        [Command("Join") , Alias("Connect","cn","masok","sokin","masuk")]
         public async Task Join()
         {
             var user = Context.User as SocketGuildUser;
@@ -37,7 +37,7 @@ namespace maicy_bot_core.MaicyModule
             }
         }
 
-        [Command("Leave")]
+        [Command("Leave"), Alias("dc", "disconnect", "kluar", "keluar", "caw")]
         public async Task Leave()
         {
             var user = Context.User as SocketGuildUser;
@@ -53,7 +53,7 @@ namespace maicy_bot_core.MaicyModule
             }
         }
 
-        [Command("Play")]
+        [Command("Play"), Alias("p", "main", "mainken")]
         public async Task Play([Remainder]string search)
         {
             var user = Context.User as SocketGuildUser;
@@ -72,7 +72,7 @@ namespace maicy_bot_core.MaicyModule
                 user.VoiceChannel.Name, "YT");
         }
 
-        [Command("Sc")]
+        [Command("Sc"), Alias("soundcloud", "sonclod", "sonklod")]
         public async Task Soundcloud([Remainder]string search)
         {
             var user = Context.User as SocketGuildUser;
@@ -91,42 +91,42 @@ namespace maicy_bot_core.MaicyModule
                 user.VoiceChannel.Name, "SC");
         }
 
-        [Command("Clear")]
+        [Command("Clear"), Alias("cl", "stop", "bersihken")]
         public async Task Stop()
         {
             string reply_msg = await maicy_music_service.clear_not_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Pause")]
+        [Command("Pause") , Alias("ps", "henti", "hentiken", "hentikeun", "sebat", "sebatdl", "sebatdulu")]
         public async Task Pause()
         {
             string reply_msg = await maicy_music_service.pause_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Resume")]
+        [Command("Resume"), Alias("r", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
         public async Task Resume()
         {
             string reply_msg = await maicy_music_service.resume_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Skip")]
+        [Command("Skip"), Alias("s", "next")]
         public async Task Skip()
         {
             var result = await maicy_music_service.skip_async();
             await ReplyAsync(result);
         }
 
-        [Command("Volume")]
+        [Command("Volume"), Alias("v", "vol", "suara")]
         public async Task Volume(int vol)
         {
             string reply_msg = await maicy_music_service.set_volume_async(vol);
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Loop")]
+        [Command("Loop"), Alias("lp", "repeat", "rp")]
         public async Task Loop()
         {
             var user = Context.User as SocketGuildUser;
@@ -141,14 +141,14 @@ namespace maicy_bot_core.MaicyModule
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Now")]
+        [Command("Now"), Alias("n","np", "nowplaying", "sekarang")]
         public async Task Now()
         {
             string reply_msg = await maicy_music_service.now_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Lyric")]
+        [Command("Lyric"), Alias("ly")]
         public async Task Lyric()
         {
 
@@ -156,14 +156,14 @@ namespace maicy_bot_core.MaicyModule
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Queue")]
+        [Command("Queue"), Alias("q", "antrean")]
         public async Task Queue()
         {
             string reply_msg = await maicy_music_service.queue_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Shuffle")]
+        [Command("Shuffle"), Alias("sh", "acak", "everydayimshuffling")]
         public async Task Shuffle()
         {
             string reply_msg = maicy_music_service.shuffle_async();
