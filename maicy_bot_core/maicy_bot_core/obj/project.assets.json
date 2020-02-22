@@ -78,6 +78,18 @@
           "lib/netstandard2.0/Discord.Net.WebSocket.dll": {}
         }
       },
+      "LtGt/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Sprache": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/LtGt.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LtGt.dll": {}
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -305,13 +317,28 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Sprache/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Globalization": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Sprache.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sprache.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -473,6 +500,18 @@
           "ref/netstandard1.3/System.Text.Encoding.dll": {}
         }
       },
+      "System.Text.RegularExpressions/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netcoreapp1.1/System.Text.RegularExpressions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/System.Text.RegularExpressions.dll": {}
+        }
+      },
       "System.Threading/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -517,6 +556,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Victoria.dll": {}
+        }
+      },
+      "YoutubeExplode/4.7.13": {
+        "type": "package",
+        "dependencies": {
+          "LtGt": "1.0.2",
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/YoutubeExplode.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/YoutubeExplode.dll": {}
         }
       }
     }
@@ -606,6 +658,22 @@
         "lib/netstandard1.3/Discord.Net.WebSocket.xml",
         "lib/netstandard2.0/Discord.Net.WebSocket.dll",
         "lib/netstandard2.0/Discord.Net.WebSocket.xml"
+      ]
+    },
+    "LtGt/1.0.2": {
+      "sha512": "E91XvD38YzUGeRqOIbLIXFXzmalk2mpZi0ZmiGs+bpYIUeUlPKUTdRkYgdeGspq+V8pdWOv01iIEwb3BYZAo+g==",
+      "type": "package",
+      "path": "ltgt/1.0.2",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/LtGt.dll",
+        "lib/net45/LtGt.xml",
+        "lib/netstandard1.0/LtGt.dll",
+        "lib/netstandard1.0/LtGt.xml",
+        "lib/netstandard2.0/LtGt.dll",
+        "lib/netstandard2.0/LtGt.xml",
+        "ltgt.1.0.2.nupkg.sha512",
+        "ltgt.nuspec"
       ]
     },
     "Microsoft.Extensions.DependencyInjection/2.0.0": {
@@ -1095,10 +1163,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "znZGbws7E4BA9jxNZ7FuiIRI3C9hrgatVQSTKhIYZYNOud4M5VfGlTYi6RdYO5sQrebFuF/g9UEV3hOxDMXF6Q==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "aTRmXwR5xYu+mWxE8r8W1DWnL02SeV8LwdQMsLwTWP8OZgrCCyTqvOAe5hRb1VNQYXjln7qr0PKpSyO/pcc19Q==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".signature.p7s",
         "LICENSE.md",
@@ -1120,8 +1188,31 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "Sprache/2.2.0": {
+      "sha512": "c/P5ehY6UEIMnp6UTqRGpEuJIWiw2B0Fx3P2Yl18ZxU1lbO+Eim0i8zIlLUB4y6S9ZvsIYFZecugBGcI+n+e6g==",
+      "type": "package",
+      "path": "sprache/2.2.0",
+      "files": [
+        ".signature.p7s",
+        "lib/net35/Sprache.dll",
+        "lib/net35/Sprache.xml",
+        "lib/net40/Sprache.dll",
+        "lib/net40/Sprache.xml",
+        "lib/net45/Sprache.dll",
+        "lib/net45/Sprache.xml",
+        "lib/netstandard1.0/Sprache.dll",
+        "lib/netstandard1.0/Sprache.xml",
+        "lib/netstandard2.0/Sprache.dll",
+        "lib/netstandard2.0/Sprache.xml",
+        "lib/sl5/Sprache.dll",
+        "lib/sl5/Sprache.xml",
+        "sprache.2.2.0.nupkg.sha512",
+        "sprache.nuspec"
       ]
     },
     "System.Collections/4.3.0": {
@@ -1942,6 +2033,89 @@
         "system.text.encoding.nuspec"
       ]
     },
+    "System.Text.RegularExpressions/4.3.0": {
+      "sha512": "gDU8FI3zDZosA+4QpiTZG2TXzMMhjLlmNEz6cGV/C1nIZ/7Sq5QFf2SrKBrZMYNT8lwjN1wA4TdrZYmuCnCq0w==",
+      "type": "package",
+      "path": "system.text.regularexpressions/4.3.0",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net463/System.Text.RegularExpressions.dll",
+        "lib/netcore50/System.Text.RegularExpressions.dll",
+        "lib/netstandard1.6/System.Text.RegularExpressions.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net463/System.Text.RegularExpressions.dll",
+        "ref/netcore50/System.Text.RegularExpressions.dll",
+        "ref/netcore50/System.Text.RegularExpressions.xml",
+        "ref/netcore50/de/System.Text.RegularExpressions.xml",
+        "ref/netcore50/es/System.Text.RegularExpressions.xml",
+        "ref/netcore50/fr/System.Text.RegularExpressions.xml",
+        "ref/netcore50/it/System.Text.RegularExpressions.xml",
+        "ref/netcore50/ja/System.Text.RegularExpressions.xml",
+        "ref/netcore50/ko/System.Text.RegularExpressions.xml",
+        "ref/netcore50/ru/System.Text.RegularExpressions.xml",
+        "ref/netcore50/zh-hans/System.Text.RegularExpressions.xml",
+        "ref/netcore50/zh-hant/System.Text.RegularExpressions.xml",
+        "ref/netcoreapp1.1/System.Text.RegularExpressions.dll",
+        "ref/netstandard1.0/System.Text.RegularExpressions.dll",
+        "ref/netstandard1.0/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/de/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/es/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/fr/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/it/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/ja/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/ko/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/ru/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/zh-hans/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.0/zh-hant/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/System.Text.RegularExpressions.dll",
+        "ref/netstandard1.3/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/de/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/es/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/fr/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/it/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/ja/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/ko/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/ru/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/zh-hans/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.3/zh-hant/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/System.Text.RegularExpressions.dll",
+        "ref/netstandard1.6/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/de/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/es/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/fr/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/it/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/ja/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/ko/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/ru/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/zh-hans/System.Text.RegularExpressions.xml",
+        "ref/netstandard1.6/zh-hant/System.Text.RegularExpressions.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.text.regularexpressions.4.3.0.nupkg.sha512",
+        "system.text.regularexpressions.nuspec"
+      ]
+    },
     "System.Threading/4.3.0": {
       "sha512": "l6J1G9zmn6r5xU+DSp/Vxgx6eG+qUvQgdpgo28m1gEwfNyG6HqlF6h2ESDXZCYEPnngsmkTQ+q7MyyMMTNlaiA==",
       "type": "package",
@@ -2126,13 +2300,32 @@
         "victoria.4.0.8.nupkg.sha512",
         "victoria.nuspec"
       ]
+    },
+    "YoutubeExplode/4.7.13": {
+      "sha512": "MvBFGzPVBsoYZq/LP9qNjK53bNM/6fbHbOKTMFSSK/Cca81aqa6JJ/rwTmgKZesJEcKGUddXH/O2KcZmgEpw0w==",
+      "type": "package",
+      "path": "youtubeexplode/4.7.13",
+      "files": [
+        ".signature.p7s",
+        "favicon.png",
+        "lib/net45/YoutubeExplode.dll",
+        "lib/net45/YoutubeExplode.xml",
+        "lib/netstandard1.1/YoutubeExplode.dll",
+        "lib/netstandard1.1/YoutubeExplode.xml",
+        "lib/netstandard2.0/YoutubeExplode.dll",
+        "lib/netstandard2.0/YoutubeExplode.xml",
+        "youtubeexplode.4.7.13.nupkg.sha512",
+        "youtubeexplode.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "Discord.Net >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Victoria >= 4.0.8"
+      "Newtonsoft.Json >= 12.0.3",
+      "Victoria >= 4.0.8",
+      "YoutubeExplode >= 4.7.13"
     ]
   },
   "packageFolders": {
@@ -2185,9 +2378,17 @@
             "version": "[2.1.0, )",
             "autoReferenced": true
           },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
+          },
           "Victoria": {
             "target": "Package",
             "version": "[4.0.8, )"
+          },
+          "YoutubeExplode": {
+            "target": "Package",
+            "version": "[4.7.13, )"
           }
         },
         "imports": [

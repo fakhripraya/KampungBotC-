@@ -69,7 +69,7 @@ namespace maicy_bot_core.MaicyModule
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name, "YT");
+                user.VoiceChannel.Name, "YT",user.Id);
         }
 
         [Command("Sc"), Alias("soundcloud", "sonclod", "sonklod")]
@@ -88,7 +88,7 @@ namespace maicy_bot_core.MaicyModule
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name, "SC");
+                user.VoiceChannel.Name, "SC" , user.Guild.Id);
         }
 
         [Command("Clear"), Alias("cl", "stop", "bersihken")]
@@ -126,6 +126,13 @@ namespace maicy_bot_core.MaicyModule
             await ReplyAsync(reply_msg);
         }
 
+        [Command("Earrape")]
+        public async Task Earrape(int vol)
+        {
+            string reply_msg = await maicy_music_service.set_Earrape();
+            await ReplyAsync(reply_msg);
+        }
+
         [Command("Loop"), Alias("lp", "repeat", "rp")]
         public async Task Loop()
         {
@@ -144,8 +151,7 @@ namespace maicy_bot_core.MaicyModule
         [Command("Now"), Alias("n","np", "nowplaying", "sekarang")]
         public async Task Now()
         {
-            string reply_msg = await maicy_music_service.now_async();
-            await ReplyAsync(reply_msg);
+            await maicy_music_service.now_async();
         }
 
         [Command("Lyric"), Alias("ly")]
@@ -159,8 +165,8 @@ namespace maicy_bot_core.MaicyModule
         [Command("Queue"), Alias("q", "antrean")]
         public async Task Queue()
         {
-            string reply_msg = await maicy_music_service.queue_async();
-            await ReplyAsync(reply_msg);
+            Embed reply_msg = maicy_music_service.queue_async();
+            await ReplyAsync(default,default,reply_msg);
         }
 
         [Command("Shuffle"), Alias("sh", "acak", "everydayimshuffling")]

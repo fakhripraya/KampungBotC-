@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Victoria;
 using Victoria.Entities;
 using maicy_bot_core.MiscData;
+using YoutubeExplode;
 
 namespace maicy_bot_core.MaicyServices
 {
@@ -69,10 +70,10 @@ namespace maicy_bot_core.MaicyServices
                 return;
             }
 
-            if (!reason.ShouldPlayNext())
-            {
-                return;
-            }
+            //if (!reason.ShouldPlayNext())
+            //{
+            //    return;
+            //}
 
             if (Gvar.loop_flag is true)
             {
@@ -152,12 +153,15 @@ namespace maicy_bot_core.MaicyServices
             SocketVoiceChannel voice_channel,
             ITextChannel channel,
             string voice_channel_name,
-            string type)
+            string type,
+            ulong user_guild_id)
         {
             var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
-            var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.Id == 674652118472458240).FirstOrDefault();
-            //674652118472458240 jukbok id
+            var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault();
+            //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673472156033613856).FirstOrDefault();
 
+            //674652118472458240 jukbok id
+            //673472156033613856 maicy id
             if (lava_client_id == null)
             {
                 await connect_async(voice_channel, channel);
@@ -172,7 +176,27 @@ namespace maicy_bot_core.MaicyServices
             SearchResult results = null; //initialize biar seneng
             if (type == "YT")
             {
-                results = await lava_rest_client.SearchYouTubeAsync(search);
+                if (search.Contains("playlist?list="))
+                {
+                    int _chars = search.Count() - 34;
+
+                    var playlist_id = search.Substring(_chars, 34);
+                    var client = new YoutubeClient();
+                    Gvar.playlist = await client.GetPlaylistAsync(playlist_id);
+
+                    //await lava_player.TextChannel.SendMessageAsync($"Waiting to put {playlist.Videos.Count} tracks to queue");
+                    //List<LavaTrack> tracks = new List<LavaTrack>();
+                    //foreach (var video in playlist.Videos.ToList())
+                    //{
+                    //    results = await lava_rest_client.SearchYouTubeAsync("www.youtube.com/watch?v=" + video.Id);
+                    //    //tracks.Add(results.Tracks.FirstOrDefault());
+                    //    Console.WriteLine($"Add {tracks.Count}");
+                    //}
+                }
+                else
+                {
+                    results = await lava_rest_client.SearchYouTubeAsync(search);
+                }
             }
             else if (type == "SC")
             {
@@ -247,16 +271,22 @@ namespace maicy_bot_core.MaicyServices
         }
 
         //now
-        public async Task<string> now_async()
+        public async Task now_async()
         {
+            var return_embed = new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("There are no track playing at this time.")
+                    .WithCurrentTimestamp()
+                    .Build();
+
             if (lava_player == null)
             {
-                return "There are no track playing at this time.";
+                await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
             }
 
             if (!lava_player.IsPlaying)
             {
-                return "There are no track playing at this time.";
+                await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
             }
 
             var thumbnail = await lava_player.CurrentTrack.FetchThumbnailAsync();
@@ -344,17 +374,25 @@ namespace maicy_bot_core.MaicyServices
                 .Build();
 
             await lava_player.TextChannel.SendMessageAsync(default, default, ready);
-            return "";
         }
 
         //queue
-        public async Task<string> queue_async()
+        public Embed queue_async()
         {
             string now_playing_title = "";
 
             if (lava_player == null)
             {
-                return "There are no more tracks in the queue.";
+                var ready = new EmbedBuilder()
+                    .WithAuthor("Queue")
+                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```There are no currently playing track right now```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + "There are no more tracks in the queue" + "```")
+                    .WithColor(Color.Green)
+                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {0} tracks in the queue")
+                    .WithCurrentTimestamp()
+                    .Build();
+
+                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                return ready;
             }
 
             if (!lava_player.IsPlaying)
@@ -370,6 +408,18 @@ namespace maicy_bot_core.MaicyServices
             int queue_count = 0;
             var queue_list = lava_player.Queue.Items.ToList();
 
+            if (lava_player.Queue.Count == 0)
+            {
+                if (Gvar.loop_flag == true)
+                {
+                    queue_string = "";
+                }
+                else
+                {
+                    queue_string = "There are no more tracks in the queue";
+                }
+            }
+
             if (Gvar.loop_flag == false)
             {
                 foreach (var item in queue_list)
@@ -383,6 +433,11 @@ namespace maicy_bot_core.MaicyServices
                     queue_count++;
                 }
 
+                if (queue_count == 0)
+                {
+                    queue_string = "There are no more tracks in the queue";
+                }
+
                 // Or with methods
                 var ready = new EmbedBuilder()
                     .WithAuthor("Queue")
@@ -392,7 +447,8 @@ namespace maicy_bot_core.MaicyServices
                     .WithCurrentTimestamp()
                     .Build();
 
-                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                return ready;
             }
             else
             {
@@ -410,6 +466,11 @@ namespace maicy_bot_core.MaicyServices
                     queue_count++;
                 }
 
+                if (queue_count == 0)
+                {
+                    queue_string = "There are no more tracks in the queue";
+                }
+
                 // Or with methods
                 var ready = new EmbedBuilder()
                     .WithAuthor("Queue")
@@ -419,9 +480,9 @@ namespace maicy_bot_core.MaicyServices
                     .WithCurrentTimestamp()
                     .Build();
 
-                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                return ready;
             }
-            return "";
         }
 
         //clear
@@ -441,12 +502,19 @@ namespace maicy_bot_core.MaicyServices
         //skip
         public async Task<string> skip_async()
         {
+            var old_track = lava_player.CurrentTrack;
+            if (lava_player.IsPlaying && lava_player.Queue.Count == 0)
+            {
+                await lava_player.StopAsync();
+                await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
+                return " ";
+            }
+
             if (lava_player == null || lava_player.Queue.Count == 0)
             {
                 return "Nothing in queue";
             }
-
-            var old_track = lava_player.CurrentTrack;
+            
             await lava_player.SkipAsync();
             await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
             await now_async();
@@ -473,6 +541,23 @@ namespace maicy_bot_core.MaicyServices
 
             await lava_player.SetVolumeAsync(vol);
             return $"Volume set to {vol}";
+        }
+
+        //volume earrape
+        public async Task<string> set_Earrape()
+        {
+            if (lava_player == null)
+            {
+                return "Player need to be connected to the channel first";
+            }
+
+            //if (vol < 0 || vol > 150)
+            //{
+            //    return "Volume must between 0 - 150";
+            //}
+
+            await lava_player.SetVolumeAsync(1000);
+            return $"Mampos lo 1000 volume earrape!!";
         }
 
         //pause
@@ -519,6 +604,7 @@ namespace maicy_bot_core.MaicyServices
 
             lava_player.Queue.Shuffle();
             Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+            //Gvar.list_loop_track.Add(lava_player.CurrentTrack);
             return "Track shuffled.";
         }
 
