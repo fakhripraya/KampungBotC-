@@ -165,9 +165,11 @@ namespace maicy_bot_core.MaicyServices
                 var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
                 var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault();
                 //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673472156033613856).FirstOrDefault();
+                //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673757055420596265).FirstOrDefault();
 
                 //674652118472458240 jukbok id
                 //673472156033613856 maicy id
+                //673757055420596265 euy
                 if (lava_client_id == null)
                 {
                     await connect_async(voice_channel, channel);
@@ -253,7 +255,7 @@ namespace maicy_bot_core.MaicyServices
                 {
                     string[] collection = search.Split('/');
 
-                    string[] spotify_id = collection[4].Split("?si=");
+                    string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
 
                     FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
 
