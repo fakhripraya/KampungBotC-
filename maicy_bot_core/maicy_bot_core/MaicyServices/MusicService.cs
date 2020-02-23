@@ -9,6 +9,9 @@ using Victoria;
 using Victoria.Entities;
 using maicy_bot_core.MiscData;
 using YoutubeExplode;
+using SpotifyAPI.Web;
+using SpotifyAPI.Web.Auth;
+using SpotifyAPI.Web.Models;
 
 namespace maicy_bot_core.MaicyServices
 {
@@ -18,6 +21,7 @@ namespace maicy_bot_core.MaicyServices
         private LavaRestClient lava_rest_client;
         private LavaSocketClient lava_socket_client;
         private LavaPlayer lava_player;
+        private static SpotifyWebAPI _spotify;
 
         public MusicService(LavaRestClient lavaRestClient,
             LavaSocketClient lavaSocketClient,
@@ -156,45 +160,98 @@ namespace maicy_bot_core.MaicyServices
             string type,
             ulong user_guild_id)
         {
-            var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
-            var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault();
-            //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673472156033613856).FirstOrDefault();
+            try
+            {
+                var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
+                var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault();
+                //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673472156033613856).FirstOrDefault();
 
-            //674652118472458240 jukbok id
-            //673472156033613856 maicy id
-            if (lava_client_id == null)
-            {
-                await connect_async(voice_channel, channel);
-                lava_player = lava_socket_client.GetPlayer(guild_id);
-                await lava_player.TextChannel.SendMessageAsync($"Successfully connected to {voice_channel_name}");
-            }
-            else
-            {
-                lava_player = lava_socket_client.GetPlayer(guild_id);
-            }
-
-            SearchResult results = null; //initialize biar seneng
-            if (type == "YT")
-            {
-                if (search.Contains("playlist?list="))
+                //674652118472458240 jukbok id
+                //673472156033613856 maicy id
+                if (lava_client_id == null)
                 {
-                    int _chars = search.Count() - 34;
+                    await connect_async(voice_channel, channel);
+                    lava_player = lava_socket_client.GetPlayer(guild_id);
+                    await lava_player.TextChannel.SendMessageAsync($"Successfully connected to {voice_channel_name}");
+                }
+                else
+                {
+                    lava_player = lava_socket_client.GetPlayer(guild_id);
+                }
 
-                    var playlist_id = search.Substring(_chars, 34);
-                    var client = new YoutubeClient();
-                    var playlist = await client.GetPlaylistAsync(playlist_id);
+                SearchResult results = null; //initialize biar seneng
+                if (type == "YT")
+                {
+                    if (search.Contains("playlist?list="))
+                    {
+                        int _chars = search.Count() - 34;
 
-                    if (playlist.Videos.ToList().Count > 200)
+                        var playlist_id = search.Substring(_chars, 34);
+                        var client = new YoutubeClient();
+                        var playlist = await client.GetPlaylistAsync(playlist_id);
+
+                        if (playlist.Videos.ToList().Count > 200)
+                        {
+                            await lava_player.TextChannel.SendMessageAsync($"Cannot add a playlist with more than 200 songs in it");
+                            return;
+                        }
+
+                        await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} playlist to the queue. Please wait.");
+
+                        foreach (var item in playlist.Videos)
+                        {
+                            results = await lava_rest_client.SearchYouTubeAsync(item.Id);
+
+                            if (lava_player.IsPlaying)
+                            {
+                                lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
+
+                                if (Gvar.list_loop_track != null)
+                                {
+                                    Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                                }
+                                else
+                                {
+                                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                                }
+                            }
+                            else
+                            {
+                                await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
+                                Gvar.loop_track = results.Tracks.FirstOrDefault();
+                                await now_async();
+                            }
+                        }
+                        await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
+                        return;
+                    }
+                    else
+                    {
+                        results = await lava_rest_client.SearchYouTubeAsync(search);
+                    }
+                }
+                else if (type == "SC")
+                {
+                    results = await lava_rest_client.SearchSoundcloudAsync(search);
+                }
+                else if (type == "SP")
+                {
+                    var search_result = _spotify.SearchItems(search, SpotifyAPI.Web.Enums.SearchType.All, limit: 50)?.Playlists;
+                    var spotify_playlist = search_result.Items.FirstOrDefault();
+
+                    FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_playlist.Id, fields: "", market: "");
+
+                    if (sp_playlist.Tracks.Total > 200)
                     {
                         await lava_player.TextChannel.SendMessageAsync($"Cannot add a playlist with more than 200 songs in it");
                         return;
                     }
 
-                    await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} to the queue. Please wait.");
+                    await lava_player.TextChannel.SendMessageAsync($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.");
 
-                    foreach (var item in playlist.Videos)
+                    foreach (var sp_item in sp_playlist.Tracks.Items)
                     {
-                        results = await lava_rest_client.SearchYouTubeAsync(item.Id);
+                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists + " " + sp_item.Track.Name);
 
                         if (lava_player.IsPlaying)
                         {
@@ -216,46 +273,43 @@ namespace maicy_bot_core.MaicyServices
                             await now_async();
                         }
                     }
-                    await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
+
+                    await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
                     return;
                 }
-                else
+
+                if (results.LoadType == LoadType.NoMatches
+                    || results.LoadType == LoadType.LoadFailed)
                 {
-                    results = await lava_rest_client.SearchYouTubeAsync(search);
+                    await lava_player.TextChannel.SendMessageAsync("No matches found.");
                 }
-            }
-            else if (type == "SC")
-            {
-                results = await lava_rest_client.SearchSoundcloudAsync(search);
-            }
 
-            if (results.LoadType == LoadType.NoMatches
-                || results.LoadType == LoadType.LoadFailed)
-            {
-                await lava_player.TextChannel.SendMessageAsync("No matches found.");
-            }
+                var track = results.Tracks.FirstOrDefault();
 
-            var track = results.Tracks.FirstOrDefault();
-
-            if (lava_player.IsPlaying)
-            {
-                lava_player.Queue.Enqueue(track);
-
-                if (Gvar.list_loop_track != null)
+                if (lava_player.IsPlaying)
                 {
-                    Gvar.list_loop_track.Add(track);
+                    lava_player.Queue.Enqueue(track);
+
+                    if (Gvar.list_loop_track != null)
+                    {
+                        Gvar.list_loop_track.Add(track);
+                    }
+                    else
+                    {
+                        Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                    }
+                    await lava_player.TextChannel.SendMessageAsync($"{track.Title} has been added to the queue");
                 }
                 else
                 {
-                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                    await lava_player.PlayAsync(track);
+                    Gvar.loop_track = track;
+                    await now_async();
                 }
-                await lava_player.TextChannel.SendMessageAsync($"{track.Title} has been added to the queue");
             }
-            else
+            catch (Exception ex)
             {
-                await lava_player.PlayAsync(track);
-                Gvar.loop_track = track;
-                await now_async();
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -632,6 +686,14 @@ namespace maicy_bot_core.MaicyServices
             {
                 AutoDisconnect = false
             });
+
+            CredentialsAuth auth = new CredentialsAuth("56894be43189492a881161efd8963cb0", "06a0a3c3331247c4bf4f2a5f979a3d11");
+            Token token = await auth.GetToken();
+            _spotify = new SpotifyWebAPI()
+            {
+                AccessToken = token.AccessToken,
+                TokenType = token.TokenType
+            };
         }
     }
 }

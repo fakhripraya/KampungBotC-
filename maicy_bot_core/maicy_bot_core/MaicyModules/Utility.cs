@@ -33,12 +33,14 @@ namespace maicy_bot_core.MaicyModule
                 .WithDescription(
                 "MUSIC COMMAND\n\n\n" +
                 "`Join` [Join current user channel] , `Leave` [Leave channel]\n\n" +
-                "`Play` [Play song from Youtube] , `Sc` [Play song from Soundcloud]\n\n" +
+                "`Play` [Play song/playlist from Youtube] , `Soundcloud` [Play song from Soundcloud]\n\n" +
+                "`spotify` [Play playlist from spotify (u need to put playlist name not the url)]" +
                 "`Clear` [Stop and Clear all tracks] , `Pause` [Pause current playback]\n\n" +
                 "`Resume` [Resume current playback] , `Skip` [Skip current playback]\n\n" +
                 "`Volume` [Set playback Volumes] , `Loop` [Loop tracks]\n\n" +
                 "`Now` [Get current track info] , `Shuffle` [Shuffle the queue randomly]\n\n" +
-                "`Lyrics` [Fetch current track lyrics] , `Queue` [Get tracks queue info]\n\n\n" +
+                "`Lyrics` [Fetch current track lyrics] , `Queue` [Get tracks queue info]\n\n" +
+                "`Shuffle` [Shuffle the queue]\n\n\n" +
                 "UTILITY\n\n" +
                 "`Help` [summon this command]")
                 .WithFooter("Contact : PakPres#8360 for any feedback")

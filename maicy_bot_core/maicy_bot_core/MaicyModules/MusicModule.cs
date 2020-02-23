@@ -72,7 +72,26 @@ namespace maicy_bot_core.MaicyModule
                 user.VoiceChannel.Name, "YT",user.Id);
         }
 
-        [Command("Sc"), Alias("soundcloud", "sonclod", "sonklod")]
+        [Command("Spotify"), Alias("sp", "spotifa", "spoti")]
+        public async Task Spotify([Remainder]string search)
+        {
+            var user = Context.User as SocketGuildUser;
+
+            if (user.VoiceChannel is null)
+            {
+                await ReplyAsync("You need to connect to a voice channel.");
+                return;
+            }
+
+            await maicy_music_service.play_async(
+                search,
+                Context.Guild.Id,
+                user.VoiceChannel,
+                Context.Channel as ITextChannel,
+                user.VoiceChannel.Name, "SP", user.Id);
+        }
+
+        [Command("soundcloud"), Alias("sc", "sonclod", "sonklod")]
         public async Task Soundcloud([Remainder]string search)
         {
             var user = Context.User as SocketGuildUser;
