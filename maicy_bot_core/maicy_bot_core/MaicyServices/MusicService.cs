@@ -190,9 +190,15 @@ namespace maicy_bot_core.MaicyServices
                         var client = new YoutubeClient();
                         var playlist = await client.GetPlaylistAsync(playlist_id);
 
+                        if (playlist == null)
+                        {
+                            await lava_player.TextChannel.SendMessageAsync("Can't find playlist");
+                            return;
+                        }
+
                         if (playlist.Videos.ToList().Count > 200)
                         {
-                            await lava_player.TextChannel.SendMessageAsync($"Cannot add a playlist with more than 200 songs in it");
+                            await lava_player.TextChannel.SendMessageAsync("Cannot add a playlist with more than 200 songs in it");
                             return;
                         }
 
@@ -201,6 +207,12 @@ namespace maicy_bot_core.MaicyServices
                         foreach (var item in playlist.Videos)
                         {
                             results = await lava_rest_client.SearchYouTubeAsync(item.Id);
+
+                            if (results.LoadType == LoadType.NoMatches
+                            || results.LoadType == LoadType.LoadFailed)
+                            {
+                                continue;
+                            }
 
                             if (lava_player.IsPlaying)
                             {
@@ -219,9 +231,10 @@ namespace maicy_bot_core.MaicyServices
                             {
                                 await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
                                 Gvar.loop_track = results.Tracks.FirstOrDefault();
-                                await now_async();
                             }
                         }
+
+                        await now_async();
                         await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
                         return;
                     }
@@ -236,14 +249,30 @@ namespace maicy_bot_core.MaicyServices
                 }
                 else if (type == "SP")
                 {
-                    var search_result = _spotify.SearchItems(search, SpotifyAPI.Web.Enums.SearchType.All, limit: 50)?.Playlists;
-                    var spotify_playlist = search_result.Items.FirstOrDefault();
+                    //if (search.Contains("https://open.spotify.com/playlist/0xCLLhGz3rLTWWoeaBfRLZ?si=o3eKrsYEQzmtzve9qAPk7A"))
+                    //{
+                    //    // http:// = 8 char
+                    //}
 
-                    FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_playlist.Id, fields: "", market: "");
+                    string[] collection = search.Split('/');
+
+                    string[] spotify_id = collection[4].Split("?si=");
+
+                    //var search_result = _spotify.SearchItems(search, SpotifyAPI.Web.Enums.SearchType.All, limit: 50)?.Playlists;
+
+                    //if (search_result == null)
+                    //{
+                    //    await lava_player.TextChannel.SendMessageAsync("Can't find playlist");
+                    //    return;
+                    //}
+
+                    //var spotify_playlist = search_result.Items.FirstOrDefault();
+
+                    FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
 
                     if (sp_playlist.Tracks.Total > 200)
                     {
-                        await lava_player.TextChannel.SendMessageAsync($"Cannot add a playlist with more than 200 songs in it");
+                        await lava_player.TextChannel.SendMessageAsync("Cannot add a playlist with more than 200 songs in it");
                         return;
                     }
 
@@ -251,7 +280,13 @@ namespace maicy_bot_core.MaicyServices
 
                     foreach (var sp_item in sp_playlist.Tracks.Items)
                     {
-                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists + " " + sp_item.Track.Name);
+                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists.FirstOrDefault().Name + " " + sp_item.Track.Name);
+
+                        if (results.LoadType == LoadType.NoMatches
+                            || results.LoadType == LoadType.LoadFailed)
+                        {
+                            continue;
+                        }
 
                         if (lava_player.IsPlaying)
                         {
@@ -270,10 +305,10 @@ namespace maicy_bot_core.MaicyServices
                         {
                             await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
                             Gvar.loop_track = results.Tracks.FirstOrDefault();
-                            await now_async();
                         }
                     }
-
+                    
+                    await now_async();
                     await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
                     return;
                 }
@@ -316,250 +351,273 @@ namespace maicy_bot_core.MaicyServices
         //lyric
         public async Task<string> lyric_async()
         {
-            if (lava_player == null)
+            try
             {
-                return "There are no track playing at this time.";
+                if (lava_player == null)
+                {
+                    return "There are no track playing at this time.";
+                }
+
+                if (!lava_player.IsPlaying)
+                {
+                    return "There are no track playing at this time.";
+                }
+
+                var lyric = await lava_player.CurrentTrack.FetchLyricsAsync();
+
+                if (lyric == "" || lyric == null)
+                {
+                    return "Can't find lyric.";
+                }
+
+                var embed = new EmbedBuilder
+                {
+                    // Embed property can be set within object initializer
+                    Title = $"By : {lava_player.CurrentTrack.Author}\n" +
+                            $"Title : {lava_player.CurrentTrack.Title}"
+                };
+                // Or with methods
+                var ready = embed
+                    .WithColor(Color.Green)
+                    .WithDescription(lyric)
+                    .WithCurrentTimestamp()
+                    .Build();
+
+                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                return "";
             }
-
-            if (!lava_player.IsPlaying)
+            catch (Exception ex)
             {
-                return "There are no track playing at this time.";
+                Console.WriteLine(ex.Message);
             }
-
-            var lyric = await lava_player.CurrentTrack.FetchLyricsAsync();
-
-            if (lyric == "" || lyric == null)
-            {
-                return "Can't find lyric.";
-            }
-
-            var embed = new EmbedBuilder
-            {
-                // Embed property can be set within object initializer
-                Title = $"By : {lava_player.CurrentTrack.Author}\n" +
-                        $"Title : {lava_player.CurrentTrack.Title}"
-            };
-            // Or with methods
-            var ready = embed
-                .WithColor(Color.Green)
-                .WithDescription(lyric)
-                .WithCurrentTimestamp()
-                .Build();
-
-            await lava_player.TextChannel.SendMessageAsync(default, default, ready);
             return "";
         }
 
         //now
         public async Task now_async()
         {
-            var return_embed = new EmbedBuilder()
+            try
+            {
+                var return_embed = new EmbedBuilder()
                     .WithColor(Color.Green)
                     .WithTitle("There are no track playing at this time.")
                     .WithCurrentTimestamp()
                     .Build();
 
-            if (lava_player == null)
-            {
-                await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                if (lava_player == null)
+                {
+                    await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                }
+
+                if (!lava_player.IsPlaying)
+                {
+                    await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                }
+
+                var thumbnail = await lava_player.CurrentTrack.FetchThumbnailAsync();
+
+                var current_track_author = lava_player.CurrentTrack.Author;
+                var current_track_title = lava_player.CurrentTrack.Title;
+                var current_track_length = lava_player.CurrentTrack.Length;
+                var current_track_url = lava_player.CurrentTrack.Uri;
+                string desc = null;
+
+                if (current_track_url.ToString().ToUpper().Contains("YOUTUBE"))
+                {
+                    desc = "Youtube";
+                }
+                else if (current_track_url.ToString().ToUpper().Contains("SOUNDCLOUD"))
+                {
+                    desc = "Soundcloud";
+                }
+                var current_hour = lava_player.CurrentTrack.Position.Hours;
+                var current_minute = lava_player.CurrentTrack.Position.Minutes;
+                var current_second = lava_player.CurrentTrack.Position.Seconds;
+
+                var hour = lava_player.CurrentTrack.Length.Hours;
+                var minute = lava_player.CurrentTrack.Length.Minutes;
+                var second = lava_player.CurrentTrack.Length.Seconds;
+
+                string s_hour = lava_player.CurrentTrack.Length.Hours.ToString(),
+                    s_minute = lava_player.CurrentTrack.Length.Minutes.ToString(),
+                    s_second = lava_player.CurrentTrack.Length.Seconds.ToString();
+
+                string s_hour_current = lava_player.CurrentTrack.Position.Hours.ToString(),
+                    s_minute_current = lava_player.CurrentTrack.Position.Minutes.ToString(),
+                    s_second_current = lava_player.CurrentTrack.Position.Seconds.ToString();
+
+                if (hour < 10)
+                {
+                    s_hour = "0" + hour.ToString();
+                }
+
+                if (minute < 10)
+                {
+                    s_minute = "0" + minute.ToString();
+                }
+
+                if (second < 10)
+                {
+                    s_second = "0" + second.ToString();
+                }
+
+                if (current_hour < 10)
+                {
+                    s_hour_current = "0" + current_hour.ToString();
+                }
+
+                if (current_minute < 10)
+                {
+                    s_minute_current = "0" + current_minute.ToString();
+                }
+
+                if (current_second < 10)
+                {
+                    s_second_current = "0" + current_second.ToString();
+                }
+
+                var embed = new EmbedBuilder
+                {
+                    Description = $"By : {current_track_author}" +
+                                  $"\nSource : {desc}" +
+                                  $"\nVolume : {lava_player.CurrentVolume}"
+                };
+                var ready = embed.AddField("Duration",
+                    s_hour_current + ":" +
+                    s_minute_current + ":" +
+                    s_second_current +
+                    " / " +
+                    s_hour + ":" +
+                    s_minute + ":" +
+                    s_second)
+                    .WithAuthor("Now Playing")
+                    .WithColor(Color.Green)
+                    .WithTitle(current_track_title)
+                    .WithUrl(current_track_url.ToString())
+                    .WithThumbnailUrl(thumbnail)
+                    .WithCurrentTimestamp()
+                    .Build();
+
+                await lava_player.TextChannel.SendMessageAsync(default, default, ready);
             }
-
-            if (!lava_player.IsPlaying)
+            catch (Exception ex)
             {
-                await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                Console.WriteLine(ex.Message);
             }
-
-            var thumbnail = await lava_player.CurrentTrack.FetchThumbnailAsync();
-
-            var current_track_author = lava_player.CurrentTrack.Author;
-            var current_track_title = lava_player.CurrentTrack.Title;
-            var current_track_length = lava_player.CurrentTrack.Length;
-            var current_track_url = lava_player.CurrentTrack.Uri;
-            string desc = null;
-
-            if (current_track_url.ToString().ToUpper().Contains("YOUTUBE"))
-            {
-                desc = "Youtube";
-            }
-            else if (current_track_url.ToString().ToUpper().Contains("SOUNDCLOUD"))
-            {
-                desc = "Soundcloud";
-            }
-            var current_hour = lava_player.CurrentTrack.Position.Hours;
-            var current_minute = lava_player.CurrentTrack.Position.Minutes;
-            var current_second = lava_player.CurrentTrack.Position.Seconds;
-
-            var hour = lava_player.CurrentTrack.Length.Hours;
-            var minute = lava_player.CurrentTrack.Length.Minutes;
-            var second = lava_player.CurrentTrack.Length.Seconds;
-
-            string s_hour = lava_player.CurrentTrack.Length.Hours.ToString(),
-                s_minute = lava_player.CurrentTrack.Length.Minutes.ToString(),
-                s_second = lava_player.CurrentTrack.Length.Seconds.ToString();
-
-            string s_hour_current = lava_player.CurrentTrack.Position.Hours.ToString(),
-                s_minute_current = lava_player.CurrentTrack.Position.Minutes.ToString(),
-                s_second_current = lava_player.CurrentTrack.Position.Seconds.ToString();
-
-            if (hour < 10)
-            {
-                s_hour = "0" + hour.ToString();
-            }
-
-            if (minute < 10)
-            {
-                s_minute = "0" + minute.ToString();
-            }
-
-            if (second < 10)
-            {
-                s_second = "0" + second.ToString();
-            }
-
-            if (current_hour < 10)
-            {
-                s_hour_current = "0" + current_hour.ToString();
-            }
-
-            if (current_minute < 10)
-            {
-                s_minute_current = "0" + current_minute.ToString();
-            }
-
-            if (current_second < 10)
-            {
-                s_second_current = "0" + current_second.ToString();
-            }
-
-            var embed = new EmbedBuilder
-            {
-                Description = $"By : {current_track_author}" +
-                              $"\nSource : {desc}" +
-                              $"\nVolume : {lava_player.CurrentVolume}"
-            };
-            var ready = embed.AddField("Duration",
-                s_hour_current + ":" +
-                s_minute_current + ":" +
-                s_second_current +
-                " / " +
-                s_hour + ":" +
-                s_minute + ":" +
-                s_second)
-                .WithAuthor("Now Playing")
-                .WithColor(Color.Green)
-                .WithTitle(current_track_title)
-                .WithUrl(current_track_url.ToString())
-                .WithThumbnailUrl(thumbnail)
-                .WithCurrentTimestamp()
-                .Build();
-
-            await lava_player.TextChannel.SendMessageAsync(default, default, ready);
         }
 
         //queue
         public Embed queue_async()
         {
-            string now_playing_title = "";
-
-            if (lava_player == null)
+            try
             {
-                var ready = new EmbedBuilder()
-                    .WithAuthor("Queue")
-                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```There are no currently playing track right now```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + "There are no more tracks in the queue" + "```")
-                    .WithColor(Color.Green)
-                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {0} tracks in the queue")
-                    .WithCurrentTimestamp()
-                    .Build();
-                
-                return ready;
-            }
+                string now_playing_title = "";
 
-            if (!lava_player.IsPlaying)
-            {
-                now_playing_title = "There are no currently playing track right now";
-            }
-            else
-            {
-                now_playing_title = lava_player.CurrentTrack.Title;
-            }
-
-            string queue_string = "";
-            int queue_count = 0;
-            var queue_list = lava_player.Queue.Items.ToList();
-
-            if (lava_player.Queue.Count == 0)
-            {
-                if (Gvar.loop_flag == true)
+                if (lava_player == null)
                 {
-                    queue_string = "";
+                    var ready = new EmbedBuilder()
+                        .WithAuthor("Queue")
+                        .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```There are no currently playing track right now```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + "There are no more tracks in the queue" + "```")
+                        .WithColor(Color.Green)
+                        .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {0} tracks in the queue")
+                        .WithCurrentTimestamp()
+                        .Build();
+
+                    return ready;
+                }
+
+                if (!lava_player.IsPlaying)
+                {
+                    now_playing_title = "There are no currently playing track right now";
                 }
                 else
                 {
-                    queue_string = "There are no more tracks in the queue";
+                    now_playing_title = lava_player.CurrentTrack.Title;
                 }
-            }
 
-            if (Gvar.loop_flag == false)
-            {
-                foreach (var item in queue_list)
+                string queue_string = "";
+                int queue_count = 0;
+                var queue_list = lava_player.Queue.Items.ToList();
+
+                if (lava_player.Queue.Count == 0)
                 {
-                    if (item is null)
+                    if (Gvar.loop_flag == true)
                     {
-                        continue;
+                        queue_string = "";
                     }
-                    var next_track = item as LavaTrack;
-                    queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
-                    queue_count++;
-                }
-
-                if (queue_count == 0)
-                {
-                    queue_string = "There are no more tracks in the queue";
-                }
-
-                // Or with methods
-                var ready = new EmbedBuilder()
-                    .WithAuthor("Queue")
-                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + queue_string + "```")
-                    .WithColor(Color.Green)
-                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
-                    .WithCurrentTimestamp()
-                    .Build();
-                
-                return ready;
-            }
-            else
-            {
-                queue_count = 1;
-                queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
-                queue_list = Gvar.list_loop_track;
-                foreach (var item in queue_list)
-                {
-                    if (item is null)
+                    else
                     {
-                        continue;
+                        queue_string = "There are no more tracks in the queue";
                     }
-                    var next_track = item as LavaTrack;
-                    queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
-                    queue_count++;
                 }
 
-                if (queue_count == 0)
+                if (Gvar.loop_flag == false)
                 {
-                    queue_string = "There are no more tracks in the queue";
-                }
+                    foreach (var item in queue_list)
+                    {
+                        if (item is null)
+                        {
+                            continue;
+                        }
+                        var next_track = item as LavaTrack;
+                        queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
+                        queue_count++;
+                    }
 
-                // Or with methods
-                var ready = new EmbedBuilder()
-                    .WithAuthor("Queue")
-                    .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Looping Queue List\"\n```\n" + "```" + queue_string + "```")
-                    .WithColor(Color.Green)
-                    .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
-                    .WithCurrentTimestamp()
-                    .Build();
-                
-                return ready;
+                    if (queue_count == 0)
+                    {
+                        queue_string = "There are no more tracks in the queue";
+                    }
+
+                    // Or with methods
+                    var ready = new EmbedBuilder()
+                        .WithAuthor("Queue")
+                        .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + queue_string + "```")
+                        .WithColor(Color.Green)
+                        .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                        .WithCurrentTimestamp()
+                        .Build();
+
+                    return ready;
+                }
+                else
+                {
+                    queue_count = 1;
+                    queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
+                    queue_list = Gvar.list_loop_track;
+                    foreach (var item in queue_list)
+                    {
+                        if (item is null)
+                        {
+                            continue;
+                        }
+                        var next_track = item as LavaTrack;
+                        queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
+                        queue_count++;
+                    }
+
+                    if (queue_count == 0)
+                    {
+                        queue_string = "There are no more tracks in the queue";
+                    }
+
+                    // Or with methods
+                    var ready = new EmbedBuilder()
+                        .WithAuthor("Queue")
+                        .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Looping Queue List\"\n```\n" + "```" + queue_string + "```")
+                        .WithColor(Color.Green)
+                        .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                        .WithCurrentTimestamp()
+                        .Build();
+
+                    return ready;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new EmbedBuilder().Build();
         }
 
         //clear

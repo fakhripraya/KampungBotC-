@@ -110,7 +110,7 @@ namespace maicy_bot_core.MaicyModule
                 user.VoiceChannel.Name, "SC" , user.Guild.Id);
         }
 
-        [Command("Clear"), Alias("cl", "stop", "bersihken")]
+        [Command("Clear"), Alias("s", "cl", "stop", "bersihken")]
         public async Task Stop()
         {
             string reply_msg = await maicy_music_service.clear_not_async();
@@ -124,14 +124,14 @@ namespace maicy_bot_core.MaicyModule
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Resume"), Alias("r", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
+        [Command("Resume"), Alias("con","res", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
         public async Task Resume()
         {
             string reply_msg = await maicy_music_service.resume_async();
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Skip"), Alias("s", "next")]
+        [Command("Skip"), Alias("n", "next")]
         public async Task Skip()
         {
             var result = await maicy_music_service.skip_async();
@@ -167,13 +167,13 @@ namespace maicy_bot_core.MaicyModule
             await ReplyAsync(reply_msg);
         }
 
-        [Command("Now"), Alias("n","np", "nowplaying", "sekarang")]
+        [Command("Now"), Alias("np", "nowplaying", "sekarang")]
         public async Task Now()
         {
             await maicy_music_service.now_async();
         }
 
-        [Command("Lyric"), Alias("ly")]
+        [Command("Lyrics"), Alias("ly", "Lyric")]
         public async Task Lyric()
         {
 

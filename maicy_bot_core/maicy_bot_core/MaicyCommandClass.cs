@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using maicy_bot_core.MiscData;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
