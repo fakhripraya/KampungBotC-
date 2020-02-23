@@ -13,5 +13,8 @@ namespace maicy_bot_core.MiscData
         public static bool loop_flag { get; set; }
         public static LavaTrack loop_track { get; set; }
         public static List<Victoria.Queue.IQueueObject> list_loop_track { get; set; }
+
+        //playlist
+        public static bool playlist_load_flag { get; set; }
     }
 }

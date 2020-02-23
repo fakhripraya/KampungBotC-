@@ -203,10 +203,11 @@ namespace maicy_bot_core.MaicyServices
                         }
 
                         await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} playlist to the queue. Please wait.");
+                        Gvar.playlist_load_flag = true;
 
                         foreach (var item in playlist.Videos)
                         {
-                            results = await lava_rest_client.SearchYouTubeAsync(item.Id);
+                            results = await lava_rest_client.SearchYouTubeAsync(item.Author + " " + item.Title);
 
                             if (results.LoadType == LoadType.NoMatches
                             || results.LoadType == LoadType.LoadFailed)
@@ -236,6 +237,7 @@ namespace maicy_bot_core.MaicyServices
 
                         await now_async();
                         await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
+                        Gvar.playlist_load_flag = false;
                         return;
                     }
                     else
@@ -249,24 +251,9 @@ namespace maicy_bot_core.MaicyServices
                 }
                 else if (type == "SP")
                 {
-                    //if (search.Contains("https://open.spotify.com/playlist/0xCLLhGz3rLTWWoeaBfRLZ?si=o3eKrsYEQzmtzve9qAPk7A"))
-                    //{
-                    //    // http:// = 8 char
-                    //}
-
                     string[] collection = search.Split('/');
 
                     string[] spotify_id = collection[4].Split("?si=");
-
-                    //var search_result = _spotify.SearchItems(search, SpotifyAPI.Web.Enums.SearchType.All, limit: 50)?.Playlists;
-
-                    //if (search_result == null)
-                    //{
-                    //    await lava_player.TextChannel.SendMessageAsync("Can't find playlist");
-                    //    return;
-                    //}
-
-                    //var spotify_playlist = search_result.Items.FirstOrDefault();
 
                     FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
 
@@ -277,6 +264,7 @@ namespace maicy_bot_core.MaicyServices
                     }
 
                     await lava_player.TextChannel.SendMessageAsync($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.");
+                    Gvar.playlist_load_flag = true;
 
                     foreach (var sp_item in sp_playlist.Tracks.Items)
                     {
@@ -310,6 +298,7 @@ namespace maicy_bot_core.MaicyServices
                     
                     await now_async();
                     await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
+                    Gvar.playlist_load_flag = false;
                     return;
                 }
 

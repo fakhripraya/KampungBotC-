@@ -34,6 +34,11 @@ namespace maicy_bot_core
         {
             var arg_pos = 0;
 
+            if (Gvar.playlist_load_flag)
+            {
+                return;
+            }
+
             if (msg.Author.IsBot)
             {
                 return;
