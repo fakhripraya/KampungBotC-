@@ -182,16 +182,42 @@ namespace maicy_bot_core.MaicyServices
 
                     var playlist_id = search.Substring(_chars, 34);
                     var client = new YoutubeClient();
-                    Gvar.playlist = await client.GetPlaylistAsync(playlist_id);
+                    var playlist = await client.GetPlaylistAsync(playlist_id);
 
-                    //await lava_player.TextChannel.SendMessageAsync($"Waiting to put {playlist.Videos.Count} tracks to queue");
-                    //List<LavaTrack> tracks = new List<LavaTrack>();
-                    //foreach (var video in playlist.Videos.ToList())
-                    //{
-                    //    results = await lava_rest_client.SearchYouTubeAsync("www.youtube.com/watch?v=" + video.Id);
-                    //    //tracks.Add(results.Tracks.FirstOrDefault());
-                    //    Console.WriteLine($"Add {tracks.Count}");
-                    //}
+                    if (playlist.Videos.ToList().Count > 200)
+                    {
+                        await lava_player.TextChannel.SendMessageAsync($"Cannot add a playlist with more than 200 songs in it");
+                        return;
+                    }
+
+                    await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} to the queue. Please wait.");
+
+                    foreach (var item in playlist.Videos)
+                    {
+                        results = await lava_rest_client.SearchYouTubeAsync(item.Id);
+
+                        if (lava_player.IsPlaying)
+                        {
+                            lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
+
+                            if (Gvar.list_loop_track != null)
+                            {
+                                Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                            }
+                            else
+                            {
+                                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                            }
+                        }
+                        else
+                        {
+                            await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
+                            Gvar.loop_track = results.Tracks.FirstOrDefault();
+                            await now_async();
+                        }
+                    }
+                    await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
+                    return;
                 }
                 else
                 {
@@ -390,8 +416,7 @@ namespace maicy_bot_core.MaicyServices
                     .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {0} tracks in the queue")
                     .WithCurrentTimestamp()
                     .Build();
-
-                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                
                 return ready;
             }
 
@@ -446,8 +471,7 @@ namespace maicy_bot_core.MaicyServices
                     .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
                     .WithCurrentTimestamp()
                     .Build();
-
-                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                
                 return ready;
             }
             else
@@ -479,8 +503,7 @@ namespace maicy_bot_core.MaicyServices
                     .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
                     .WithCurrentTimestamp()
                     .Build();
-
-                //await lava_player.TextChannel.SendMessageAsync(default, default, ready);
+                
                 return ready;
             }
         }
@@ -529,11 +552,6 @@ namespace maicy_bot_core.MaicyServices
                 return "Player need to be connected to the channel first";
             }
 
-            //if (vol < 0 || vol > 150)
-            //{
-            //    return "Volume must between 0 - 150";
-            //}
-
             if (vol < 0 || vol > 100)
             {
                 return "Volume must between 0 - 100";
@@ -550,11 +568,6 @@ namespace maicy_bot_core.MaicyServices
             {
                 return "Player need to be connected to the channel first";
             }
-
-            //if (vol < 0 || vol > 150)
-            //{
-            //    return "Volume must between 0 - 150";
-            //}
 
             await lava_player.SetVolumeAsync(1000);
             return $"Mampos lo 1000 volume earrape!!";
@@ -604,7 +617,6 @@ namespace maicy_bot_core.MaicyServices
 
             lava_player.Queue.Shuffle();
             Gvar.list_loop_track = lava_player.Queue.Items.ToList();
-            //Gvar.list_loop_track.Add(lava_player.CurrentTrack);
             return "Track shuffled.";
         }
 

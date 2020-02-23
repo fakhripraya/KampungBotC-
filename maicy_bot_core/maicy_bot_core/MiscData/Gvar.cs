@@ -15,8 +15,6 @@ namespace maicy_bot_core.MiscData
         public static List<Victoria.Queue.IQueueObject> list_loop_track { get; set; }
 
         //playlist
-        public static bool playlist_flag { get; set; }
-        public static Playlist playlist { get; set; }
-        public static int queue_index { get; set; }
+        public static List<Victoria.Queue.IQueueObject> list_playlist_track { get; set; }
     }
 }
