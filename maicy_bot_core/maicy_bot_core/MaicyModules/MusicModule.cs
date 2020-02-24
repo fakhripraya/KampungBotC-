@@ -184,8 +184,15 @@ namespace maicy_bot_core.MaicyModule
         [Command("Queue"), Alias("q", "antrean")]
         public async Task Queue()
         {
-            Embed reply_msg = maicy_music_service.queue_async();
+            Embed reply_msg = maicy_music_service.queue_async(null);
             await ReplyAsync(default,default,reply_msg);
+        }
+
+        [Command("Page"), Alias("halaman")]
+        public async Task Page(int? input_page)
+        {
+            Embed reply_msg = maicy_music_service.queue_async(input_page);
+            await ReplyAsync(default, default, reply_msg);
         }
 
         [Command("Shuffle"), Alias("sh", "acak", "everydayimshuffling")]

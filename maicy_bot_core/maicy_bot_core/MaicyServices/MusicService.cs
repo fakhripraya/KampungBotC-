@@ -162,14 +162,13 @@ namespace maicy_bot_core.MaicyServices
         {
             try
             {
-                var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
-                var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault();
-                //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673472156033613856).FirstOrDefault();
-                //var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 673757055420596265).FirstOrDefault();
-
                 //674652118472458240 jukbok id
                 //673472156033613856 maicy id
                 //673757055420596265 euy
+
+                var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
+                var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault(); //input your bot id here
+
                 if (lava_client_id == null)
                 {
                     await connect_async(voice_channel, channel);
@@ -198,32 +197,28 @@ namespace maicy_bot_core.MaicyServices
                             return;
                         }
 
-                        if (playlist.Videos.ToList().Count > 200)
+                        await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} playlist to the queue. Please wait.");
+
+                        results = await lava_rest_client.SearchTracksAsync(search);
+
+                        if (results.LoadType == LoadType.NoMatches
+                        || results.LoadType == LoadType.LoadFailed)
                         {
-                            await lava_player.TextChannel.SendMessageAsync("Cannot add a playlist with more than 200 songs in it");
+                            await lava_player.TextChannel.SendMessageAsync("Load type error.");
                             return;
                         }
 
-                        await lava_player.TextChannel.SendMessageAsync($"Adding {playlist.Author} playlist to the queue. Please wait.");
                         Gvar.playlist_load_flag = true;
 
-                        foreach (var item in playlist.Videos)
+                        foreach (var item in results.Tracks)
                         {
-                            results = await lava_rest_client.SearchYouTubeAsync(item.Author + " " + item.Title);
-
-                            if (results.LoadType == LoadType.NoMatches
-                            || results.LoadType == LoadType.LoadFailed)
-                            {
-                                continue;
-                            }
-
                             if (lava_player.IsPlaying)
                             {
-                                lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
+                                lava_player.Queue.Enqueue(item);
 
                                 if (Gvar.list_loop_track != null)
                                 {
-                                    Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                                    Gvar.list_loop_track.Add(item);
                                 }
                                 else
                                 {
@@ -232,8 +227,8 @@ namespace maicy_bot_core.MaicyServices
                             }
                             else
                             {
-                                await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
-                                Gvar.loop_track = results.Tracks.FirstOrDefault();
+                                await lava_player.PlayAsync(item);
+                                Gvar.loop_track = item;
                             }
                         }
 
@@ -363,11 +358,9 @@ namespace maicy_bot_core.MaicyServices
 
                 var embed = new EmbedBuilder
                 {
-                    // Embed property can be set within object initializer
                     Title = $"By : {lava_player.CurrentTrack.Author}\n" +
                             $"Title : {lava_player.CurrentTrack.Title}"
                 };
-                // Or with methods
                 var ready = embed
                     .WithColor(Color.Green)
                     .WithDescription(lyric)
@@ -498,7 +491,7 @@ namespace maicy_bot_core.MaicyServices
         }
 
         //queue
-        public Embed queue_async()
+        public Embed queue_async(int? input_page)
         {
             try
             {
@@ -544,28 +537,76 @@ namespace maicy_bot_core.MaicyServices
 
                 if (Gvar.loop_flag == false)
                 {
-                    foreach (var item in queue_list)
+                    int page = 0;
+                    int queue_index = 0;
+                    int queue_track_index = 0;
+                    LavaTrack[,] queue_list_array = new LavaTrack[1000,10];
+
+                    foreach (var queue_item in queue_list)
                     {
-                        if (item is null)
+                        queue_list_array[queue_index, queue_track_index] = queue_item as LavaTrack;
+                        if (queue_track_index == 9)
+                        {
+                            queue_index++;
+                            queue_track_index = 0;
+                        }
+                        else
+                        {
+                            queue_track_index++;
+                        }
+                    }
+
+                    if (!(input_page is null))
+                    {
+                        if (input_page <= 0)
+                        {
+                            return new EmbedBuilder()
+                                .WithColor(Color.Green)
+                                .WithDescription("Please input the correct page number")
+                                .Build();
+                        }
+
+                        if (input_page > queue_index + 1)
+                        {
+                            return new EmbedBuilder()
+                                .WithColor(Color.Green)
+                                .WithDescription("Please input the correct page number").Build();
+                        }
+
+                        page = (int)input_page - 1;
+                    }
+
+                    for (int i = 0; i <= 9; i++)
+                    {
+                        if (queue_list_array[page, i] is null)
                         {
                             continue;
                         }
-                        var next_track = item as LavaTrack;
-                        queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
+                        var next_track = queue_list_array[page, i];
+                        queue_string += $"{(page * 10) + queue_count + 1}. " + $"{next_track.Title}\n\n";
                         queue_count++;
                     }
 
-                    if (queue_count == 0)
+                    if (lava_player.Queue.Items.ToList().Count() == 0)
                     {
                         queue_string = "There are no more tracks in the queue";
                     }
-
-                    // Or with methods
+                    
                     var ready = new EmbedBuilder()
                         .WithAuthor("Queue")
-                        .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Queue List\"\n```\n" + "```" + queue_string + "```")
+                        .WithDescription(
+                        "```bash\n\"Now Playing\"\n```\n" +
+                        $"```{now_playing_title}```" +
+                        "\n\n```bash\n\"Queue List\"\n```\n" +
+                        "```" +
+                        queue_string +
+                        "```")
                         .WithColor(Color.Green)
-                        .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                        .WithFooter(
+                        $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
+                        $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
+                        $"There are total {lava_player.Queue.Items.ToList().Count()} tracks in the queue"
+                        )
                         .WithCurrentTimestamp()
                         .Build();
 
@@ -574,30 +615,100 @@ namespace maicy_bot_core.MaicyServices
                 else
                 {
                     queue_count = 1;
-                    queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
                     queue_list = Gvar.list_loop_track;
-                    foreach (var item in queue_list)
-                    {
-                        if (item is null)
-                        {
-                            continue;
-                        }
-                        var next_track = item as LavaTrack;
-                        queue_string += $"{queue_count + 1}. " + $"{next_track.Title}\n\n";
-                        queue_count++;
-                    }
 
-                    if (queue_count == 0)
+                    if (lava_player.Queue.Items.ToList().Count() == 0 && queue_list.Count() == 0)
                     {
                         queue_string = "There are no more tracks in the queue";
                     }
 
-                    // Or with methods
+                    int page = 0;
+                    int queue_index = 0;
+                    int queue_track_index = 0;
+                    LavaTrack[,] queue_list_array = new LavaTrack[1000, 10];
+
+                    foreach (var queue_item in queue_list)
+                    {
+                        queue_list_array[queue_index, queue_track_index] = queue_item as LavaTrack;
+                        if (queue_track_index == 9)
+                        {
+                            queue_index++;
+                            queue_track_index = 0;
+                        }
+                        else
+                        {
+                            queue_track_index++;
+                        }
+                    }
+
+                    if (!(input_page is null))
+                    {
+                        if (input_page <= 0)
+                        {
+                            return new EmbedBuilder()
+                                .WithColor(Color.Green)
+                                .WithDescription("Please input the correct page number")
+                                .Build();
+                        }
+
+                        if (input_page > queue_index + 1)
+                        {
+                            return new EmbedBuilder()
+                                .WithColor(Color.Green)
+                                .WithDescription("Please input the correct page number").Build();
+                        }
+
+                        page = (int)input_page - 1;
+                    }
+
+                    if (page == 0)
+                    {
+                        //halaman pertama
+                        queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
+                        for (int i = 0; i <= 8; i++)
+                        {
+                            if (queue_list_array[page, i] is null)
+                            {
+                                continue;
+                            }
+                            var next_track = queue_list_array[page, i];
+                            queue_string += $"{(page * 10) + queue_count + 1}. " + $"{next_track.Title}\n\n";
+                            queue_count++;
+                        }
+                    }
+                    else
+                    {
+                        var next_track = queue_list_array[page - 1, 9];
+                        queue_string += $"{(page * 10) + queue_count}. " + $"{next_track.Title}\n\n";
+                        queue_count++;
+                        //halaman selanjutnya
+                        for (int i = 0; i <= 9; i++)
+                        {
+                            if (queue_list_array[page, i] is null)
+                            {
+                                continue;
+                            }
+                            next_track = queue_list_array[page, i];
+                            queue_string += $"{(page * 10) + queue_count}. " + $"{next_track.Title}\n\n";
+                            queue_count++;
+                        }
+                    }
+                    
                     var ready = new EmbedBuilder()
                         .WithAuthor("Queue")
-                        .WithDescription("```bash\n\"Now Playing\"\n```\n" + $"```{now_playing_title}```" + "\n\n```bash\n\"Looping Queue List\"\n```\n" + "```" + queue_string + "```")
+                        .WithDescription(
+                        "```bash\n\"Now Playing\"\n```\n" +
+                        $"```{now_playing_title}```" +
+                        "\n\n```bash\n\"Looping Queue List\"\n```\n" +
+                        "```" +
+                        queue_string +
+                        "```")
                         .WithColor(Color.Green)
-                        .WithFooter($"Loop Status : {Gvar.loop_flag.ToString()}\n" + $"There are total {queue_count} tracks in the queue")
+                        .WithFooter(
+                        $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
+                        $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
+                        $"There are total {lava_player.Queue.Items.ToList().Count()} tracks in the queue"
+                        )
                         .WithCurrentTimestamp()
                         .Build();
 
@@ -608,7 +719,10 @@ namespace maicy_bot_core.MaicyServices
             {
                 Console.WriteLine(ex.Message);
             }
-            return new EmbedBuilder().Build();
+            return new EmbedBuilder()
+                .WithColor(Color.Green)
+                .WithDescription("Error , Contact pres asap")
+                .Build();
         }
 
         //clear

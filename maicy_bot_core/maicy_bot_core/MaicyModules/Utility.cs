@@ -32,15 +32,32 @@ namespace maicy_bot_core.MaicyModule
                 .WithColor(Color.Green)
                 .WithDescription(
                 "MUSIC COMMAND\n\n\n" +
-                "`Join` [Join current user channel] , `Leave` [Leave channel]\n\n" +
-                "`Play` [Play song/playlist from Youtube] , `Soundcloud` [Play song from Soundcloud]\n\n" +
-                "`spotify` [Play playlist from spotify (u need to put playlist name not the url)]" +
-                "`Clear` [Stop and Clear all tracks] , `Pause` [Pause current playback]\n\n" +
-                "`Resume` [Resume current playback] , `Skip` [Skip current playback]\n\n" +
-                "`Volume` [Set playback Volumes] , `Loop` [Loop tracks]\n\n" +
-                "`Now` [Get current track info] , `Shuffle` [Shuffle the queue randomly]\n\n" +
-                "`Lyrics` [Fetch current track lyrics] , `Queue` [Get tracks queue info]\n\n" +
-                "`Shuffle` [Shuffle the queue]\n\n\n" +
+                "`Join` [Join current user channel]\n" + 
+                "`Leave` [Leave channel]\n" + 
+                "\n" +
+                "`Play` [Play song/playlist from Youtube]\n" + 
+                "`Soundcloud` [Play song from Soundcloud]\n" + 
+                "`spotify` [Play playlist from spotify]\n" +
+                "[ex: (prefix)spotify {url} ]\n" + 
+                "\n" +
+                "`Resume` [Resume current playback]\n" + 
+                "`Pause` [Pause current playback]\n" + 
+                "\n" +
+                "`Clear` [Stop and Clear all tracks]\n" + 
+                "`Skip` [Skip current playback]\n" + 
+                "\n" +
+                "`Volume` [Set playback Volumes]\n" + 
+                "`Loop` [Loop tracks]\n" + 
+                "\n" + 
+                "`Now` [Get current track info]\n" + 
+                "`Lyrics` [Fetch current track lyrics]\n" + 
+                "\n" +
+                "`Queue` [Get tracks queue info]\n" + 
+                "`Page` [Get tracks queue info]\n" +
+                "[based by user page input]\n" +
+                "[ex : (prefix)page 1]\n" + 
+                "`Shuffle` [Shuffle the queue randomly]\n" + 
+                "\n\n" +
                 "UTILITY\n\n" +
                 "`Help` [summon this command]")
                 .WithFooter("Contact : PakPres#8360 for any feedback")
