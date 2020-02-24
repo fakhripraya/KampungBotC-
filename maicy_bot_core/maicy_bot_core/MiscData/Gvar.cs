@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord.WebSocket;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -16,5 +17,8 @@ namespace maicy_bot_core.MiscData
 
         //playlist
         public static bool playlist_load_flag { get; set; }
+
+        //current channel
+        public static SocketChannel current_client_channel { get; set; }
     }
 }

@@ -39,23 +39,49 @@ namespace maicy_bot_core.MaicyServices
             lava_socket_client.OnTrackFinished += Lava_socket_client_OnTrackFinished;
             lava_socket_client.OnTrackException += Lava_socket_client_OnTrackException;
             lava_socket_client.OnTrackStuck += Lava_socket_client_OnTrackStuck;
+            maicy_client.UserVoiceStateUpdated += Maicy_client_UserVoiceStateUpdated;
             maicy_client.Disconnected += Maicy_client_Disconnected;
+            return Task.CompletedTask;
+        }
+
+        private Task Maicy_client_UserVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)
+        {
+            if (Gvar.current_client_channel == null)
+            {
+                return Task.CompletedTask;
+            }
+            if (Gvar.current_client_channel.Users.Count() == 1)
+            {
+                if (!Gvar.current_client_channel.Users.FirstOrDefault().IsBot)
+                {
+                    return Task.CompletedTask;
+                }
+
+                clear_all_loop();
+                lava_socket_client.DisconnectAsync(Gvar.current_client_channel as IVoiceChannel);
+                Gvar.current_client_channel = null;
+                lava_player.TextChannel.SendMessageAsync
+                            ("All player left, Trying to disconnect.");
+                lava_player = null;
+            }
             return Task.CompletedTask;
         }
 
         private Task Lava_socket_client_OnTrackStuck(LavaPlayer player, LavaTrack track, long arg3)
         {
-            clear_all_loop();
-            lava_player = null;
-            lava_socket_client.DisconnectAsync(player.VoiceChannel);
+            //clear_all_loop();
+            //lava_player = null;
+            //lava_socket_client.DisconnectAsync(player.VoiceChannel);
             return Task.CompletedTask;
         }
 
         private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string arg3)
         {
             clear_all_loop();
-            lava_player = null;
             lava_socket_client.DisconnectAsync(player.VoiceChannel);
+            lava_player.TextChannel.SendMessageAsync
+                            ("Track Error, Trying to disconnect.");
+            lava_player = null;
             return Task.CompletedTask;
         }
 
@@ -192,8 +218,12 @@ namespace maicy_bot_core.MaicyServices
                 //673472156033613856 maicy id
                 //673757055420596265 euy
 
-                var current_user_channel = maicy_client.GetChannel(voice_channel.Id);
-                var lava_client_id = current_user_channel.Users.Select(x => x).Where(x => x.IsBot == true && x.Id == 674652118472458240).FirstOrDefault(); //input your bot id here
+                Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
+                var lava_client_id = Gvar.current_client_channel
+                    .Users
+                    .Select(x => x)
+                    .Where(x => x.IsBot == true && x.Id == 674652118472458240)
+                    .FirstOrDefault(); //input your bot id here
 
                 if (lava_client_id == null)
                 {
