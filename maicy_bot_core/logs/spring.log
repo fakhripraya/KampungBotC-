@@ -148,3 +148,75 @@ Caused by: org.apache.http.NoHttpResponseException: r2---sn-2uuxa3vh-jb3e6.googl
 2020-02-24 04:55:22.038  INFO 4184 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: galaxy news radio
 2020-02-24 04:55:22.040  INFO 4184 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAkQIAKCJGYWxsb3V0IDMgIiBHYWxheHkgTmV3cyBSYWRpbyBBbGwgU29uZ3MAD05JVEVNQVJFU0tJVFRMRQAAAAAAMPcoAAtHa0VIZjVaYnJ6VQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUdrRUhmNVpicnpVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
 2020-02-24 04:55:22.397  INFO 4184 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"32e8f60506924032912bba7ff9fab0f6","event":{"token":"d441b5f57889d4e7","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-24 13:00:55.806  INFO 9276 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        4f53d09491ba5254eb5c55c234a63b208388d3ef-SNAPSHOT
+	Build:          965
+	Build time:     28.12.2019 17:02:58 UTC
+	Branch          master
+	Commit:         4f53d09
+	Commit time:    28.12.2019 17:00:51 UTC
+	JVM:            11.0.6
+	Lavaplayer      1.3.32
+
+2020-02-24 13:00:55.896  INFO 9276 --- [main] lavalink.server.Launcher                 : Starting Launcher on CAD2-ITSD5 with PID 9276 (D:\Project Kantor\Git_Repository\KampungBotC-\maicy_bot_core\Lavalink.jar started by user in D:\Project Kantor\Git_Repository\KampungBotC-\maicy_bot_core)
+2020-02-24 13:00:55.896  INFO 9276 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2020-02-24 13:00:56.001  WARN 9276 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2020-02-24 13:00:57.257  WARN 9276 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2020-02-24 13:00:57.277  INFO 9276 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2020-02-24 13:00:57.277  INFO 9276 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1307 ms
+2020-02-24 13:00:57.611  WARN 9276 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2020-02-24 13:00:57.621  INFO 9276 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 7, Arch: amd64
+2020-02-24 13:00:57.621  INFO 9276 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
+2020-02-24 13:00:57.621  INFO 9276 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
+2020-02-24 13:00:57.621  INFO 9276 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
+2020-02-24 13:00:57.923  INFO 9276 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-24 13:00:58.343  INFO 9276 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-24 13:00:58.641  INFO 9276 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2020-02-24 13:00:58.651  INFO 9276 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2020-02-24 13:00:58.981  INFO 9276 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2020-02-24 13:00:59.001  INFO 9276 --- [main] lavalink.server.Launcher                 : Started Launcher in 3.825 seconds (JVM running for 4.375)
+2020-02-24 13:12:45.406  INFO 9276 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-02-24 13:12:45.406  INFO 9276 --- [Thread-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-24 13:20:18.718  INFO 7060 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        4f53d09491ba5254eb5c55c234a63b208388d3ef-SNAPSHOT
+	Build:          965
+	Build time:     28.12.2019 17:02:58 UTC
+	Branch          master
+	Commit:         4f53d09
+	Commit time:    28.12.2019 17:00:51 UTC
+	JVM:            11.0.6
+	Lavaplayer      1.3.32
+
+2020-02-24 13:20:18.812  INFO 7060 --- [main] lavalink.server.Launcher                 : Starting Launcher on CAD2-ITSD5 with PID 7060 (D:\Project Kantor\Git_Repository\KampungBotC-\maicy_bot_core\Lavalink.jar started by user in D:\Project Kantor\Git_Repository\KampungBotC-\maicy_bot_core)
+2020-02-24 13:20:18.812  INFO 7060 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2020-02-24 13:20:18.905  WARN 7060 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2020-02-24 13:20:21.963  WARN 7060 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2020-02-24 13:20:21.978  INFO 7060 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2020-02-24 13:20:21.978  INFO 7060 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3120 ms
+2020-02-24 13:20:22.290  WARN 7060 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2020-02-24 13:20:22.306  INFO 7060 --- [main] l.s.c.AudioSendFactoryConfiguration      : OS: Windows 7, Arch: amd64
+2020-02-24 13:20:22.306  INFO 7060 --- [main] l.s.c.AudioSendFactoryConfiguration      : JDA-NAS supported system detected. Enabled native audio sending.
+2020-02-24 13:20:22.306  INFO 7060 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting buffer to 400ms
+2020-02-24 13:20:22.306  INFO 7060 --- [main] l.s.c.AudioSendFactoryConfiguration      : Setting playlist load limit to 6
+2020-02-24 13:20:22.571  INFO 7060 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-24 13:20:22.946  INFO 7060 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-24 13:20:23.242  INFO 7060 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2020-02-24 13:20:23.242  INFO 7060 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2020-02-24 13:20:25.676  INFO 7060 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2020-02-24 13:20:25.738  INFO 7060 --- [main] lavalink.server.Launcher                 : Started Launcher in 7.55 seconds (JVM running for 8.506)
