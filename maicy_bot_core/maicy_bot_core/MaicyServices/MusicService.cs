@@ -37,7 +37,25 @@ namespace maicy_bot_core.MaicyServices
             maicy_client.Ready += Maicy_client_Ready_async;
             lava_socket_client.Log += Lava_socket_client_Log;
             lava_socket_client.OnTrackFinished += Lava_socket_client_OnTrackFinished;
+            lava_socket_client.OnTrackException += Lava_socket_client_OnTrackException;
+            lava_socket_client.OnTrackStuck += Lava_socket_client_OnTrackStuck;
             maicy_client.Disconnected += Maicy_client_Disconnected;
+            return Task.CompletedTask;
+        }
+
+        private Task Lava_socket_client_OnTrackStuck(LavaPlayer player, LavaTrack track, long arg3)
+        {
+            clear_all_loop();
+            lava_player = null;
+            lava_socket_client.DisconnectAsync(player.VoiceChannel);
+            return Task.CompletedTask;
+        }
+
+        private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string arg3)
+        {
+            clear_all_loop();
+            lava_player = null;
+            lava_socket_client.DisconnectAsync(player.VoiceChannel);
             return Task.CompletedTask;
         }
 
@@ -64,55 +82,63 @@ namespace maicy_bot_core.MaicyServices
             LavaTrack track,
             TrackEndReason reason)
         {
-            if (lava_player.IsPlaying)
+            try
             {
-                return;
-            }
-
-            if (!lava_player.IsPaused && lava_player.IsPlaying)
-            {
-                return;
-            }
-
-            //if (!reason.ShouldPlayNext())
-            //{
-            //    return;
-            //}
-
-            if (Gvar.loop_flag is true)
-            {
-                if (!player.Queue.TryDequeue(out var item)
-                || !(item is LavaTrack next_track))
+                if (lava_player.IsPlaying)
                 {
-                    if (!lava_player.IsPlaying)
-                    {
-                        await lava_player.PlayAsync(Gvar.loop_track);
-                        await now_async();
-                    }
+                    return;
+                }
 
-                    foreach (var loop_item in Gvar.list_loop_track)
+                if (!lava_player.IsPaused && lava_player.IsPlaying)
+                {
+                    return;
+                }
+
+                if (Gvar.loop_flag is true)
+                {
+                    if (!player.Queue.TryDequeue(out var item)
+                    || !(item is LavaTrack next_track))
                     {
-                        lava_player.Queue.Enqueue(loop_item);
+                        if (!lava_player.IsPlaying)
+                        {
+                            await lava_player.PlayAsync(Gvar.loop_track);
+                            await now_async();
+                        }
+
+                        foreach (var loop_item in Gvar.list_loop_track)
+                        {
+                            lava_player.Queue.Enqueue(loop_item);
+                        }
+                    }
+                    else
+                    {
+                        await player.PlayAsync(next_track);
+                        await now_async();
                     }
                 }
                 else
                 {
+                    if (!player.Queue.TryDequeue(out var item)
+                        || !(item is LavaTrack next_track))
+                    {
+                        await player.TextChannel.SendMessageAsync
+                            ("There are no more tracks in the queue.");
+                        clear_all_loop();
+                        lava_player = null;
+                        await lava_socket_client.DisconnectAsync(player.VoiceChannel);
+                        return;
+                    }
+
                     await player.PlayAsync(next_track);
                     await now_async();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (!player.Queue.TryDequeue(out var item)
-                    || !(item is LavaTrack next_track))
-                {
-                    await player.TextChannel.SendMessageAsync
-                        ("There are no more tracks in the queue.");
-                    return;
-                }
-
-                await player.PlayAsync(next_track);
-                await now_async();
+                Console.WriteLine(ex.Message);
+                clear_all_loop();
+                lava_player = null;
+                await lava_socket_client.DisconnectAsync(player.VoiceChannel);
             }
         }
 
@@ -655,7 +681,8 @@ namespace maicy_bot_core.MaicyServices
                         {
                             return new EmbedBuilder()
                                 .WithColor(Color.Green)
-                                .WithDescription("Please input the correct page number").Build();
+                                .WithDescription("Please input the correct page number")
+                                .Build();
                         }
 
                         page = (int)input_page - 1;
