@@ -21,21 +21,23 @@ namespace maicy_bot_core
         private Timer _timer;
 
         //create your list of statuses and an indexer to keep track
+        //private readonly List<string> _statusList = new List<string>() {
+        //    "Strvrains",
+        //    "Genji",
+        //    "Gazer",
+        //    "Birra",
+        //    "Dreqqy",
+        //    "Ugau",
+        //    "Edgar",
+        //    "Sauce",
+        //    "MekMek",
+        //    "King",
+        //    "Plasti",
+        //    "Jarvis",
+        //    "Maicy",
+        //    "Pakpres" };
         private readonly List<string> _statusList = new List<string>() {
-            "Strvrains",
-            "Genji",
-            "Gazer",
-            "Birra",
-            "Dreqqy",
-            "Ugau",
-            "Edgar",
-            "Sauce",
-            "MekMek",
-            "King",
-            "Plasti",
-            "Jarvis",
-            "Maicy",
-            "Pakpres" };
+            "Maicy"};
         private int _statusIndex = 0;
 
         public MaicyClientClass(DiscordSocketClient client = null, CommandService cmd = null)

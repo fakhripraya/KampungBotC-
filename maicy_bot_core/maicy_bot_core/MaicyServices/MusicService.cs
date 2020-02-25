@@ -38,7 +38,6 @@ namespace maicy_bot_core.MaicyServices
             lava_socket_client.Log += Lava_socket_client_Log;
             lava_socket_client.OnTrackFinished += Lava_socket_client_OnTrackFinished;
             lava_socket_client.OnTrackException += Lava_socket_client_OnTrackException;
-            lava_socket_client.OnTrackStuck += Lava_socket_client_OnTrackStuck;
             maicy_client.UserVoiceStateUpdated += Maicy_client_UserVoiceStateUpdated;
             maicy_client.Disconnected += Maicy_client_Disconnected;
             return Task.CompletedTask;
@@ -67,20 +66,12 @@ namespace maicy_bot_core.MaicyServices
             return Task.CompletedTask;
         }
 
-        private Task Lava_socket_client_OnTrackStuck(LavaPlayer player, LavaTrack track, long arg3)
-        {
-            //clear_all_loop();
-            //lava_player = null;
-            //lava_socket_client.DisconnectAsync(player.VoiceChannel);
-            return Task.CompletedTask;
-        }
-
-        private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string arg3)
+        private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string ex_msg)
         {
             clear_all_loop();
             lava_socket_client.DisconnectAsync(player.VoiceChannel);
             lava_player.TextChannel.SendMessageAsync
-                            ("Track Error, Trying to disconnect.");
+                            ($"Track Error, {ex_msg} Disconnecting.");
             lava_player = null;
             return Task.CompletedTask;
         }
@@ -316,16 +307,31 @@ namespace maicy_bot_core.MaicyServices
                         return;
                     }
 
-                    await lava_player.TextChannel.SendMessageAsync($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.");
+                    var temp_msg = await lava_player.TextChannel.SendMessageAsync($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.");
                     Gvar.playlist_load_flag = true;
+
+                    int load_count = 0;
+                    var lastMessageID = temp_msg.Id;
 
                     foreach (var sp_item in sp_playlist.Tracks.Items)
                     {
+                        if (load_count % 5 == 0)
+                        {
+                            if (load_count > 0)
+                            {
+                                var del = await lava_player.TextChannel.GetMessageAsync(lastMessageID);
+                                await temp_msg.DeleteAsync();
+                                temp_msg = await lava_player.TextChannel.SendMessageAsync($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.");
+                                lastMessageID = temp_msg.Id;
+                            }
+                        }
+
                         results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists.FirstOrDefault().Name + " " + sp_item.Track.Name);
 
                         if (results.LoadType == LoadType.NoMatches
                             || results.LoadType == LoadType.LoadFailed)
                         {
+                            load_count++;
                             continue;
                         }
 
@@ -347,6 +353,7 @@ namespace maicy_bot_core.MaicyServices
                             await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
                             Gvar.loop_track = results.Tracks.FirstOrDefault();
                         }
+                        load_count++;
                     }
                     
                     await now_async();
@@ -661,7 +668,7 @@ namespace maicy_bot_core.MaicyServices
                         .WithFooter(
                         $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
                         $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
-                        $"There are total {lava_player.Queue.Items.ToList().Count()} tracks in the queue"
+                        $"There are total {queue_list.Count() + 1} tracks in the queue"
                         )
                         .WithCurrentTimestamp()
                         .Build();
@@ -739,7 +746,7 @@ namespace maicy_bot_core.MaicyServices
                         queue_string += $"{(page * 10) + queue_count}. " + $"{next_track.Title}\n\n";
                         queue_count++;
                         //halaman selanjutnya
-                        for (int i = 0; i <= 9; i++)
+                        for (int i = 0; i <= 8; i++)
                         {
                             if (queue_list_array[page, i] is null)
                             {
@@ -764,7 +771,7 @@ namespace maicy_bot_core.MaicyServices
                         .WithFooter(
                         $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
                         $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
-                        $"There are total {lava_player.Queue.Items.ToList().Count()} tracks in the queue"
+                        $"There are total {queue_list.Count() + 1} tracks in the queue"
                         )
                         .WithCurrentTimestamp()
                         .Build();

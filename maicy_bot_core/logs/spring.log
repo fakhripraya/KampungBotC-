@@ -1,24 +1,673 @@
-2020-02-25 04:55:06.288  INFO 11052 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51669 -- CloseStatus[code=1006, reason=]
-2020-02-25 04:55:06.382  INFO 11052 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-02-25 04:55:06.382  INFO 11052 --- [XNIO-1 I/O-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
-2020-02-25 04:55:15.265  INFO 11052 --- [XNIO-1 task-18] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52888
-2020-02-25 04:55:15.272  INFO 11052 --- [XNIO-1 task-18] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
-2020-02-25 04:55:15.282  INFO 11052 --- [XNIO-1 task-18] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52888
-2020-02-25 05:01:08.812  INFO 11052 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
-2020-02-25 05:01:09.139  INFO 11052 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Lfkjgjf
-2020-02-25 05:01:09.178  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAgwIAJUxBTlkgLSBNYWxpYnUgTmlnaHRzIChPZmZpY2lhbCBBdWRpbykABExBTlkAAAAAAARhGAALS2RjUHpETkhYNzQAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1LZGNQekROSFg3NAAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:01:09.890  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"3660ec7b3bb61a1bca18c30591172d6f","event":{"token":"17775a70a961bcf4","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
-2020-02-25 05:01:30.243  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"destroy"}
-2020-02-25 05:01:37.651  INFO 11052 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
-2020-02-25 05:01:37.920  INFO 11052 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Lfkjgjf
-2020-02-25 05:01:37.922  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAgwIAJUxBTlkgLSBNYWxpYnUgTmlnaHRzIChPZmZpY2lhbCBBdWRpbykABExBTlkAAAAAAARhGAALS2RjUHpETkhYNzQAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1LZGNQekROSFg3NAAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:01:38.709  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"3660ec7b3bb61a1bca18c30591172d6f","event":{"token":"785b07b254a08291","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
-2020-02-25 05:06:25.118  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAeAIAGkxBTlkgLSAxMyAoT2ZmaWNpYWwgQXVkaW8pAARMQU5ZAAAAAAADncgAC05EV0pXSUxFQTdvAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9TkRXSldJTEVBN28AB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:10:21.456  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAlAIAKkxld2lzIENhcGFsZGkgLSBTb21lb25lIFlvdSBMb3ZlZCAoTHlyaWNzKQAQR29sZCBDb2FzdCBNdXNpYwAAAAAAAsbwAAt1MXlWQ2VYWXlhNAABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PXUxeVZDZVhZeWE0AAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:13:22.686  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAMUJlbm55IEJsYW5jbywgSGFsc2V5ICYgS2hhbGlkIC0gRWFzdHNpZGUgKEx5cmljcykADVN5cmVicmFsVmliZXMAAAAAAAKnsAALS0ZvZjhhYVV2R1kAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1LRm9mOGFhVXZHWQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:16:15.784  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAApAIAQVNIQVVOIGZlYXQuIENvbm9yIE1heW5hcmQgLSBXYXkgQmFjayBIb21lIChMeXJpY3MpIFNhbSBGZWxkdCBFZGl0AAlXYXZlTXVzaWMAAAAAAALx6AALMWtlaHFDTHVkeWcAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0xa2VocUNMdWR5ZwAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:19:28.210  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"track":"QAAAfgIAHUdhbGxhbnQgLSBTbGVlcCBPbiBJdCAoQXVkaW8pAAdnYWxsYW50AAAAAAADT6gAC3dDQlE4ZUd2Q3RBAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9d0NCUThlR3ZDdEEAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
-2020-02-25 05:21:23.868  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"destroy"}
-2020-02-25 05:21:26.752  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52888 -- CloseStatus[code=1006, reason=]
-2020-02-25 05:21:26.752  INFO 11052 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2020-02-25 05:21:26.752  INFO 11052 --- [XNIO-1 I/O-4] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-26 00:14:34.689  INFO 8116 --- [XNIO-1 task-22] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 00:14:35.293  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: love del rey
+2020-02-26 00:14:35.302  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAkAIAKkxhbmEgRGVsIFJleSAtIExvdmUgKE9mZmljaWFsIE11c2ljIFZpZGVvKQAMTGFuYSBEZWwgUmV5AAAAAAAEgFgACzMtTlR2MENkRkNrAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9My1OVHYwQ2RGQ2sAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:14:35.626  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"c754d983f7f4abdcc764d7ec848133da","event":{"token":"a31279374cf6dfca","guildid":"673512696288903199","endpoint":"singapore593.discord.media:80"},"guildId":"673512696288903199","op":"voiceUpdate"}
+2020-02-26 00:19:30.193  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"guildId":"673512696288903199","op":"destroy"}
+2020-02-26 00:29:35.052  INFO 8116 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 00:29:35.377  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist RENDY PANDUGO ALBUM
+2020-02-26 00:29:35.381  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAlAIALVJlbmR5IFBhbmR1Z28gLSA3IERheXMgKE9mZmljaWFsIEx5cmljIFZpZGVvKQANUmVuZHkgUGFuZHVnbwAAAAAAA27oAAtHUFFmX0VGMWpGZwABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUdQUWZfRUYxakZnAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:29:36.058  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"c754d983f7f4abdcc764d7ec848133da","event":{"token":"a47e67908573ae12","guildid":"673512696288903199","endpoint":"singapore593.discord.media:80"},"guildId":"673512696288903199","op":"voiceUpdate"}
+2020-02-26 00:33:19.647  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiQIAIlJlbmR5IFBhbmR1Z28gLSBEb24ndCBDYWxsIE1lIEJhYnkADVJlbmR5IFBhbmR1Z28AAAAAAALWkAALTldJZ2RBMW5SaVEAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1OV0lnZEExblJpUQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:36:25.351  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAhwIAIFJlbmR5IFBhbmR1Z28gLSBXb250IExldCBNZSBEb3duAA1SZW5keSBQYW5kdWdvAAAAAAADIMgAC1ZwSVRWRl9qUnJrAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9VnBJVFZGX2pScmsAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:39:36.330  INFO 8116 --- [parallel-4] s.n.m.impl.connections.AudioWebSocket    : Websocket to wss://singapore221.discord.media/?v=4 closed with code 4014 and reason Disconnected.
+2020-02-26 00:39:36.331  INFO 8116 --- [parallel-4] s.n.m.impl.connections.AudioWebSocket    : Closing
+2020-02-26 00:39:49.434  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAggIAG1JlbmR5IFBhbmR1Z28gLSBCYWQgQ29tcGFueQANUmVuZHkgUGFuZHVnbwAAAAAAA70IAAtZVkJfaWxEOU00YwABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PVlWQl9pbEQ5TTRjAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:43:54.054  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAMVJlbmR5IFBhbmR1Z28gLSBGbG9hdCBJbiBUaGUgU2t5IChPZmZpY2lhbCBBdWRpbykADVJlbmR5IFBhbmR1Z28AAAAAAANy0AALemQ1U0t5VGpkYVEAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj16ZDVTS3lUamRhUQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:47:39.535  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAgQIAGlJlbmR5IFBhbmR1Z28gLSBTdGVhbCBBd2F5AA1SZW5keSBQYW5kdWdvAAAAAAADDUAAC1l6akE2LUdJTUJjAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9WXpqQTYtR0lNQmMAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:50:58.787  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAewIAFFJlbmR5IFBhbmR1Z28gLSBTbmFwAA1SZW5keSBQYW5kdWdvAAAAAAAC0qgAC1paejJyRGZGOE9JAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9Wlp6MnJEZkY4T0kAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:54:03.623  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAjgIAKlJlbmR5IFBhbmR1Z28gLSBJIGRvbid0IENhcmUgKEJlc3QgTHlyaWNzKQAKTHlyaWNzQUYxMwAAAAAAA9R4AAstVS1FdGdpZ2Z6NAABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PS1VLUV0Z2lnZno0AAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 00:58:14.165  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAlAIALVJlbmR5IFBhbmR1Z28gLSBCeSBNeSBTaWRlIChPU1QgU3VzYWggU2lueWFsKQANUmVuZHkgUGFuZHVnbwAAAAAAA9hgAAtCak4yMVVOS0lXUQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUJqTjIxVU5LSVdRAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 01:02:25.742  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAmQIAMlJlbmR5IFBhbmR1Z28gLSBTaWx2ZXIgUmFpbiAoT2ZmaWNpYWwgTXVzaWMgVmlkZW8pAA1SZW5keSBQYW5kdWdvAAAAAAADeqAAC1F2S3NuR3M5ZzdVAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UXZLc25HczlnN1UAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"673512696288903199","op":"play"}
+2020-02-26 01:05:20.083  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:49482 -- CloseStatus[code=1006, reason=]
+2020-02-26 01:05:20.083  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 1 playing players.
+2020-02-26 01:05:20.084  INFO 8116 --- [XNIO-1 I/O-2] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-26 01:05:20.136  WARN 8116 --- [lava-daemon-pool-playback-5-thread-8] c.s.d.l.t.p.LocalAudioTrackExecutor      : Suspicious exception for playback of QvKsnGs9g7U
+
+com.sedmelluq.discord.lavaplayer.tools.FriendlyException: The track was unexpectedly terminated.
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.handlePlaybackInterrupt(LocalAudioTrackExecutor.java:334) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:278) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:236) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaAudioTrack.process(MatroskaAudioTrack.java:39) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.DelegatedAudioTrack.processDelegate(DelegatedAudioTrack.java:25) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack.processStatic(YoutubeAudioTrack.java:57) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack.process(YoutubeAudioTrack.java:49) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.execute(LocalAudioTrackExecutor.java:91) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$executeTrack$1(DefaultAudioPlayerManager.java:349) ~[lavaplayer-1.3.32.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: java.lang.InterruptedException: null
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2056) ~[na:na]
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2090) ~[na:na]
+	at java.base/java.util.concurrent.ArrayBlockingQueue.put(ArrayBlockingQueue.java:367) ~[na:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.AllocatingAudioFrameBuffer.consume(AllocatingAudioFrameBuffer.java:179) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.common.OpusPacketRouter.passThrough(OpusPacketRouter.java:169) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.common.OpusPacketRouter.process(OpusPacketRouter.java:99) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaOpusTrackConsumer.consume(MatroskaOpusTrackConsumer.java:47) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.processFrameInBlock(MatroskaStreamingFile.java:372) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.parseClusterSimpleBlock(MatroskaStreamingFile.java:336) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.parseNextCluster(MatroskaStreamingFile.java:321) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.provideFrames(MatroskaStreamingFile.java:297) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaAudioTrack.lambda$process$0(MatroskaAudioTrack.java:40) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:262) ~[lavaplayer-1.3.32.jar!/:na]
+	... 10 common frames omitted
+
+2020-02-26 01:07:56.179  INFO 8116 --- [XNIO-1 task-26] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50150
+2020-02-26 01:07:56.183  INFO 8116 --- [XNIO-1 task-26] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-26 01:07:56.189  INFO 8116 --- [XNIO-1 task-26] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50150
+2020-02-26 01:08:47.633  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:08:47.887  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist RENDY PANDUGO ALBUM
+2020-02-26 01:08:47.932  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAlAIALVJlbmR5IFBhbmR1Z28gLSA3IERheXMgKE9mZmljaWFsIEx5cmljIFZpZGVvKQANUmVuZHkgUGFuZHVnbwAAAAAAA27oAAtHUFFmX0VGMWpGZwABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUdQUWZfRUYxakZnAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:08:48.751  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"3837fa936b71ac8469dbcdb87a662f53","event":{"token":"5590ab1ffb3b9885","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 01:09:10.854  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiQIAIlJlbmR5IFBhbmR1Z28gLSBEb24ndCBDYWxsIE1lIEJhYnkADVJlbmR5IFBhbmR1Z28AAAAAAALWkAALTldJZ2RBMW5SaVEAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1OV0lnZEExblJpUQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:09:24.882  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAhwIAIFJlbmR5IFBhbmR1Z28gLSBXb250IExldCBNZSBEb3duAA1SZW5keSBQYW5kdWdvAAAAAAADIMgAC1ZwSVRWRl9qUnJrAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9VnBJVFZGX2pScmsAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:12:49.438  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAggIAG1JlbmR5IFBhbmR1Z28gLSBCYWQgQ29tcGFueQANUmVuZHkgUGFuZHVnbwAAAAAAA70IAAtZVkJfaWxEOU00YwABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PVlWQl9pbEQ5TTRjAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:16:54.033  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAMVJlbmR5IFBhbmR1Z28gLSBGbG9hdCBJbiBUaGUgU2t5IChPZmZpY2lhbCBBdWRpbykADVJlbmR5IFBhbmR1Z28AAAAAAANy0AALemQ1U0t5VGpkYVEAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj16ZDVTS3lUamRhUQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:20:39.587  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAgQIAGlJlbmR5IFBhbmR1Z28gLSBTdGVhbCBBd2F5AA1SZW5keSBQYW5kdWdvAAAAAAADDUAAC1l6akE2LUdJTUJjAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9WXpqQTYtR0lNQmMAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:23:58.858  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAewIAFFJlbmR5IFBhbmR1Z28gLSBTbmFwAA1SZW5keSBQYW5kdWdvAAAAAAAC0qgAC1paejJyRGZGOE9JAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9Wlp6MnJEZkY4T0kAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:27:03.666  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAjgIAKlJlbmR5IFBhbmR1Z28gLSBJIGRvbid0IENhcmUgKEJlc3QgTHlyaWNzKQAKTHlyaWNzQUYxMwAAAAAAA9R4AAstVS1FdGdpZ2Z6NAABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PS1VLUV0Z2lnZno0AAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:31:14.214  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAlAIALVJlbmR5IFBhbmR1Z28gLSBCeSBNeSBTaWRlIChPU1QgU3VzYWggU2lueWFsKQANUmVuZHkgUGFuZHVnbwAAAAAAA9hgAAtCak4yMVVOS0lXUQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUJqTjIxVU5LSVdRAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:35:25.700  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAmQIAMlJlbmR5IFBhbmR1Z28gLSBTaWx2ZXIgUmFpbiAoT2ZmaWNpYWwgTXVzaWMgVmlkZW8pAA1SZW5keSBQYW5kdWdvAAAAAAADeqAAC1F2S3NuR3M5ZzdVAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UXZLc25HczlnN1UAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:36:28.851  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"volume":100,"guildId":"388355964195307530","op":"volume"}
+2020-02-26 01:39:12.721  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAlgIALUhhbXBpciBTZW1wdXJuYSAgIFJlbmR5IFBhbmR1Z28gICBWaWRlbyBMaXJpawAPR3VudHVyIE1hcnRpbnVzAAAAAAADwPAAC21QS1JYUFo0eng0AAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9bVBLUlhQWjR6eDQAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:41:48.098  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:48.487  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: DESERT STAR Carissa
+2020-02-26 01:41:48.495  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:49.258  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Synchronice All We Know (Acoustic) [feat. Aeryn]
+2020-02-26 01:41:49.268  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:49.874  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????????
+2020-02-26 01:41:49.880  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:50.311  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Nyong Franco Gemu Fa Mi Re
+2020-02-26 01:41:50.320  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:50.748  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Cheetah Mobile Fairy Tale
+2020-02-26 01:41:51.670  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:52.371  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Pegboard Nerds Emoji - Rogue Remix
+2020-02-26 01:41:52.377  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:52.762  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae World In A Bottle
+2020-02-26 01:41:52.768  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:53.265  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Stephen Walking Saturday Morning Space Ride
+2020-02-26 01:41:53.269  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:53.679  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Bullet Train Burn!
+2020-02-26 01:41:53.687  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:54.150  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE StaRt
+2020-02-26 01:41:55.545  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:55.960  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Hang Man
+2020-02-26 01:41:55.967  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:56.658  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo Ay3
+2020-02-26 01:41:56.664  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:57.082  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Chain Gang Of 1974 Sleepwalking
+2020-02-26 01:41:57.089  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:57.485  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Oceans
+2020-02-26 01:41:57.489  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:57.861  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Feel Alive
+2020-02-26 01:41:58.827  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:59.182  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Savoy Contemplate
+2020-02-26 01:41:59.187  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:41:59.566  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Noisestorm Leaving Now
+2020-02-26 01:41:59.573  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:00.017  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Watching
+2020-02-26 01:42:00.046  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:00.467  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Future Fine China
+2020-02-26 01:42:00.474  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:01.128  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Puppet Enough Is Enough
+2020-02-26 01:42:02.058  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:02.620  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Post Malone Sunflower - Spider-Man: Into the Spider-Verse
+2020-02-26 01:42:02.624  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:03.055  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Some Kind Of Magic
+2020-02-26 01:42:03.061  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:03.426  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ????????
+2020-02-26 01:42:03.435  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:03.832  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Le Sciantose Aliene - DJoNemesis & Lilly Instrumental Remix
+2020-02-26 01:42:03.835  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:04.223  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Float Away
+2020-02-26 01:42:05.098  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:05.530  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo In Reverse
+2020-02-26 01:42:05.538  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:05.899  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Instinct
+2020-02-26 01:42:05.902  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:06.295  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Cold
+2020-02-26 01:42:06.302  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:06.773  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Friends Again
+2020-02-26 01:42:06.778  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:07.223  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Playboi Carti Shoota (feat. Lil Uzi Vert)
+2020-02-26 01:42:08.150  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:08.557  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER This Love
+2020-02-26 01:42:08.563  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:08.959  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Friends (with Faustix)
+2020-02-26 01:42:08.963  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:09.387  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Apashe Good Bye - Instrumental Mix
+2020-02-26 01:42:09.396  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:09.757  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Whatever The Case May be
+2020-02-26 01:42:09.765  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:10.296  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Good Charlotte The River
+2020-02-26 01:42:11.264  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:11.741  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE ???????????!
+2020-02-26 01:42:11.747  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:12.138  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Exit Stage Left Pursued By A Bear
+2020-02-26 01:42:12.144  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:12.527  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Way Too Deep
+2020-02-26 01:42:12.534  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:12.983  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Dirty Audio Gorilla Glue
+2020-02-26 01:42:12.992  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:13.629  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Psychic Type Victory Road
+2020-02-26 01:42:14.637  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:15.024  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Subtact Restart
+2020-02-26 01:42:15.029  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:15.455  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: BAND-MAID glory
+2020-02-26 01:42:15.461  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:15.910  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Dream Catcher
+2020-02-26 01:42:15.916  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:16.272  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Mirage
+2020-02-26 01:42:16.280  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:16.690  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hyper Potions Adventures
+2020-02-26 01:42:17.599  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:18.008  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Sorella Stellare - Instrumental
+2020-02-26 01:42:18.016  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:18.393  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize - VIP Mix
+2020-02-26 01:42:18.398  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:18.810  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Unheilig Grosse Freiheit
+2020-02-26 01:42:18.816  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:19.284  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE Speaking
+2020-02-26 01:42:19.288  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:19.660  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2020-02-26 01:42:20.531  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:21.147  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Altered Beasts The Legendary Theme [Gitarooman]
+2020-02-26 01:42:21.154  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:21.915  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: 21 Savage Bank Account
+2020-02-26 01:42:21.920  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:22.327  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Storm Chaser (Acoustic)
+2020-02-26 01:42:22.336  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:23.004  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic One Way Dream
+2020-02-26 01:42:23.011  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:23.444  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Laszlo Home
+2020-02-26 01:42:24.345  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:24.742  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Razihel Legends
+2020-02-26 01:42:24.746  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:25.250  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Must Have Been The Wind
+2020-02-26 01:42:25.254  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:25.719  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Run To You
+2020-02-26 01:42:25.726  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:26.107  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg This Is Forever (feat. Danyka Nadeau)
+2020-02-26 01:42:26.110  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:26.605  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Khalid OTW
+2020-02-26 01:42:27.493  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:27.889  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae This Light (feat. Arthur Walwin)
+2020-02-26 01:42:27.892  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:28.518  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????
+2020-02-26 01:42:28.522  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:28.859  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae The Wanderer
+2020-02-26 01:42:28.868  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:29.513  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: San Holo Victory
+2020-02-26 01:42:29.521  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:29.943  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: JPB Defeat The Night
+2020-02-26 01:42:31.029  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:31.479  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Unknown Brain Waiting
+2020-02-26 01:42:31.485  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:31.923  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Boys Like Girls The Great Escape
+2020-02-26 01:42:31.930  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:32.338  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Tristam Far Away
+2020-02-26 01:42:32.344  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:32.849  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Why Don't We 8 Letters
+2020-02-26 01:42:32.854  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:33.282  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic Ocean Eyes
+2020-02-26 01:42:34.178  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:34.607  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Wanted Chasing The Sun
+2020-02-26 01:42:34.614  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:35.087  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: True Damage GIANTS
+2020-02-26 01:42:35.090  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:35.506  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize (feat. Aaron Richards)
+2020-02-26 01:42:35.509  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:35.996  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Let Me Down Slowly
+2020-02-26 01:42:35.999  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:36.477  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LANY Malibu Nights
+2020-02-26 01:42:37.345  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:37.741  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Big Marvel Twilight (feat. Ysabelle Cuevas)
+2020-02-26 01:42:37.746  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:42:38.088  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ???????
+2020-02-26 01:43:18.359  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAArwIASFJlbmR5IFBhbmR1Z28gLSBTZWJ1YWggS2lzYWggS2xhc2lrIChPZmZpY2lhbCBMeXJpYyBWaWRlbykgKFZpZGVvIEx5cmljKQANUmVuZHkgUGFuZHVnbwAAAAAAAzg4AAtDcXUzYko3VHFlZwABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUNxdTNiSjdUcWVnAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:46:48.495  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAoQIAOlJlbmR5IFBhbmR1Z28gLSBXaHk/IChPZmZpY2lhbCBNdXNpYyBWaWRlbykgZnQuIE1hdHRlciBNb3MADVJlbmR5IFBhbmR1Z28AAAAAAANy0AALTjRvOUhmRHU3d1EAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1ONG85SGZEdTd3UQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:50:34.149  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAgQIAGlJlbmR5IFBhbmR1Z28gLSBVbmRlcndhdGVyAA1SZW5keSBQYW5kdWdvAAAAAAADkhAAC29LQkVqRHJBaTRFAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9b0tCRWpEckFpNEUAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:54:27.197  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAKkRFU0VSVCBTVEFSIC0gQ2FyaXNzYSBbTW9uc3RlcmNhdCBSZWxlYXNlXQAUTW9uc3RlcmNhdDogSW5zdGluY3QAAAAAAAI6UAALN1BjNnV2OE4yUlkAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj03UGM2dXY4TjJSWQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:55:40.778  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"stop"}
+2020-02-26 01:55:40.817  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"destroy"}
+2020-02-26 01:56:11.878  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 01:56:12.279  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: streetcar
+2020-02-26 01:56:12.289  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 01:56:12.689  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"3837fa936b71ac8469dbcdb87a662f53","event":{"token":"a019b642f9d37878","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 02:00:20.633  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:04:28.985  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:08:37.346  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:12:45.680  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:16:54.062  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:21:02.483  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:25:10.880  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:29:19.212  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:33:27.599  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:37:35.918  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:41:44.309  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:45:52.674  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:50:01.010  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:54:09.430  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 02:58:17.765  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:02:26.164  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:06:34.499  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:10:42.840  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:14:51.226  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:18:59.576  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:23:07.966  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:27:16.341  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:31:24.699  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:35:33.124  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:39:41.498  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:43:49.905  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:47:58.307  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:52:06.621  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 03:56:15.484  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:00:23.845  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:04:32.207  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:08:40.559  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:12:48.953  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:16:57.307  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:21:05.678  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:25:14.059  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:29:22.403  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:33:30.756  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:37:39.105  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:41:47.483  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:45:55.867  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:50:04.220  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:54:12.610  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 04:58:20.960  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:02:29.330  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:06:37.705  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:10:46.099  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:14:54.463  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:19:02.825  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:23:11.188  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:27:19.578  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:31:27.908  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:35:36.375  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:39:44.719  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:43:53.099  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:48:01.449  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:52:09.840  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 05:56:18.181  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:00:26.561  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:04:34.918  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:08:43.302  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:12:51.772  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:17:00.201  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:21:08.583  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:25:16.940  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:29:25.383  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:33:33.763  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"track":"QAAAiAIAIkRhbmllbCBDYWVzYXIgLSBzdHJlZXRjYXIgfCBseXJpY3MADEx5cmljIFNoYWRlcwAAAAAAA8yoAAtfY05TYVhrcUZhVQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV9jTlNhWGtxRmFVAAd5b3V0dWJlAAAAAAAAAAA=","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:35:55.534  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"destroy"}
+2020-02-26 06:36:01.681  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:50150 -- CloseStatus[code=1006, reason=]
+2020-02-26 06:36:01.681  INFO 8116 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2020-02-26 06:36:01.682  INFO 8116 --- [XNIO-1 I/O-2] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-26 06:37:13.418  INFO 8116 --- [XNIO-1 task-25] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51427
+2020-02-26 06:37:13.423  INFO 8116 --- [XNIO-1 task-25] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-26 06:37:13.431  INFO 8116 --- [XNIO-1 task-25] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51427
+2020-02-26 06:37:45.853  INFO 8116 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:46.282  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: DESERT STAR Carissa
+2020-02-26 06:37:46.336  INFO 8116 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAKkRFU0VSVCBTVEFSIC0gQ2FyaXNzYSBbTW9uc3RlcmNhdCBSZWxlYXNlXQAUTW9uc3RlcmNhdDogSW5zdGluY3QAAAAAAAI6UAALN1BjNnV2OE4yUlkAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj03UGM2dXY4TjJSWQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:37:46.340  INFO 8116 --- [XNIO-1 task-28] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:46.956  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Synchronice All We Know (Acoustic) [feat. Aeryn]
+2020-02-26 06:37:46.965  INFO 8116 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:47.354  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????????
+2020-02-26 06:37:47.359  INFO 8116 --- [XNIO-1 task-32] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:47.814  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Nyong Franco Gemu Fa Mi Re
+2020-02-26 06:37:47.822  INFO 8116 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:48.234  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Cheetah Mobile Fairy Tale
+2020-02-26 06:37:49.167  INFO 8116 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:49.578  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Pegboard Nerds Emoji - Rogue Remix
+2020-02-26 06:37:49.583  INFO 8116 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:50.043  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae World In A Bottle
+2020-02-26 06:37:50.047  INFO 8116 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:50.473  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Stephen Walking Saturday Morning Space Ride
+2020-02-26 06:37:50.479  INFO 8116 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:50.919  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Bullet Train Burn!
+2020-02-26 06:37:50.935  INFO 8116 --- [XNIO-1 task-12] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:51.391  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE StaRt
+2020-02-26 06:37:52.289  INFO 8116 --- [XNIO-1 task-14] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:52.748  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Hang Man
+2020-02-26 06:37:52.754  INFO 8116 --- [XNIO-1 task-16] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:53.205  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo Ay3
+2020-02-26 06:37:53.210  INFO 8116 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:53.702  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Chain Gang Of 1974 Sleepwalking
+2020-02-26 06:37:53.710  INFO 8116 --- [XNIO-1 task-20] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:54.138  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Oceans
+2020-02-26 06:37:54.144  INFO 8116 --- [XNIO-1 task-22] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:54.673  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Feel Alive
+2020-02-26 06:37:55.595  INFO 8116 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:56.014  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Savoy Contemplate
+2020-02-26 06:37:56.017  INFO 8116 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:56.441  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Noisestorm Leaving Now
+2020-02-26 06:37:56.444  INFO 8116 --- [XNIO-1 task-28] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:56.832  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Watching
+2020-02-26 06:37:56.836  INFO 8116 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:57.260  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Future Fine China
+2020-02-26 06:37:57.262  INFO 8116 --- [XNIO-1 task-32] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:57.640  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Puppet Enough Is Enough
+2020-02-26 06:37:58.510  INFO 8116 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:59.114  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Post Malone Sunflower - Spider-Man: Into the Spider-Verse
+2020-02-26 06:37:59.120  INFO 8116 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:59.597  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Some Kind Of Magic
+2020-02-26 06:37:59.601  INFO 8116 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:37:59.944  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ????????
+2020-02-26 06:37:59.951  INFO 8116 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:00.371  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Le Sciantose Aliene - DJoNemesis & Lilly Instrumental Remix
+2020-02-26 06:38:00.376  INFO 8116 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:00.822  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Float Away
+2020-02-26 06:38:01.766  INFO 8116 --- [XNIO-1 task-12] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:02.291  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo In Reverse
+2020-02-26 06:38:02.299  INFO 8116 --- [XNIO-1 task-14] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:02.641  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Instinct
+2020-02-26 06:38:02.650  INFO 8116 --- [XNIO-1 task-16] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:03.033  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Cold
+2020-02-26 06:38:03.041  INFO 8116 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:03.470  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Friends Again
+2020-02-26 06:38:03.475  INFO 8116 --- [XNIO-1 task-20] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:03.879  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Playboi Carti Shoota (feat. Lil Uzi Vert)
+2020-02-26 06:38:04.789  INFO 8116 --- [XNIO-1 task-22] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:05.225  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER This Love
+2020-02-26 06:38:05.232  INFO 8116 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:05.632  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Friends (with Faustix)
+2020-02-26 06:38:05.636  INFO 8116 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:06.048  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Apashe Good Bye - Instrumental Mix
+2020-02-26 06:38:06.052  INFO 8116 --- [XNIO-1 task-28] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:06.466  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Whatever The Case May be
+2020-02-26 06:38:06.471  INFO 8116 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:07.011  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Good Charlotte The River
+2020-02-26 06:38:07.875  INFO 8116 --- [XNIO-1 task-32] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:08.411  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE ???????????!
+2020-02-26 06:38:08.418  INFO 8116 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:08.847  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Exit Stage Left Pursued By A Bear
+2020-02-26 06:38:08.855  INFO 8116 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:09.341  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Way Too Deep
+2020-02-26 06:38:09.348  INFO 8116 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:09.792  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Dirty Audio Gorilla Glue
+2020-02-26 06:38:09.799  INFO 8116 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:10.286  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Psychic Type Victory Road
+2020-02-26 06:38:11.130  INFO 8116 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:11.529  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Subtact Restart
+2020-02-26 06:38:11.538  INFO 8116 --- [XNIO-1 task-12] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:11.938  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: BAND-MAID glory
+2020-02-26 06:38:11.945  INFO 8116 --- [XNIO-1 task-14] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:12.410  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Dream Catcher
+2020-02-26 06:38:12.414  INFO 8116 --- [XNIO-1 task-16] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:12.803  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Mirage
+2020-02-26 06:38:12.816  INFO 8116 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:13.249  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hyper Potions Adventures
+2020-02-26 06:38:14.129  INFO 8116 --- [XNIO-1 task-20] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:14.539  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Sorella Stellare - Instrumental
+2020-02-26 06:38:14.546  INFO 8116 --- [XNIO-1 task-22] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:14.977  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize - VIP Mix
+2020-02-26 06:38:14.985  INFO 8116 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:15.410  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Unheilig Grosse Freiheit
+2020-02-26 06:38:15.414  INFO 8116 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:15.919  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE Speaking
+2020-02-26 06:38:15.924  INFO 8116 --- [XNIO-1 task-28] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:16.309  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Storm Chaser
+2020-02-26 06:38:17.429  INFO 8116 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:17.771  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Altered Beasts The Legendary Theme [Gitarooman]
+2020-02-26 06:38:17.778  INFO 8116 --- [XNIO-1 task-32] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:18.385  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: 21 Savage Bank Account
+2020-02-26 06:38:18.393  INFO 8116 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:18.793  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Storm Chaser (Acoustic)
+2020-02-26 06:38:18.801  INFO 8116 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:19.264  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic One Way Dream
+2020-02-26 06:38:19.272  INFO 8116 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:19.734  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Laszlo Home
+2020-02-26 06:38:20.725  INFO 8116 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:21.147  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Razihel Legends
+2020-02-26 06:38:21.152  INFO 8116 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:21.564  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Must Have Been The Wind
+2020-02-26 06:38:21.569  INFO 8116 --- [XNIO-1 task-12] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:22.028  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Run To You
+2020-02-26 06:38:22.036  INFO 8116 --- [XNIO-1 task-14] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:22.464  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg This Is Forever (feat. Danyka Nadeau)
+2020-02-26 06:38:22.468  INFO 8116 --- [XNIO-1 task-16] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:22.938  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Khalid OTW
+2020-02-26 06:38:23.896  INFO 8116 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:24.274  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae This Light (feat. Arthur Walwin)
+2020-02-26 06:38:24.278  INFO 8116 --- [XNIO-1 task-20] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:24.737  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????
+2020-02-26 06:38:24.743  INFO 8116 --- [XNIO-1 task-22] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:25.116  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae The Wanderer
+2020-02-26 06:38:25.122  INFO 8116 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:25.608  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: San Holo Victory
+2020-02-26 06:38:25.652  INFO 8116 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:26.091  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: JPB Defeat The Night
+2020-02-26 06:38:26.959  INFO 8116 --- [XNIO-1 task-28] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:27.422  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2020-02-26 06:38:27.428  INFO 8116 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:27.906  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Boys Like Girls The Great Escape
+2020-02-26 06:38:27.914  INFO 8116 --- [XNIO-1 task-32] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:28.369  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Tristam Far Away
+2020-02-26 06:38:28.372  INFO 8116 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:28.935  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Why Don't We 8 Letters
+2020-02-26 06:38:28.940  INFO 8116 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:29.357  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic Ocean Eyes
+2020-02-26 06:38:30.254  INFO 8116 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:30.773  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Wanted Chasing The Sun
+2020-02-26 06:38:30.780  INFO 8116 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:31.202  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: True Damage GIANTS
+2020-02-26 06:38:31.213  INFO 8116 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:31.626  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize (feat. Aaron Richards)
+2020-02-26 06:38:31.634  INFO 8116 --- [XNIO-1 task-12] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:32.139  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Let Me Down Slowly
+2020-02-26 06:38:32.146  INFO 8116 --- [XNIO-1 task-14] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:32.596  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LANY Malibu Nights
+2020-02-26 06:38:33.498  INFO 8116 --- [XNIO-1 task-16] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:33.927  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Big Marvel Twilight (feat. Ysabelle Cuevas)
+2020-02-26 06:38:33.930  INFO 8116 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:38:34.351  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ???????
+2020-02-26 06:38:39.106  INFO 8116 --- [XNIO-1 task-20] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51453
+2020-02-26 06:38:39.110  INFO 8116 --- [XNIO-1 task-20] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-26 06:38:39.115  INFO 8116 --- [XNIO-1 task-20] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51453
+2020-02-26 06:38:57.690  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"36a4cf6c119c7a971782033298155f96","event":{"token":"1d8d44260b3c0e7a","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 06:38:57.691  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"36a4cf6c119c7a971782033298155f96","event":{"token":"1d8d44260b3c0e7a","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 06:38:57.703  INFO 8116 --- [parallel-4] space.npstr.magma.impl.AudioStack        : Discarding received connection request because it is identical to the already existing connection. If you really want to reconnect, send a disconnect request first.
+2020-02-26 06:38:59.557  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"guildId":"388355964195307530","op":"destroy"}
+2020-02-26 06:39:02.050  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:02.399  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: DESERT STAR Carissa
+2020-02-26 06:39:02.401  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"track":"QAAAmAIAKkRFU0VSVCBTVEFSIC0gQ2FyaXNzYSBbTW9uc3RlcmNhdCBSZWxlYXNlXQAUTW9uc3RlcmNhdDogSW5zdGluY3QAAAAAAAI6UAALN1BjNnV2OE4yUlkAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj03UGM2dXY4TjJSWQAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:39:02.401  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:02.909  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Synchronice All We Know (Acoustic) [feat. Aeryn]
+2020-02-26 06:39:02.912  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:03.316  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????????
+2020-02-26 06:39:03.319  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:03.768  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2020-02-26 06:39:03.770  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:04.185  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Cheetah Mobile Fairy Tale
+2020-02-26 06:39:05.060  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:05.440  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Pegboard Nerds Emoji - Rogue Remix
+2020-02-26 06:39:05.448  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:05.846  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae World In A Bottle
+2020-02-26 06:39:05.850  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:06.286  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Stephen Walking Saturday Morning Space Ride
+2020-02-26 06:39:06.291  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:06.715  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Bullet Train Burn!
+2020-02-26 06:39:06.721  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:07.239  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE StaRt
+2020-02-26 06:39:08.204  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:08.678  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Hang Man
+2020-02-26 06:39:08.685  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:09.184  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo Ay3
+2020-02-26 06:39:09.191  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:09.678  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Chain Gang Of 1974 Sleepwalking
+2020-02-26 06:39:09.687  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:10.071  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Oceans
+2020-02-26 06:39:10.075  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:10.452  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Feel Alive
+2020-02-26 06:39:11.339  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:11.707  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Savoy Contemplate
+2020-02-26 06:39:11.714  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:12.104  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Noisestorm Leaving Now
+2020-02-26 06:39:12.110  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:12.578  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Watching
+2020-02-26 06:39:12.586  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:13.000  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Future Fine China
+2020-02-26 06:39:13.007  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:13.403  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Puppet Enough Is Enough
+2020-02-26 06:39:14.282  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:14.865  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Post Malone Sunflower - Spider-Man: Into the Spider-Verse
+2020-02-26 06:39:14.872  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:15.299  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Some Kind Of Magic
+2020-02-26 06:39:15.307  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:15.650  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ????????
+2020-02-26 06:39:15.656  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:16.067  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Le Sciantose Aliene - DJoNemesis & Lilly Instrumental Remix
+2020-02-26 06:39:16.073  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:16.490  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Float Away
+2020-02-26 06:39:17.638  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:18.085  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Ayo & Teo In Reverse
+2020-02-26 06:39:18.091  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:18.403  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Instinct
+2020-02-26 06:39:18.409  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:18.797  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Cold
+2020-02-26 06:39:18.803  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:19.244  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER Friends Again
+2020-02-26 06:39:19.250  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:19.711  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Playboi Carti Shoota (feat. Lil Uzi Vert)
+2020-02-26 06:39:20.979  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:21.501  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LVTHER This Love
+2020-02-26 06:39:21.507  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:21.916  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Friends (with Faustix)
+2020-02-26 06:39:21.921  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:22.344  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Apashe Good Bye - Instrumental Mix
+2020-02-26 06:39:22.349  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:22.738  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2020-02-26 06:39:22.742  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:23.204  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Good Charlotte The River
+2020-02-26 06:39:24.127  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:24.696  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE ???????????!
+2020-02-26 06:39:24.703  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:25.180  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Exit Stage Left Pursued By A Bear
+2020-02-26 06:39:25.182  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:25.586  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Grabbitz Way Too Deep
+2020-02-26 06:39:25.593  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:26.021  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Dirty Audio Gorilla Glue
+2020-02-26 06:39:26.028  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:26.490  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Psychic Type Victory Road
+2020-02-26 06:39:27.451  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:27.808  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Subtact Restart
+2020-02-26 06:39:27.812  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:28.200  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: BAND-MAID glory
+2020-02-26 06:39:28.206  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:28.603  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Dream Catcher
+2020-02-26 06:39:28.608  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:28.993  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Rogue Mirage
+2020-02-26 06:39:28.997  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:29.451  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hyper Potions Adventures
+2020-02-26 06:39:30.438  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:30.852  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Fratelli Stellari Sorella Stellare - Instrumental
+2020-02-26 06:39:30.857  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:31.285  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize - VIP Mix
+2020-02-26 06:39:31.290  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:31.686  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Unheilig Grosse Freiheit
+2020-02-26 06:39:31.690  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:32.167  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Mrs. GREEN APPLE Speaking
+2020-02-26 06:39:32.177  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:32.526  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Storm Chaser
+2020-02-26 06:39:33.413  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:33.762  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Altered Beasts The Legendary Theme [Gitarooman]
+2020-02-26 06:39:33.766  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:34.368  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: 21 Savage Bank Account
+2020-02-26 06:39:34.372  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:34.845  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae Storm Chaser (Acoustic)
+2020-02-26 06:39:34.850  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:35.359  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic One Way Dream
+2020-02-26 06:39:35.363  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:35.798  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Laszlo Home
+2020-02-26 06:39:36.744  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:37.208  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Razihel Legends
+2020-02-26 06:39:37.215  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:37.677  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Must Have Been The Wind
+2020-02-26 06:39:37.683  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:38.201  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Summer Was Fun Run To You
+2020-02-26 06:39:38.206  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:38.597  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg This Is Forever (feat. Danyka Nadeau)
+2020-02-26 06:39:38.603  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:39.053  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Khalid OTW
+2020-02-26 06:39:40.026  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:40.439  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae This Light (feat. Arthur Walwin)
+2020-02-26 06:39:40.442  INFO 8116 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:40.818  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ?????????
+2020-02-26 06:39:40.823  INFO 8116 --- [XNIO-1 task-17] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:41.150  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Anavae The Wanderer
+2020-02-26 06:39:41.153  INFO 8116 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:41.570  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: San Holo Victory
+2020-02-26 06:39:41.575  INFO 8116 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:41.991  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: JPB Defeat The Night
+2020-02-26 06:39:44.360  INFO 8116 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:44.889  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Unknown Brain Waiting
+2020-02-26 06:39:44.896  INFO 8116 --- [XNIO-1 task-25] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:45.313  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Boys Like Girls The Great Escape
+2020-02-26 06:39:45.320  INFO 8116 --- [XNIO-1 task-27] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:45.740  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Tristam Far Away
+2020-02-26 06:39:45.748  INFO 8116 --- [XNIO-1 task-29] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:46.312  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Why Don't We 8 Letters
+2020-02-26 06:39:46.317  INFO 8116 --- [XNIO-1 task-31] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:46.754  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Jay Cosmic Ocean Eyes
+2020-02-26 06:39:48.171  INFO 8116 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:48.638  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: The Wanted Chasing The Sun
+2020-02-26 06:39:48.644  INFO 8116 --- [XNIO-1 task-3] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:49.085  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: True Damage GIANTS
+2020-02-26 06:39:49.092  INFO 8116 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:49.517  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Hellberg Synchronize (feat. Aaron Richards)
+2020-02-26 06:39:49.521  INFO 8116 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:50.051  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Alec Benjamin Let Me Down Slowly
+2020-02-26 06:39:50.058  INFO 8116 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:50.508  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: LANY Malibu Nights
+2020-02-26 06:39:51.836  INFO 8116 --- [XNIO-1 task-11] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:52.227  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Big Marvel Twilight (feat. Ysabelle Cuevas)
+2020-02-26 06:39:52.235  INFO 8116 --- [XNIO-1 task-13] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-02-26 06:39:52.579  INFO 8116 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ???? ???????
+2020-02-26 06:39:53.417  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"36a4cf6c119c7a971782033298155f96","event":{"token":"e1197ca1aab743f2","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 06:39:53.418  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"36a4cf6c119c7a971782033298155f96","event":{"token":"e1197ca1aab743f2","guildid":"388355964195307530","endpoint":"singapore221.discord.media:80"},"guildId":"388355964195307530","op":"voiceUpdate"}
+2020-02-26 06:39:53.419  INFO 8116 --- [parallel-4] space.npstr.magma.impl.AudioStack        : Discarding received connection request because it is identical to the already existing connection. If you really want to reconnect, send a disconnect request first.
+2020-02-26 06:42:18.098  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"track":"QAAAnwIAOlRoZSBDaGFpbnNtb2tlcnMgLSBBbGwgV2UgS25vdyAoU3luY2hyb25pY2UgJiBBRVJZTiBDb3ZlcikAC0dhbGF4eU11c2ljAAAAAAAFGLAAC2w4Rjh1UzFOSjJnAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9bDhGOHVTMU5KMmcAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:47:51.110  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"track":"QAAAjwIAKjI4IOODleOCoeOCpOOCouOCpuOCqeODvOODq+ODu+ODieODqeOCtOODswALQWNlIENyaWZ1ZGUAAAAAAAMJWAALZjJvdTM4Vmh2SjgAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1mMm91MzhWaHZKOAAHeW91dHViZQAAAAAAAAAA","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:51:09.793  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"track":"QAAAlgIAKlJvbGxpbmcgU2t5IChDaGVldGFoIE1vYmlsZSApIC0gRmFpcnkgVGFsZQASR3Jhdml0eSBQcm9tb3Rpb25zAAAAAAACE0AAC09hQlFzT3FEc00wAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9T2FCUXNPcURzTTAAB3lvdXR1YmUAAAAAAAAAAA==","startTime":0,"endTime":0,"noReplace":false,"guildId":"388355964195307530","op":"play"}
+2020-02-26 06:52:11.479  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51453 -- CloseStatus[code=1006, reason=]
+2020-02-26 06:52:11.479  INFO 8116 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 1 playing players.
+2020-02-26 06:52:11.479  INFO 8116 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51427 -- CloseStatus[code=1006, reason=]
+2020-02-26 06:52:11.482  INFO 8116 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2020-02-26 06:52:11.485  INFO 8116 --- [XNIO-1 I/O-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-26 06:52:11.485  INFO 8116 --- [XNIO-1 I/O-3] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2020-02-26 06:52:11.496  WARN 8116 --- [lava-daemon-pool-playback-17-thread-1] c.s.d.l.t.p.LocalAudioTrackExecutor      : Suspicious exception for playback of OaBQsOqDsM0
+
+com.sedmelluq.discord.lavaplayer.tools.FriendlyException: The track was unexpectedly terminated.
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.handlePlaybackInterrupt(LocalAudioTrackExecutor.java:334) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:278) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:236) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaAudioTrack.process(MatroskaAudioTrack.java:39) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.DelegatedAudioTrack.processDelegate(DelegatedAudioTrack.java:25) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack.processStatic(YoutubeAudioTrack.java:57) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack.process(YoutubeAudioTrack.java:49) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.execute(LocalAudioTrackExecutor.java:91) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$executeTrack$1(DefaultAudioPlayerManager.java:349) ~[lavaplayer-1.3.32.jar!/:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: java.lang.InterruptedException: null
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2056) ~[na:na]
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2090) ~[na:na]
+	at java.base/java.util.concurrent.ArrayBlockingQueue.put(ArrayBlockingQueue.java:367) ~[na:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.AllocatingAudioFrameBuffer.consume(AllocatingAudioFrameBuffer.java:179) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.common.OpusPacketRouter.passThrough(OpusPacketRouter.java:169) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.common.OpusPacketRouter.process(OpusPacketRouter.java:99) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaOpusTrackConsumer.consume(MatroskaOpusTrackConsumer.java:47) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.processFrameInBlock(MatroskaStreamingFile.java:372) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.parseClusterSimpleBlock(MatroskaStreamingFile.java:336) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.parseNextCluster(MatroskaStreamingFile.java:321) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaStreamingFile.provideFrames(MatroskaStreamingFile.java:297) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.container.matroska.MatroskaAudioTrack.lambda$process$0(MatroskaAudioTrack.java:40) ~[lavaplayer-1.3.32.jar!/:na]
+	at com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor.executeProcessingLoop(LocalAudioTrackExecutor.java:262) ~[lavaplayer-1.3.32.jar!/:na]
+	... 10 common frames omitted
+
+2020-02-26 06:52:52.284  INFO 8116 --- [XNIO-1 task-15] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51530
+2020-02-26 06:52:52.289  INFO 8116 --- [XNIO-1 task-15] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2020-02-26 06:52:52.299  INFO 8116 --- [XNIO-1 task-15] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51530
