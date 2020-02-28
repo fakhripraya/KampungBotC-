@@ -1,4 +1,5 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,5 +21,8 @@ namespace maicy_bot_core.MiscData
 
         //current user channel
         public static SocketChannel current_client_channel { get; set; }
+
+        //current user text channel
+        public static ITextChannel current_client_text_channel { get; set; }
     }
 }

@@ -65,11 +65,15 @@ namespace maicy_bot_core.MaicyServices
                     }
                 }
 
+                
+                var text_channel = Gvar.current_client_text_channel as ITextChannel;
+
                 clear_all_loop();
                 lava_socket_client.DisconnectAsync(Gvar.current_client_channel as IVoiceChannel);
                 Gvar.current_client_channel = null;
-                lava_player.TextChannel.SendMessageAsync
-                            ("All player left, Trying to disconnect.");
+                Gvar.current_client_text_channel = null;
+                text_channel.SendMessageAsync
+                            ("All user left, Trying to disconnect.");
                 lava_player = null;
                 return Task.CompletedTask;
             }
@@ -156,6 +160,8 @@ namespace maicy_bot_core.MaicyServices
                             ("There are no more tracks in the queue. Disconnecting");
                         clear_all_loop();
                         lava_player = null;
+                        Gvar.current_client_channel = null;
+                        Gvar.current_client_text_channel = null;
                         await lava_socket_client.DisconnectAsync(player.VoiceChannel);
                         return;
                     }
@@ -186,7 +192,7 @@ namespace maicy_bot_core.MaicyServices
 
             if (lava_player.VoiceChannel != voice_channel)
             {
-                return "Please join the voice channel the bot is in to make it leave.";
+                return "Please join the voice channel the bot is in to trigger loop";
             }
 
             if (Gvar.loop_flag is true)
@@ -208,8 +214,26 @@ namespace maicy_bot_core.MaicyServices
         {
             try
             {
+                Gvar.current_client_text_channel = text_channel;
                 Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
                 await lava_socket_client.ConnectAsync(voice_channel, text_channel);
+
+                if (lava_socket_client.GetPlayer(voice_channel.Guild.Id) != null)
+                {
+                    foreach (var item in lava_socket_client.GetPlayer(voice_channel.Guild.Id)
+                    .VoiceChannel
+                    .PermissionOverwrites)
+                    {
+                        if (item.TargetId == 674652118472458240)
+                        {
+                            if (item.Permissions.Connect.ToString() == "Deny")
+                            {
+                                return "im not allowed to join your voice channel.";
+                            }
+                        }
+                    }
+                }
+
                 return $"Successfully connected to {voice_channel.Name}";
             }
             catch (Exception ex)
@@ -234,6 +258,8 @@ namespace maicy_bot_core.MaicyServices
                 }
                 else
                 {
+                    Gvar.current_client_text_channel = null;
+                    Gvar.current_client_channel = null;
                     clear_all_loop();
                     lava_player = null;
                     await lava_socket_client.DisconnectAsync(voice_channel);
@@ -251,20 +277,34 @@ namespace maicy_bot_core.MaicyServices
         //restart
         public async Task<string> restart_async(SocketVoiceChannel voice_channel, ITextChannel text_channel)
         {
-            if (maicy_client.GetChannel(voice_channel.Id) != voice_channel)
-            {
-                return "Please join the voice channel the bot is in to restart it.";
-            }
-
             try
             {
                 clear_all_loop();
                 lava_player = null;
                 Gvar.current_client_channel = null;
+                Gvar.current_client_text_channel = null;
                 await lava_socket_client.DisconnectAsync(voice_channel);
-                Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
                 await lava_socket_client.ConnectAsync(voice_channel, text_channel);
-                lava_player = lava_socket_client.GetPlayer(text_channel.GuildId);
+
+                if (lava_socket_client.GetPlayer(voice_channel.Guild.Id) != null)
+                {
+                    foreach (var item in lava_socket_client.GetPlayer(voice_channel.Guild.Id)
+                    .VoiceChannel
+                    .PermissionOverwrites)
+                    {
+                        if (item.TargetId == 674652118472458240)
+                        {
+                            if (item.Permissions.Connect.ToString() == "Deny")
+                            {
+                                await leave_async(voice_channel, text_channel);
+                                return "Successfuly restart but im not allowed to join your voice channel.";
+                            }
+                        }
+                    }
+                }
+
+                Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
+                Gvar.current_client_text_channel = maicy_client.GetChannel(text_channel.Id) as ITextChannel;
                 return "Successfully restart.";
             }
             catch (Exception ex)
@@ -299,7 +339,29 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_client_id == null)
                 {
+                    Gvar.current_client_text_channel = channel;
+                    Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
+
                     await connect_async(voice_channel, channel);
+
+                    if (lava_socket_client.GetPlayer(voice_channel.Guild.Id) != null)
+                    {
+                        foreach (var item in lava_socket_client.GetPlayer(voice_channel.Guild.Id)
+                        .VoiceChannel
+                        .PermissionOverwrites)
+                        {
+                            if (item.TargetId == 674652118472458240)
+                            {
+                                if (item.Permissions.Connect.ToString() == "Deny")
+                                {
+                                    await channel.SendMessageAsync("im not allowed to join your voice channel.");
+                                    await leave_async(voice_channel, channel);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+
                     lava_player = lava_socket_client.GetPlayer(guild_id);
                     await lava_player.TextChannel.SendMessageAsync($"Successfully connected to {voice_channel_name}");
                 }
@@ -310,7 +372,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to make it leave.");
+                    await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to queue track.");
                     lava_player = null;
                     return;
                 }
@@ -498,7 +560,13 @@ namespace maicy_bot_core.MaicyServices
 
             if (lava_player.VoiceChannel != voice_channel)
             {
-                await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to make it leave.");
+                await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to remove track.");
+                return;
+            }
+
+            if (lava_player.Queue.Count == 0)
+            {
+                await lava_player.TextChannel.SendMessageAsync("Queue is empty.");
                 return;
             }
 
@@ -932,7 +1000,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to clear tracks.";
                 }
 
                 await lava_player.StopAsync();
@@ -961,7 +1029,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to skip track.";
                 }
 
                 var old_track = lava_player.CurrentTrack;
@@ -1000,7 +1068,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to set player volume.";
                 }
 
                 if (vol < 0 || vol > 100)
@@ -1030,7 +1098,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to EARRAPE!!!!.";
                 }
 
                 await lava_player.SetVolumeAsync(1000);
@@ -1055,7 +1123,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to pause the player.";
                 }
 
                 if (lava_player.IsPaused == true)
@@ -1085,7 +1153,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to resume the player.";
                 }
 
                 if (lava_player.IsPaused != true)
@@ -1115,7 +1183,7 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player.VoiceChannel != voice_channel)
                 {
-                    return "Please join the voice channel the bot is in to make it leave.";
+                    return "Please join the voice channel the bot is in to shuffle the queue.";
                 }
 
                 lava_player.Queue.Shuffle();
