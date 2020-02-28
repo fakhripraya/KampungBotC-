@@ -40,20 +40,29 @@ namespace maicy_bot_core.MaicyServices
             lava_socket_client.OnTrackException += Lava_socket_client_OnTrackException;
             maicy_client.UserVoiceStateUpdated += Maicy_client_UserVoiceStateUpdated;
             maicy_client.Disconnected += Maicy_client_Disconnected;
+
             return Task.CompletedTask;
         }
 
         private Task Maicy_client_UserVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)
         {
-            if (Gvar.current_client_channel == null)
+            try
             {
-                return Task.CompletedTask;
-            }
-            if (Gvar.current_client_channel.Users.Count() == 1)
-            {
-                if (!Gvar.current_client_channel.Users.FirstOrDefault().IsBot)
+                if (Gvar.current_client_channel == null)
                 {
                     return Task.CompletedTask;
+                }
+
+                foreach (var bot in Gvar.current_client_channel.Users.ToList())
+                {
+                    if (bot.IsBot == false)
+                    {
+                        return Task.CompletedTask;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 clear_all_loop();
@@ -62,8 +71,13 @@ namespace maicy_bot_core.MaicyServices
                 lava_player.TextChannel.SendMessageAsync
                             ("All player left, Trying to disconnect.");
                 lava_player = null;
+                return Task.CompletedTask;
             }
-            return Task.CompletedTask;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return Task.CompletedTask;
+            }
         }
 
         private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string ex_msg)
@@ -73,14 +87,13 @@ namespace maicy_bot_core.MaicyServices
             lava_player.TextChannel.SendMessageAsync
                             ($"Track Error, {ex_msg} Disconnecting.");
             lava_player = null;
+
             return Task.CompletedTask;
         }
 
         private Task Maicy_client_Disconnected(Exception ex)
         {
             Console.WriteLine(ex.Message);
-            clear_all_loop();
-            lava_player = null;
             return Task.CompletedTask;
         }
 
@@ -90,6 +103,7 @@ namespace maicy_bot_core.MaicyServices
             Gvar.loop_track = null;
             Gvar.list_loop_track = null;
             Gvar.loop_flag = false;
+
             return;
         }
 
@@ -101,12 +115,12 @@ namespace maicy_bot_core.MaicyServices
         {
             try
             {
-                if (lava_player.IsPlaying)
+                if (player.IsPlaying)
                 {
                     return;
                 }
 
-                if (!lava_player.IsPaused && lava_player.IsPlaying)
+                if (!player.IsPaused && lava_player.IsPlaying)
                 {
                     return;
                 }
@@ -116,21 +130,21 @@ namespace maicy_bot_core.MaicyServices
                     if (!player.Queue.TryDequeue(out var item)
                     || !(item is LavaTrack next_track))
                     {
-                        if (!lava_player.IsPlaying)
+                        if (!player.IsPlaying)
                         {
-                            await lava_player.PlayAsync(Gvar.loop_track);
-                            await now_async();
+                            await player.PlayAsync(Gvar.loop_track);
+                            await now_async(default);
                         }
 
                         foreach (var loop_item in Gvar.list_loop_track)
                         {
-                            lava_player.Queue.Enqueue(loop_item);
+                            player.Queue.Enqueue(loop_item);
                         }
                     }
                     else
                     {
                         await player.PlayAsync(next_track);
-                        await now_async();
+                        await now_async(default);
                     }
                 }
                 else
@@ -139,7 +153,7 @@ namespace maicy_bot_core.MaicyServices
                         || !(item is LavaTrack next_track))
                     {
                         await player.TextChannel.SendMessageAsync
-                            ("There are no more tracks in the queue.");
+                            ("There are no more tracks in the queue. Disconnecting");
                         clear_all_loop();
                         lava_player = null;
                         await lava_socket_client.DisconnectAsync(player.VoiceChannel);
@@ -147,24 +161,32 @@ namespace maicy_bot_core.MaicyServices
                     }
 
                     await player.PlayAsync(next_track);
-                    await now_async();
+                    await now_async(default);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                await player.TextChannel.SendMessageAsync
+                            ($"Error {ex.Message}. Disconnecting");
                 clear_all_loop();
                 lava_player = null;
                 await lava_socket_client.DisconnectAsync(player.VoiceChannel);
+                return;
             }
         }
 
         //player loop check
-        public string player_check()
+        public string player_check(SocketVoiceChannel voice_channel)
         {
             if (lava_player == null)
             {
                 return "There are no track to loop";
+            }
+
+            if (lava_player.VoiceChannel != voice_channel)
+            {
+                return "Please join the voice channel the bot is in to make it leave.";
             }
 
             if (Gvar.loop_flag is true)
@@ -182,15 +204,74 @@ namespace maicy_bot_core.MaicyServices
         }
 
         //join
-        public async Task connect_async(SocketVoiceChannel voice_channel, ITextChannel text_channel)
-            => await lava_socket_client.ConnectAsync(voice_channel, text_channel);
+        public async Task<string> connect_async(SocketVoiceChannel voice_channel, ITextChannel text_channel)
+        {
+            try
+            {
+                Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
+                await lava_socket_client.ConnectAsync(voice_channel, text_channel);
+                return $"Successfully connected to {voice_channel.Name}";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error ,{ex.Message}";
+            }
+        }
 
         //leave
-        public async Task leave_async(SocketVoiceChannel voice_channel)
+        public async Task<string> leave_async(SocketVoiceChannel voice_channel, ITextChannel text_channel)
         {
-            clear_all_loop();
-            lava_player = null;
-            await lava_socket_client.DisconnectAsync(voice_channel);
+            try
+            {
+                if (lava_player == null)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+                else if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+                else
+                {
+                    clear_all_loop();
+                    lava_player = null;
+                    await lava_socket_client.DisconnectAsync(voice_channel);
+
+                    return $"Successfully disconnected from {voice_channel.Name}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
+        }
+
+        //restart
+        public async Task<string> restart_async(SocketVoiceChannel voice_channel, ITextChannel text_channel)
+        {
+            if (maicy_client.GetChannel(voice_channel.Id) != voice_channel)
+            {
+                return "Please join the voice channel the bot is in to restart it.";
+            }
+
+            try
+            {
+                clear_all_loop();
+                lava_player = null;
+                Gvar.current_client_channel = null;
+                await lava_socket_client.DisconnectAsync(voice_channel);
+                Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
+                await lava_socket_client.ConnectAsync(voice_channel, text_channel);
+                lava_player = lava_socket_client.GetPlayer(text_channel.GuildId);
+                return "Successfully restart.";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
         }
 
         //play music from youtube
@@ -225,6 +306,13 @@ namespace maicy_bot_core.MaicyServices
                 else
                 {
                     lava_player = lava_socket_client.GetPlayer(guild_id);
+                }
+
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to make it leave.");
+                    lava_player = null;
+                    return;
                 }
 
                 SearchResult results = null; //initialize biar seneng
@@ -279,7 +367,7 @@ namespace maicy_bot_core.MaicyServices
                             }
                         }
 
-                        await now_async();
+                        await now_async(default);
                         await lava_player.TextChannel.SendMessageAsync($"{playlist.Author} playlist has been added to the queue");
                         Gvar.playlist_load_flag = false;
                         return;
@@ -356,7 +444,7 @@ namespace maicy_bot_core.MaicyServices
                         load_count++;
                     }
                     
-                    await now_async();
+                    await now_async(default);
                     await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
                     Gvar.playlist_load_flag = false;
                     return;
@@ -388,12 +476,51 @@ namespace maicy_bot_core.MaicyServices
                 {
                     await lava_player.PlayAsync(track);
                     Gvar.loop_track = track;
-                    await now_async();
+                    await now_async(default);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                await channel.SendMessageAsync($"Error while removing track , {ex.Message}");
+                return;
+            }
+        }
+
+        //remove at
+        public async Task remove_async(int index , SocketVoiceChannel voice_channel , ITextChannel text_channel)
+        {
+            if (lava_player == null)
+            {
+                await text_channel.SendMessageAsync("There are no track playing at this time.");
+                return;
+            }
+
+            if (lava_player.VoiceChannel != voice_channel)
+            {
+                await lava_player.TextChannel.SendMessageAsync("Please join the voice channel the bot is in to make it leave.");
+                return;
+            }
+
+            try
+            {
+                if (Gvar.loop_flag)
+                {
+                    var removed_track = lava_player.Queue.RemoveAt(index - 2);
+                    Gvar.list_loop_track.RemoveAt(index - 2);
+                }
+                else
+                {
+                    var removed_track = lava_player.Queue.RemoveAt(index - 1);
+                }
+
+                await lava_player.TextChannel.SendMessageAsync($"Selected track has been removed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                await lava_player.TextChannel.SendMessageAsync($"Error while removing track , {ex.Message}");
+                return;
             }
         }
 
@@ -436,12 +563,12 @@ namespace maicy_bot_core.MaicyServices
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
             }
-            return "";
         }
 
         //now
-        public async Task now_async()
+        public async Task now_async(ITextChannel text_channel)
         {
             try
             {
@@ -453,12 +580,14 @@ namespace maicy_bot_core.MaicyServices
 
                 if (lava_player == null)
                 {
-                    await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                    await text_channel.SendMessageAsync(default, default, return_embed);
+                    return;
                 }
 
                 if (!lava_player.IsPlaying)
                 {
                     await lava_player.TextChannel.SendMessageAsync(default, default, return_embed);
+                    return;
                 }
 
                 var thumbnail = await lava_player.CurrentTrack.FetchThumbnailAsync();
@@ -550,6 +679,7 @@ namespace maicy_bot_core.MaicyServices
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return;
             }
         }
 
@@ -633,7 +763,8 @@ namespace maicy_bot_core.MaicyServices
                         {
                             return new EmbedBuilder()
                                 .WithColor(Color.Green)
-                                .WithDescription("Please input the correct page number").Build();
+                                .WithDescription("Please input the correct page number")
+                                .Build();
                         }
 
                         page = (int)input_page - 1;
@@ -680,7 +811,7 @@ namespace maicy_bot_core.MaicyServices
                     queue_count = 1;
                     queue_list = Gvar.list_loop_track;
 
-                    if (lava_player.Queue.Items.ToList().Count() == 0 && queue_list.Count() == 0)
+                    if (lava_player.Queue.Items.ToList().Count() == 0 && queue_list.Count() == 0 && Gvar.loop_track == null)
                     {
                         queue_string = "There are no more tracks in the queue";
                     }
@@ -782,123 +913,220 @@ namespace maicy_bot_core.MaicyServices
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            return new EmbedBuilder()
+                return new EmbedBuilder()
                 .WithColor(Color.Green)
-                .WithDescription("Error , Contact pres asap")
+                .WithDescription($"Error , {ex.Message} try restarting the player or Contact PakPres#8360 asap")
                 .Build();
+            }
         }
 
         //clear
-        public async Task<string> clear_not_async()
+        public async Task<string> clear_not_async(SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "There are no track playing at this time.";
+                if (lava_player == null)
+                {
+                    return "There are no track playing at this time.";
+                }
+
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                await lava_player.StopAsync();
+                lava_player.Queue.Clear();
+                lava_player = null;
+                clear_all_loop();
+
+                return "Tracks cleared.";
             }
-            await lava_player.StopAsync();
-            lava_player.Queue.Clear();
-            lava_player = null;
-            clear_all_loop();
-            return "Tracks cleared.";
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
         }
 
         //skip
-        public async Task<string> skip_async()
+        public async Task<string> skip_async(SocketVoiceChannel voice_channel)
         {
-            var old_track = lava_player.CurrentTrack;
-            if (lava_player.IsPlaying && lava_player.Queue.Count == 0)
+            try
             {
-                await lava_player.StopAsync();
-                await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
-                return " ";
-            }
+                if (lava_player == null)
+                {
+                    return "Player need to be connected to the channel first";
+                }
 
-            if (lava_player == null || lava_player.Queue.Count == 0)
-            {
-                return "Nothing in queue";
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                var old_track = lava_player.CurrentTrack;
+                if (lava_player.IsPlaying && lava_player.Queue.Count == 0)
+                {
+                    await lava_player.StopAsync();
+                    return $"Successfully skipped {old_track.Title}";
+                }
+
+                if (lava_player == null || lava_player.Queue.Count == 0)
+                {
+                    return "Nothing in queue";
+                }
+
+                await lava_player.SkipAsync();
+                await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
+                await now_async(default);
+                return "";
             }
-            
-            await lava_player.SkipAsync();
-            await lava_player.TextChannel.SendMessageAsync($"Successfully skipped {old_track.Title}");
-            await now_async();
-            return " ";
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
         }
 
         //volume adjustment
-        public async Task<string> set_volume_async(int vol)
+        public async Task<string> set_volume_async(int vol, SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "Player need to be connected to the channel first";
-            }
+                if (lava_player == null)
+                {
+                    return "Player need to be connected to the channel first";
+                }
 
-            if (vol < 0 || vol > 100)
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                if (vol < 0 || vol > 100)
+                {
+                    return "Volume must between 0 - 100";
+                }
+
+                await lava_player.SetVolumeAsync(vol);
+                return $"Volume set to {vol}";
+            }
+            catch (Exception ex)
             {
-                return "Volume must between 0 - 100";
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
             }
-
-            await lava_player.SetVolumeAsync(vol);
-            return $"Volume set to {vol}";
         }
 
         //volume earrape
-        public async Task<string> set_Earrape()
+        public async Task<string> set_Earrape(SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "Player need to be connected to the channel first";
-            }
+                if (lava_player == null)
+                {
+                    return "Player need to be connected to the channel first";
+                }
 
-            await lava_player.SetVolumeAsync(1000);
-            return $"Mampos lo 1000 volume earrape!!";
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                await lava_player.SetVolumeAsync(1000);
+                return "Earraping y'all";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
         }
 
         //pause
-        public async Task<string> pause_async()
+        public async Task<string> pause_async(SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "There are no track playing at this time.";
-            }
+                if (lava_player == null)
+                {
+                    return "There are no track playing at this time.";
+                }
 
-            if (lava_player.IsPaused == true)
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                if (lava_player.IsPaused == true)
+                {
+                    return "Track already paused.";
+                }
+
+                await lava_player.PauseAsync();
+                return "Player Paused.";
+            }
+            catch (Exception ex)
             {
-                return "Track already paused.";
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
             }
-
-            await lava_player.PauseAsync();
-            return "Player Paused.";
         }
 
         //resume
-        public async Task<string> resume_async()
+        public async Task<string> resume_async(SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "There are no track playing at this time.";
-            }
+                if (lava_player == null)
+                {
+                    return "There are no track playing at this time.";
+                }
 
-            if (lava_player.IsPaused != true)
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                if (lava_player.IsPaused != true)
+                {
+                    return "Track still playing.";
+                }
+
+                await lava_player.ResumeAsync();
+                return "Track resumed.";
+            }
+            catch (Exception ex)
             {
-                return "Track still playing.";
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
             }
-
-            await lava_player.ResumeAsync();
-            return "Track resumed.";
         }
 
         //shuffle
-        public string shuffle_async()
+        public string shuffle_async(SocketVoiceChannel voice_channel)
         {
-            if (lava_player == null)
+            try
             {
-                return "There are no track playing at this time.";
-            }
+                if (lava_player == null)
+                {
+                    return "There are no track playing at this time.";
+                }
 
-            lava_player.Queue.Shuffle();
-            Gvar.list_loop_track = lava_player.Queue.Items.ToList();
-            return "Track shuffled.";
+                if (lava_player.VoiceChannel != voice_channel)
+                {
+                    return "Please join the voice channel the bot is in to make it leave.";
+                }
+
+                lava_player.Queue.Shuffle();
+                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                return "Track shuffled.";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return $"Error , {ex.Message}";
+            }
         }
 
         private Task Lava_socket_client_Log(LogMessage Logmessage)

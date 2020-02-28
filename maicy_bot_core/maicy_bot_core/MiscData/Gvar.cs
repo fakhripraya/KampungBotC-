@@ -18,7 +18,7 @@ namespace maicy_bot_core.MiscData
         //playlist
         public static bool playlist_load_flag { get; set; }
 
-        //current channel
+        //current user channel
         public static SocketChannel current_client_channel { get; set; }
     }
 }

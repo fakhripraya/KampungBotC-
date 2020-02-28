@@ -19,25 +19,7 @@ namespace maicy_bot_core
         private CommandService maicy_cmd_serv;
         private IServiceProvider maicy_services;
         private Timer _timer;
-
-        //create your list of statuses and an indexer to keep track
-        //private readonly List<string> _statusList = new List<string>() {
-        //    "Strvrains",
-        //    "Genji",
-        //    "Gazer",
-        //    "Birra",
-        //    "Dreqqy",
-        //    "Ugau",
-        //    "Edgar",
-        //    "Sauce",
-        //    "MekMek",
-        //    "King",
-        //    "Plasti",
-        //    "Jarvis",
-        //    "Maicy",
-        //    "Pakpres" };
-        private readonly List<string> _statusList = new List<string>() {
-            "Maicy"};
+        private static List<string> _statusList = new List<string>();
         private int _statusIndex = 0;
 
         public MaicyClientClass(DiscordSocketClient client = null, CommandService cmd = null)
@@ -64,7 +46,7 @@ namespace maicy_bot_core
 
             //Startin the bot
             await maicy_client.StartAsync();
-
+            maicy_client.GuildAvailable += Maicy_client_GuildAvailable;
             maicy_client.Ready += Maicy_client_Ready;
             maicy_client.Log += Maicy_client_Log;
             maicy_services = SetupServices();
@@ -80,17 +62,36 @@ namespace maicy_bot_core
             await Task.Delay(-1);
         }
 
-        private Task Maicy_client_Ready()
+        private Task Maicy_client_GuildAvailable(SocketGuild guild)
         {
-            _timer = new Timer(async _ =>
-            {//any code in here will run periodically       
-                await maicy_client.SetGameAsync(_statusList.ElementAtOrDefault(_statusIndex), type: ActivityType.Watching); //set activity to current index position
-                _statusIndex = _statusIndex + 1 == _statusList.Count ? 0 : _statusIndex + 1; //increment index position, restart if end of list
-            },
-            null,
-            TimeSpan.FromSeconds(1), //time to wait before executing the timer for the first time (set first status)
-            TimeSpan.FromSeconds(10)); //time to wait before executing the timer again (set new status - repeats indifinitely every 10 seconds)
+            if (guild.Name == "English House")
+            {
+                guild.Users.ToList().ForEach(x => _statusList.Add(x.Nickname));
+                _statusList.RemoveAll(item => item == null);
+            }
+
             return Task.CompletedTask;
+        }
+
+        private async Task Maicy_client_Ready()
+        {
+            try
+            {
+                _timer = new Timer(async _ =>
+                {
+                    await maicy_client.SetGameAsync(_statusList.ElementAtOrDefault(_statusIndex), type: ActivityType.Watching);
+                    _statusIndex = _statusIndex + 1 == _statusList.Count ? 0 : _statusIndex + 1;
+                },
+                null,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(10));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                await Task.CompletedTask;
+                return;
+            }
         }
 
         private Task Maicy_client_Log(LogMessage log_message)

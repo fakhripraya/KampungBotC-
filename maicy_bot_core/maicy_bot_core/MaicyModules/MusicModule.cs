@@ -32,8 +32,8 @@ namespace maicy_bot_core.MaicyModule
             }
             else
             {
-                await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
-                await ReplyAsync($"Successfully connected to {user.VoiceChannel.Name}");
+                var reply_msg = await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
+                await ReplyAsync(reply_msg);
             }
         }
 
@@ -48,8 +48,8 @@ namespace maicy_bot_core.MaicyModule
             }
             else
             {
-                await maicy_music_service.leave_async(user.VoiceChannel);
-                await ReplyAsync($"Successfully disconnected from {user.VoiceChannel.Name}");
+                var reply_msg = await maicy_music_service.leave_async(user.VoiceChannel, Context.Channel as ITextChannel);
+                await ReplyAsync(reply_msg);
             }
         }
 
@@ -70,6 +70,21 @@ namespace maicy_bot_core.MaicyModule
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
                 user.VoiceChannel.Name, "YT",user.Id);
+        }
+
+        [Command("Restart")]
+        public async Task Restart()
+        {
+            var user = Context.User as SocketGuildUser;
+
+            if (user.VoiceChannel is null)
+            {
+                await ReplyAsync("You need to connect to a voice channel.");
+                return;
+            }
+
+            var reply_msg = await maicy_music_service.restart_async(user.VoiceChannel , Context.Channel as ITextChannel);
+            await ReplyAsync(reply_msg);
         }
 
         [Command("Spotify"), Alias("sp", "spotifa", "spoti")]
@@ -113,42 +128,63 @@ namespace maicy_bot_core.MaicyModule
         [Command("Clear"), Alias("s", "cl", "stop", "bersihken")]
         public async Task Stop()
         {
-            string reply_msg = await maicy_music_service.clear_not_async();
+            var user = Context.User as SocketGuildUser;
+
+            string reply_msg = await maicy_music_service.clear_not_async(user.VoiceChannel);
             await ReplyAsync(reply_msg);
+        }
+
+        [Command("Remove"), Alias("r", "cabut", "cabutken")]
+        public async Task Remove(int index)
+        {
+            var user = Context.User as SocketGuildUser;
+
+            if (user.VoiceChannel is null)
+            {
+                await ReplyAsync("You need to connect to a voice channel.");
+                return;
+            }
+
+            await maicy_music_service.remove_async(index , user.VoiceChannel , Context.Channel as ITextChannel);
         }
 
         [Command("Pause") , Alias("ps", "henti", "hentiken", "hentikeun", "sebat", "sebatdl", "sebatdulu")]
         public async Task Pause()
         {
-            string reply_msg = await maicy_music_service.pause_async();
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = await maicy_music_service.pause_async(user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
 
         [Command("Resume"), Alias("con","res", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
         public async Task Resume()
         {
-            string reply_msg = await maicy_music_service.resume_async();
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = await maicy_music_service.resume_async(user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
 
         [Command("Skip"), Alias("n", "next")]
         public async Task Skip()
         {
-            var result = await maicy_music_service.skip_async();
+            var user = Context.User as SocketGuildUser;
+            var result = await maicy_music_service.skip_async(user.VoiceChannel);
             await ReplyAsync(result);
         }
 
         [Command("Volume"), Alias("v", "vol", "suara")]
         public async Task Volume(int vol)
         {
-            string reply_msg = await maicy_music_service.set_volume_async(vol);
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = await maicy_music_service.set_volume_async(vol , user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
 
         [Command("Earrape")]
-        public async Task Earrape(int vol)
+        public async Task Earrape()
         {
-            string reply_msg = await maicy_music_service.set_Earrape();
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = await maicy_music_service.set_Earrape(user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
 
@@ -163,14 +199,14 @@ namespace maicy_bot_core.MaicyModule
                 return;
             }
 
-            string reply_msg = maicy_music_service.player_check();
+            string reply_msg = maicy_music_service.player_check(user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
 
         [Command("Now"), Alias("np", "nowplaying", "sekarang")]
         public async Task Now()
         {
-            await maicy_music_service.now_async();
+            await maicy_music_service.now_async(Context.Channel as ITextChannel);
         }
 
         [Command("Lyrics"), Alias("ly", "Lyric")]
@@ -198,7 +234,8 @@ namespace maicy_bot_core.MaicyModule
         [Command("Shuffle"), Alias("sh", "acak", "everydayimshuffling")]
         public async Task Shuffle()
         {
-            string reply_msg = maicy_music_service.shuffle_async();
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = maicy_music_service.shuffle_async(user.VoiceChannel);
             await ReplyAsync(reply_msg);
         }
     }

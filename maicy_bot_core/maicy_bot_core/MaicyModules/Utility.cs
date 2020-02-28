@@ -24,39 +24,36 @@ namespace maicy_bot_core.MaicyModule
         {
             var embed = new EmbedBuilder
             {
-                // Embed property can be set within object initializer
                 Title = "Help",
             };
-            // Or with methods
             var ready = embed
                 .WithColor(Color.Green)
                 .WithDescription(
                 "MUSIC COMMAND\n\n\n" +
-                "`Join` [Join current user channel]\n" + 
-                "`Leave` [Leave channel]\n" + 
+                "`Join` [Join current user channel]\n" +
+                "`Leave` [Leave channel]\n" +
+                "`Restart` [Restart the music player]\n" +
                 "\n" +
-                "`Play` [Play song/playlist from Youtube]\n" + 
-                "`Soundcloud` [Play song from Soundcloud]\n" + 
+                "`Play` [Play song/playlist from Youtube]\n" +
+                "`Soundcloud` [Play song from Soundcloud]\n" +
                 "`spotify` [Play playlist from spotify]\n" +
-                "[ex: (prefix)spotify {url} ]\n" + 
                 "\n" +
-                "`Resume` [Resume current playback]\n" + 
-                "`Pause` [Pause current playback]\n" + 
+                "`Resume` [Resume current playback]\n" +
+                "`Pause` [Pause current playback]\n" +
                 "\n" +
-                "`Clear` [Stop and Clear all tracks]\n" + 
-                "`Skip` [Skip current playback]\n" + 
+                "`Clear` [Stop and Clear all tracks]\n" +
+                "`Skip` [Skip current playback]\n" +
+                "`Remove` [Remove the selected track]\n" +
                 "\n" +
-                "`Volume` [Set playback Volumes]\n" + 
-                "`Loop` [Loop tracks]\n" + 
-                "\n" + 
-                "`Now` [Get current track info]\n" + 
-                "`Lyrics` [Fetch current track lyrics]\n" + 
+                "`Volume` [Set playback Volumes]\n" +
+                "`Loop` [Loop tracks]\n" +
                 "\n" +
-                "`Queue` [Get tracks queue info]\n" + 
-                "`Page` [Get tracks queue info]\n" +
-                "[based by user page input]\n" +
-                "[ex : (prefix)page 1]\n" + 
-                "`Shuffle` [Shuffle the queue randomly]\n" + 
+                "`Now` [Get current track info]\n" +
+                "`Lyrics` [Fetch current track lyrics]\n" +
+                "\n" +
+                "`Queue` [Get tracks queue info]\n" +
+                "`Page` [Get selected queue page info]\n" +
+                "`Shuffle` [Shuffle the queue randomly]\n" +
                 "\n\n" +
                 "UTILITY\n\n" +
                 "`Help` [summon this command]")
@@ -78,6 +75,12 @@ namespace maicy_bot_core.MaicyModule
         [Command("Kick")]
         public async Task Kick(IGuildUser userAccount, string reason)
         {
+            //belum pasti
+            if (true)
+            {
+                await ReplyAsync("Command Unavailable");
+            }
+
             var user = Context.User as SocketGuildUser;
             var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Marshall");
             if (user.GuildPermissions.KickMembers)
