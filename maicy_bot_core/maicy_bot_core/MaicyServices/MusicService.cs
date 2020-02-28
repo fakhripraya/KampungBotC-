@@ -65,7 +65,7 @@ namespace maicy_bot_core.MaicyServices
                     }
                 }
 
-                
+
                 var text_channel = Gvar.current_client_text_channel as ITextChannel;
 
                 clear_all_loop();
@@ -129,21 +129,31 @@ namespace maicy_bot_core.MaicyServices
                     return;
                 }
 
-                if (Gvar.loop_flag is true)
+                if (Gvar.loop_flag is true && (Gvar.loop_track != null || Gvar.list_loop_track != null))
                 {
                     if (!player.Queue.TryDequeue(out var item)
                     || !(item is LavaTrack next_track))
                     {
-                        if (!player.IsPlaying)
+                        if (!player.IsPlaying && Gvar.loop_track != null)
                         {
                             await player.PlayAsync(Gvar.loop_track);
-                            await now_async(default);
                         }
 
-                        foreach (var loop_item in Gvar.list_loop_track)
+                        if (!player.IsPlaying && Gvar.loop_track == null)
                         {
-                            player.Queue.Enqueue(loop_item);
+                            foreach (var loop_item in Gvar.list_loop_track)
+                            {
+                                if (!player.IsPlaying)
+                                {
+                                    await player.PlayAsync(loop_item as LavaTrack);
+                                    continue;
+                                }
+
+                                player.Queue.Enqueue(loop_item);
+                            }
                         }
+
+                        await now_async(default);
                     }
                     else
                     {
@@ -174,9 +184,11 @@ namespace maicy_bot_core.MaicyServices
             {
                 Console.WriteLine(ex.Message);
                 await player.TextChannel.SendMessageAsync
-                            ($"Error {ex.Message}. Disconnecting");
+                            ($"Error {ex.Message} Disconnecting");
                 clear_all_loop();
                 lava_player = null;
+                Gvar.current_client_channel = null;
+                Gvar.current_client_text_channel = null;
                 await lava_socket_client.DisconnectAsync(player.VoiceChannel);
                 return;
             }
@@ -224,7 +236,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 674652118472458240)
+                        if (item.TargetId == 673472156033613856)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -248,11 +260,7 @@ namespace maicy_bot_core.MaicyServices
         {
             try
             {
-                if (lava_player == null)
-                {
-                    return "Please join the voice channel the bot is in to make it leave.";
-                }
-                else if (lava_player.VoiceChannel != voice_channel)
+                if (lava_player.VoiceChannel != voice_channel)
                 {
                     return "Please join the voice channel the bot is in to make it leave.";
                 }
@@ -292,7 +300,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 674652118472458240)
+                        if (item.TargetId == 673472156033613856)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -334,7 +342,7 @@ namespace maicy_bot_core.MaicyServices
                 var lava_client_id = Gvar.current_client_channel
                     .Users
                     .Select(x => x)
-                    .Where(x => x.IsBot == true && x.Id == 674652118472458240)
+                    .Where(x => x.IsBot == true && x.Id == 673472156033613856)
                     .FirstOrDefault(); //input your bot id here
 
                 if (lava_client_id == null)
@@ -350,7 +358,7 @@ namespace maicy_bot_core.MaicyServices
                         .VoiceChannel
                         .PermissionOverwrites)
                         {
-                            if (item.TargetId == 674652118472458240)
+                            if (item.TargetId == 673472156033613856)
                             {
                                 if (item.Permissions.Connect.ToString() == "Deny")
                                 {
@@ -505,7 +513,7 @@ namespace maicy_bot_core.MaicyServices
                         }
                         load_count++;
                     }
-                    
+
                     await now_async(default);
                     await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
                     Gvar.playlist_load_flag = false;
@@ -516,6 +524,7 @@ namespace maicy_bot_core.MaicyServices
                     || results.LoadType == LoadType.LoadFailed)
                 {
                     await lava_player.TextChannel.SendMessageAsync("No matches found.");
+                    return;
                 }
 
                 var track = results.Tracks.FirstOrDefault();
@@ -550,7 +559,7 @@ namespace maicy_bot_core.MaicyServices
         }
 
         //remove at
-        public async Task remove_async(int index , SocketVoiceChannel voice_channel , ITextChannel text_channel)
+        public async Task remove_async(int index, SocketVoiceChannel voice_channel, ITextChannel text_channel)
         {
             if (lava_player == null)
             {
@@ -574,8 +583,52 @@ namespace maicy_bot_core.MaicyServices
             {
                 if (Gvar.loop_flag)
                 {
-                    var removed_track = lava_player.Queue.RemoveAt(index - 2);
-                    Gvar.list_loop_track.RemoveAt(index - 2);
+                    if (index == 1)
+                    {
+                        try
+                        {
+                            if (Gvar.loop_track == null)
+                            {
+                                if (lava_player.CurrentTrack == Gvar.list_loop_track.FirstOrDefault())
+                                {
+                                    await lava_player.SkipAsync();
+                                }
+                            }
+                            else
+                            {
+                                if (lava_player.CurrentTrack == Gvar.loop_track)
+                                {
+                                    await lava_player.SkipAsync();
+                                }
+                            }
+                        }
+                        finally
+                        {
+                            if (Gvar.loop_track == null)
+                            {
+                                Gvar.list_loop_track.RemoveAt(0);
+                            }
+                            else
+                            {
+                                Gvar.loop_track = null;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int n = (Gvar.list_loop_track.Count + 1) - lava_player.Queue.Count;
+
+                        if (index - (n) == -1)
+                        {
+                            await lava_player.SkipAsync();
+                        }
+                        else if (index - (n) >= 0)
+                        {
+                            lava_player.Queue.RemoveAt(index - (n));
+                        }
+
+                        Gvar.list_loop_track.RemoveAt(index - 1);
+                    }
                 }
                 else
                 {
@@ -801,7 +854,7 @@ namespace maicy_bot_core.MaicyServices
                     int page = 0;
                     int queue_index = 0;
                     int queue_track_index = 0;
-                    LavaTrack[,] queue_list_array = new LavaTrack[1000,10];
+                    LavaTrack[,] queue_list_array = new LavaTrack[1000, 10];
 
                     foreach (var queue_item in queue_list)
                     {
@@ -853,7 +906,7 @@ namespace maicy_bot_core.MaicyServices
                     {
                         queue_string = "There are no more tracks in the queue";
                     }
-                    
+
                     var ready = new EmbedBuilder()
                         .WithAuthor("Queue")
                         .WithDescription(
@@ -927,7 +980,15 @@ namespace maicy_bot_core.MaicyServices
                     if (page == 0)
                     {
                         //halaman pertama
-                        queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
+                        if (Gvar.loop_track != null)
+                        {
+                            queue_string += $"{queue_count}. " + $"{Gvar.loop_track.Title}\n\n";
+                        }
+                        else
+                        {
+                            queue_count = 0;
+                        }
+
                         for (int i = 0; i <= 8; i++)
                         {
                             if (queue_list_array[page, i] is null)
@@ -956,7 +1017,7 @@ namespace maicy_bot_core.MaicyServices
                             queue_count++;
                         }
                     }
-                    
+
                     var ready = new EmbedBuilder()
                         .WithAuthor("Queue")
                         .WithDescription(
