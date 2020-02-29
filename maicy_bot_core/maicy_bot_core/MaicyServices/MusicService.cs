@@ -107,6 +107,7 @@ namespace maicy_bot_core.MaicyServices
             Gvar.loop_track = null;
             Gvar.list_loop_track = null;
             Gvar.loop_flag = false;
+            Gvar.first_track = 0;
 
             return;
         }
@@ -137,6 +138,11 @@ namespace maicy_bot_core.MaicyServices
                         if (!player.IsPlaying && Gvar.loop_track != null)
                         {
                             await player.PlayAsync(Gvar.loop_track);
+
+                            foreach (var loop_item in Gvar.list_loop_track)
+                            {
+                                player.Queue.Enqueue(loop_item);
+                            }
                         }
 
                         if (!player.IsPlaying && Gvar.loop_track == null)
@@ -573,7 +579,10 @@ namespace maicy_bot_core.MaicyServices
                 return;
             }
 
-            if (lava_player.Queue.Count == 0)
+            if (lava_player.Queue.Count == 0 
+                && lava_player.CurrentTrack == null
+                && Gvar.loop_track == null 
+                && Gvar.list_loop_track.Count == 0)
             {
                 await lava_player.TextChannel.SendMessageAsync("Queue is empty.");
                 return;
@@ -612,22 +621,27 @@ namespace maicy_bot_core.MaicyServices
                             {
                                 Gvar.loop_track = null;
                             }
+
+                            if (Gvar.first_track == 0)
+                            {
+                                Gvar.first_track = 1;
+                            }
                         }
                     }
                     else
                     {
-                        int n = (Gvar.list_loop_track.Count + 1) - lava_player.Queue.Count;
+                        var ele = Gvar.list_loop_track.ElementAtOrDefault(index + Gvar.first_track - 2);
 
-                        if (index - (n) == -1)
+                        if (index + Gvar.first_track - 2 == 0)
                         {
                             await lava_player.SkipAsync();
                         }
-                        else if (index - (n) >= 0)
+                        else if (index + Gvar.first_track - 2 > 0)
                         {
-                            lava_player.Queue.RemoveAt(index - (n));
+                            lava_player.Queue.Remove(ele);
                         }
-
-                        Gvar.list_loop_track.RemoveAt(index - 1);
+                        
+                        Gvar.list_loop_track.Remove(ele);
                     }
                 }
                 else
