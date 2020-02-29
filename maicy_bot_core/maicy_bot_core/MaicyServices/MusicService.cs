@@ -125,7 +125,7 @@ namespace maicy_bot_core.MaicyServices
                     return;
                 }
 
-                if (!player.IsPaused && lava_player.IsPlaying)
+                if (!player.IsPaused && player.IsPlaying)
                 {
                     return;
                 }
@@ -242,7 +242,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 673472156033613856)
+                        if (item.TargetId == 674652118472458240)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -306,7 +306,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 673472156033613856)
+                        if (item.TargetId == 674652118472458240)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -348,7 +348,7 @@ namespace maicy_bot_core.MaicyServices
                 var lava_client_id = Gvar.current_client_channel
                     .Users
                     .Select(x => x)
-                    .Where(x => x.IsBot == true && x.Id == 673472156033613856)
+                    .Where(x => x.IsBot == true && x.Id == 674652118472458240)
                     .FirstOrDefault(); //input your bot id here
 
                 if (lava_client_id == null)
@@ -364,7 +364,7 @@ namespace maicy_bot_core.MaicyServices
                         .VoiceChannel
                         .PermissionOverwrites)
                         {
-                            if (item.TargetId == 673472156033613856)
+                            if (item.TargetId == 674652118472458240)
                             {
                                 if (item.Permissions.Connect.ToString() == "Deny")
                                 {

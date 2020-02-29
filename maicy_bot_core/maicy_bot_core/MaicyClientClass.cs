@@ -64,13 +64,13 @@ namespace maicy_bot_core
 
         private Task Maicy_client_GuildAvailable(SocketGuild guild)
         {
-            //if (guild.Name == "English House")
-            //{
-            //    guild.Users.ToList().ForEach(x => _statusList.Add(x.Nickname));
-            //    _statusList.RemoveAll(item => item == null);
-            //}
+            if (guild.Name == "English House")
+            {
+                guild.Users.ToList().ForEach(x => _statusList.Add(x.Nickname));
+                _statusList.RemoveAll(item => item == null);
+            }
 
-            _statusList.Add("Maicy only");
+            //_statusList.Add("Maicy only");
 
             return Task.CompletedTask;
         }
