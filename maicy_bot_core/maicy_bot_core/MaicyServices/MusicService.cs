@@ -256,7 +256,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 674652118472458240)
+                        if (item.TargetId == maicy_client.CurrentUser.Id)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -320,7 +320,7 @@ namespace maicy_bot_core.MaicyServices
                     .VoiceChannel
                     .PermissionOverwrites)
                     {
-                        if (item.TargetId == 674652118472458240)
+                        if (item.TargetId == maicy_client.CurrentUser.Id)
                         {
                             if (item.Permissions.Connect.ToString() == "Deny")
                             {
@@ -354,16 +354,12 @@ namespace maicy_bot_core.MaicyServices
         {
             try
             {
-                //674652118472458240 jukbok id
-                //673472156033613856 maicy id
-                //673757055420596265 euy
-
                 Gvar.current_client_channel = maicy_client.GetChannel(voice_channel.Id);
                 var lava_client_id = Gvar.current_client_channel
                     .Users
                     .Select(x => x)
-                    .Where(x => x.IsBot == true && x.Id == 674652118472458240)
-                    .FirstOrDefault(); //input your bot id here
+                    .Where(x => x.IsBot == true && x.Id == maicy_client.CurrentUser.Id)
+                    .FirstOrDefault();
 
                 if (lava_client_id == null)
                 {
@@ -378,7 +374,7 @@ namespace maicy_bot_core.MaicyServices
                         .VoiceChannel
                         .PermissionOverwrites)
                         {
-                            if (item.TargetId == 674652118472458240)
+                            if (item.TargetId == maicy_client.CurrentUser.Id)
                             {
                                 if (item.Permissions.Connect.ToString() == "Deny")
                                 {
@@ -427,9 +423,10 @@ namespace maicy_bot_core.MaicyServices
                         results = await lava_rest_client.SearchTracksAsync(search);
 
                         if (results.LoadType == LoadType.NoMatches
-                        || results.LoadType == LoadType.LoadFailed)
+                        || results.LoadType == LoadType.LoadFailed
+                        || results.Tracks.Count() == 0)
                         {
-                            await lava_player.TextChannel.SendMessageAsync("Load type error.");
+                            await lava_player.TextChannel.SendMessageAsync("No matches found.");
                             return;
                         }
 
@@ -469,7 +466,8 @@ namespace maicy_bot_core.MaicyServices
                 }
                 else if (type == "SC")
                 {
-                    results = await lava_rest_client.SearchSoundcloudAsync(search);
+                    string[] collection = search.Split('/');
+                    results = await lava_rest_client.SearchSoundcloudAsync(collection.LastOrDefault());
                 }
                 else if (type == "SP")
                 {
@@ -491,7 +489,6 @@ namespace maicy_bot_core.MaicyServices
                     Gvar.playlist_load_flag = true;
 
                     int load_count = 0;
-                    var lastMessageID = temp_msg.Id;
 
                     foreach (var sp_item in sp_playlist.Tracks.Items)
                     {
@@ -499,17 +496,16 @@ namespace maicy_bot_core.MaicyServices
                         {
                             if (load_count > 0)
                             {
-                                var del = await lava_player.TextChannel.GetMessageAsync(lastMessageID);
                                 await temp_msg.DeleteAsync();
                                 temp_msg = await lava_player.TextChannel.SendMessageAsync($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.");
-                                lastMessageID = temp_msg.Id;
                             }
                         }
 
                         results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists.FirstOrDefault().Name + " " + sp_item.Track.Name);
 
                         if (results.LoadType == LoadType.NoMatches
-                            || results.LoadType == LoadType.LoadFailed)
+                            || results.LoadType == LoadType.LoadFailed
+                            || results.Tracks.Count() == 0)
                         {
                             load_count++;
                             continue;
@@ -536,6 +532,7 @@ namespace maicy_bot_core.MaicyServices
                         load_count++;
                     }
 
+                    await temp_msg.DeleteAsync();
                     await now_async(default);
                     await lava_player.TextChannel.SendMessageAsync($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue");
                     Gvar.playlist_load_flag = false;
@@ -543,7 +540,8 @@ namespace maicy_bot_core.MaicyServices
                 }
 
                 if (results.LoadType == LoadType.NoMatches
-                    || results.LoadType == LoadType.LoadFailed)
+                    || results.LoadType == LoadType.LoadFailed 
+                    || results.Tracks.Count() == 0)
                 {
                     await lava_player.TextChannel.SendMessageAsync("No matches found.");
                     return;
@@ -953,7 +951,7 @@ namespace maicy_bot_core.MaicyServices
                         .WithFooter(
                         $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
                         $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
-                        $"There are total {queue_list.Count() + 1} tracks in the queue"
+                        $"There are total {queue_list.Count() + 1} tracks loaded"
                         )
                         .WithCurrentTimestamp()
                         .Build();
@@ -1064,7 +1062,7 @@ namespace maicy_bot_core.MaicyServices
                         .WithFooter(
                         $"Loop Status : {Gvar.loop_flag.ToString()}\n" +
                         $"Current Page : {(page + 1).ToString()} / {(queue_index + 1).ToString()}\n" +
-                        $"There are total {queue_list.Count() + 1} tracks in the queue"
+                        $"There are total {queue_list.Count() + 1} tracks loaded"
                         )
                         .WithCurrentTimestamp()
                         .Build();
@@ -1280,8 +1278,16 @@ namespace maicy_bot_core.MaicyServices
                     return "Please join the voice channel the bot is in to shuffle the queue.";
                 }
 
-                lava_player.Queue.Shuffle();
-                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                if (Gvar.loop_flag)
+                {
+                    lava_player.Queue.Shuffle();
+                }
+                else
+                {
+                    lava_player.Queue.Shuffle();
+                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                }
+
                 return "Track shuffled.";
             }
             catch (Exception ex)
