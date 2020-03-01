@@ -87,11 +87,12 @@ namespace maicy_bot_core.MaicyServices
         private Task Lava_socket_client_OnTrackException(LavaPlayer player, LavaTrack track, string ex_msg)
         {
             clear_all_loop();
-            lava_socket_client.DisconnectAsync(player.VoiceChannel);
-            lava_player.TextChannel.SendMessageAsync
-                            ($"Track Error, {ex_msg} Disconnecting.");
             lava_player = null;
+            lava_socket_client.DisconnectAsync(player.VoiceChannel);
+            player.TextChannel.SendMessageAsync
+                            ($"Track Error, {ex_msg} Disconnecting.");
 
+            Console.WriteLine($"Track Error, {ex_msg} Disconnecting.");
             return Task.CompletedTask;
         }
 
@@ -198,6 +199,19 @@ namespace maicy_bot_core.MaicyServices
                 await lava_socket_client.DisconnectAsync(player.VoiceChannel);
                 return;
             }
+        }
+
+        //get spotify access token
+        public async Task get_access()
+        {
+            CredentialsAuth auth = new CredentialsAuth("56894be43189492a881161efd8963cb0", "06a0a3c3331247c4bf4f2a5f979a3d11");
+            Token token = await auth.GetToken();
+            _spotify = new SpotifyWebAPI()
+            {
+                AccessToken = token.AccessToken,
+                TokenType = token.TokenType
+            };
+            return;
         }
 
         //player loop check
@@ -459,6 +473,8 @@ namespace maicy_bot_core.MaicyServices
                 }
                 else if (type == "SP")
                 {
+                    await get_access();
+
                     string[] collection = search.Split('/');
 
                     string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
@@ -638,7 +654,10 @@ namespace maicy_bot_core.MaicyServices
                         }
                         else if (index + Gvar.first_track - 2 > 0)
                         {
-                            lava_player.Queue.Remove(ele);
+                            if (lava_player.Queue.Count > 0)
+                            {
+                                lava_player.Queue.Remove(ele);
+                            }
                         }
                         
                         Gvar.list_loop_track.Remove(ele);
@@ -1284,14 +1303,6 @@ namespace maicy_bot_core.MaicyServices
             {
                 AutoDisconnect = false
             });
-
-            CredentialsAuth auth = new CredentialsAuth("56894be43189492a881161efd8963cb0", "06a0a3c3331247c4bf4f2a5f979a3d11");
-            Token token = await auth.GetToken();
-            _spotify = new SpotifyWebAPI()
-            {
-                AccessToken = token.AccessToken,
-                TokenType = token.TokenType
-            };
         }
     }
 }
