@@ -646,11 +646,11 @@ namespace maicy_bot_core.MaicyServices
                     {
                         var ele = Gvar.list_loop_track.ElementAtOrDefault(index + Gvar.first_track - 2);
 
-                        if (index + Gvar.first_track - 2 == 0)
+                        if (index + Gvar.first_track - 2 == -1)
                         {
                             await lava_player.SkipAsync();
                         }
-                        else if (index + Gvar.first_track - 2 > 0)
+                        else if (index + Gvar.first_track - 2 >= 0)
                         {
                             if (lava_player.Queue.Count > 0)
                             {
