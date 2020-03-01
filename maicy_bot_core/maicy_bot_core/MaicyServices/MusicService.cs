@@ -1116,7 +1116,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 if (lava_player == null)
                 {
-                    return "Player need to be connected to the channel first";
+                    return "I need to be connected to a channel first";
                 }
 
                 if (lava_player.VoiceChannel != voice_channel)
@@ -1155,7 +1155,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 if (lava_player == null)
                 {
-                    return "Player need to be connected to the channel first";
+                    return "I need to be connected to a channel first";
                 }
 
                 if (lava_player.VoiceChannel != voice_channel)
@@ -1185,7 +1185,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 if (lava_player == null)
                 {
-                    return "Player need to be connected to the channel first";
+                    return "I need to be connected to a channel first";
                 }
 
                 if (lava_player.VoiceChannel != voice_channel)
