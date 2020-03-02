@@ -75,7 +75,7 @@ namespace maicy_bot_core.MaicyServices
 
                 text_channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("All user left, Trying to disconnect.")
+                    .WithDescription("All user left, Trying to disconnect.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -97,7 +97,7 @@ namespace maicy_bot_core.MaicyServices
 
             player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle($"Track Error, {ex_msg} Disconnecting.")
+                    .WithDescription($"Track Error, {ex_msg} Disconnecting.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -184,7 +184,7 @@ namespace maicy_bot_core.MaicyServices
                     {
                         await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                             .WithColor(Color.Green)
-                            .WithTitle("There are no more tracks in the queue. Disconnecting")
+                            .WithDescription("There are no more tracks in the queue. Disconnecting")
                             .WithCurrentTimestamp()
                             .Build());
 
@@ -206,7 +206,7 @@ namespace maicy_bot_core.MaicyServices
 
                 await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle($"Error {ex.Message} Disconnecting")
+                    .WithDescription($"Error {ex.Message} Disconnecting")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -407,7 +407,7 @@ namespace maicy_bot_core.MaicyServices
                                 {
                                     await channel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("im not allowed to join your voice channel.")
+                                        .WithDescription("im not allowed to join your voice channel.")
                                         .WithCurrentTimestamp()
                                         .Build());
                                     await leave_async(voice_channel, channel);
@@ -420,7 +420,7 @@ namespace maicy_bot_core.MaicyServices
                     lava_player = lava_socket_client.GetPlayer(guild_id);
                     await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"Successfully connected to {voice_channel_name}")
+                                        .WithDescription($"Successfully connected to {voice_channel_name}")
                                         .WithCurrentTimestamp()
                                         .Build());
                 }
@@ -433,7 +433,7 @@ namespace maicy_bot_core.MaicyServices
                 {
                     await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("Please join the voice channel the bot is in to queue track.")
+                                        .WithDescription("Please join the voice channel the bot is in to queue track.")
                                         .WithCurrentTimestamp()
                                         .Build());
                     lava_player = null;
@@ -455,7 +455,7 @@ namespace maicy_bot_core.MaicyServices
                         {
                             await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("Can't find playlist")
+                                        .WithDescription("Can't find playlist")
                                         .WithCurrentTimestamp()
                                         .Build());
                             return;
@@ -463,7 +463,7 @@ namespace maicy_bot_core.MaicyServices
 
                         await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"Adding {playlist.Author} playlist to the queue. Please wait.")
+                                        .WithDescription($"Adding {playlist.Author} playlist to the queue. Please wait.")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -475,7 +475,7 @@ namespace maicy_bot_core.MaicyServices
                         {
                             await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("No matches found. try more specific")
+                                        .WithDescription("No matches found. try more specific")
                                         .WithCurrentTimestamp()
                                         .Build());
                             return;
@@ -508,7 +508,7 @@ namespace maicy_bot_core.MaicyServices
                         await now_async(default);
                         await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"{playlist.Author} playlist has been added to the queue")
+                                        .WithDescription($"{playlist.Author} playlist has been added to the queue")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -539,7 +539,7 @@ namespace maicy_bot_core.MaicyServices
                     {
                         await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("Cannot add a playlist with more than 200 songs in it")
+                                        .WithDescription("Cannot add a playlist with more than 200 songs in it")
                                         .WithCurrentTimestamp()
                                         .Build());
                         return;
@@ -547,7 +547,7 @@ namespace maicy_bot_core.MaicyServices
 
                     var temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.")
+                                        .WithDescription($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -564,7 +564,7 @@ namespace maicy_bot_core.MaicyServices
                                 await temp_msg.DeleteAsync();
                                 temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.")
+                                        .WithDescription($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.")
                                         .WithCurrentTimestamp()
                                         .Build());
                             }
@@ -605,7 +605,7 @@ namespace maicy_bot_core.MaicyServices
                     await now_async(default);
                     await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue")
+                                        .WithDescription($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -619,7 +619,7 @@ namespace maicy_bot_core.MaicyServices
                 {
                     await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle("No matches found. try more specific")
+                                        .WithDescription("No matches found. try more specific")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -643,7 +643,7 @@ namespace maicy_bot_core.MaicyServices
 
                     await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithTitle($"{track.Title} has been added to the queue")
+                                        .WithDescription($"{track.Title} has been added to the queue")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -661,7 +661,7 @@ namespace maicy_bot_core.MaicyServices
 
                 await channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle($"Error while removing track , {ex.Message}")
+                    .WithDescription($"Error while removing track , {ex.Message}")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -676,7 +676,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 await text_channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("There are no track playing at this time.")
+                    .WithDescription("There are no track playing at this time.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -687,7 +687,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("Please join the voice channel the bot is in to remove track.")
+                    .WithDescription("Please join the voice channel the bot is in to remove track.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -701,7 +701,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("Queue is empty.")
+                    .WithDescription("Queue is empty.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -775,7 +775,7 @@ namespace maicy_bot_core.MaicyServices
                         {
                             await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                 .WithColor(Color.Green)
-                                .WithTitle("Queue is empty.")
+                                .WithDescription("Queue is empty.")
                                 .WithCurrentTimestamp()
                                 .Build());
 
@@ -788,7 +788,7 @@ namespace maicy_bot_core.MaicyServices
 
                 await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle($"Selected track has been removed")
+                    .WithDescription($"Selected track has been removed")
                     .WithCurrentTimestamp()
                     .Build());
             }
@@ -797,7 +797,7 @@ namespace maicy_bot_core.MaicyServices
                 Console.WriteLine(ex.Message);
                 await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle($"Error while removing track , {ex.Message}")
+                    .WithDescription($"Error while removing track , {ex.Message}")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -889,7 +889,7 @@ namespace maicy_bot_core.MaicyServices
             {
                 var return_embed = new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("There are no track playing at this time.")
+                    .WithDescription("There are no track playing at this time.")
                     .WithCurrentTimestamp()
                     .Build();
 
@@ -994,7 +994,7 @@ namespace maicy_bot_core.MaicyServices
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                await text_channel.SendMessageAsync(default, default, embed
+                await text_channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
                     .WithDescription(ex.Message)
                     .WithCurrentTimestamp()

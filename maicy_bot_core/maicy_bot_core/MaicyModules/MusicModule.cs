@@ -29,7 +29,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default,default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("There are no track playing at this time.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
                 return;
@@ -40,7 +40,7 @@ namespace maicy_bot_core.MaicyModule
 
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
             }
@@ -55,7 +55,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("Please join the voice channel the bot is in to make it leave.")
+                    .WithDescription("Please join the voice channel the bot is in to make it leave.")
                     .WithCurrentTimestamp()
                     .Build());
             }
@@ -65,7 +65,7 @@ namespace maicy_bot_core.MaicyModule
 
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
             }
@@ -80,7 +80,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -104,7 +104,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -115,7 +115,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -129,7 +129,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -153,7 +153,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -177,7 +177,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -191,7 +191,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -209,7 +209,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -222,7 +222,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -235,7 +235,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -250,7 +250,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -263,7 +263,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -277,7 +277,7 @@ namespace maicy_bot_core.MaicyModule
             {
                 await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle("You need to connect to a voice channel.")
+                    .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -288,7 +288,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -307,7 +307,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
@@ -334,7 +334,7 @@ namespace maicy_bot_core.MaicyModule
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithTitle(reply_msg)
+                    .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
         }
