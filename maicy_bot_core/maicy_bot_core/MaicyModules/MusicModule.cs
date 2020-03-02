@@ -27,13 +27,22 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default,default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("There are no track playing at this time.")
+                    .WithCurrentTimestamp()
+                    .Build());
                 return;
             }
             else
             {
                 var reply_msg = await maicy_music_service.connect_async(user.VoiceChannel, Context.Channel as ITextChannel);
-                await ReplyAsync(reply_msg);
+
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
             }
         }
 
@@ -44,12 +53,21 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("Please join the voice channel the bot is in to make it leave.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("Please join the voice channel the bot is in to make it leave.")
+                    .WithCurrentTimestamp()
+                    .Build());
             }
             else
             {
                 var reply_msg = await maicy_music_service.leave_async(user.VoiceChannel, Context.Channel as ITextChannel);
-                await ReplyAsync(reply_msg);
+
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
             }
         }
 
@@ -60,7 +78,12 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
@@ -79,12 +102,22 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
             var reply_msg = await maicy_music_service.restart_async(user.VoiceChannel , Context.Channel as ITextChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Spotify"), Alias("sp", "spotifa", "spoti")]
@@ -94,7 +127,12 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
@@ -113,7 +151,12 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
@@ -131,7 +174,12 @@ namespace maicy_bot_core.MaicyModule
             var user = Context.User as SocketGuildUser;
 
             string reply_msg = await maicy_music_service.clear_not_async(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Remove"), Alias("r", "cabut", "cabutken")]
@@ -141,7 +189,12 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
@@ -153,7 +206,12 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = await maicy_music_service.pause_async(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Resume"), Alias("con","res", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
@@ -161,15 +219,27 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = await maicy_music_service.resume_async(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Skip"), Alias("n", "next")]
         public async Task Skip()
         {
             var user = Context.User as SocketGuildUser;
-            var result = await maicy_music_service.skip_async(user.VoiceChannel);
-            await ReplyAsync(result);
+            var reply_msg = await maicy_music_service.skip_async(user.VoiceChannel);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
+
+            await maicy_music_service.now_async(default);
         }
 
         [Command("Volume"), Alias("v", "vol", "suara")]
@@ -177,7 +247,12 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = await maicy_music_service.set_volume_async(vol , user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Earrape")]
@@ -185,7 +260,12 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = await maicy_music_service.set_Earrape(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Loop"), Alias("lp", "repeat", "rp")]
@@ -195,12 +275,22 @@ namespace maicy_bot_core.MaicyModule
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync("You need to connect to a voice channel.");
+                await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle("You need to connect to a voice channel.")
+                    .WithCurrentTimestamp()
+                    .Build());
+
                 return;
             }
 
             string reply_msg = maicy_music_service.player_check(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Now"), Alias("np", "nowplaying", "sekarang")]
@@ -214,7 +304,12 @@ namespace maicy_bot_core.MaicyModule
         {
 
             string reply_msg = await maicy_music_service.lyric_async();
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
 
         [Command("Queue"), Alias("q", "antrean")]
@@ -236,7 +331,12 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = maicy_music_service.shuffle_async(user.VoiceChannel);
-            await ReplyAsync(reply_msg);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithTitle(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
         }
     }
 }
