@@ -25,5 +25,8 @@ namespace maicy_bot_core.MiscData
 
         //current user text channel
         public static ITextChannel current_client_text_channel { get; set; }
+
+        //toggle auto play
+        public static bool toggle_auto { get; set; }
     }
 }

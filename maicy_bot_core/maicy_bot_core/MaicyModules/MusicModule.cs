@@ -20,14 +20,14 @@ namespace maicy_bot_core.MaicyModule
             maicy_music_service = music_service;
         }
 
-        [Command("Join") , Alias("Connect","cn","masok","sokin","masuk")]
+        [Command("Join"), Alias("Connect", "cn", "masok", "sokin", "masuk")]
         public async Task Join()
         {
             var user = Context.User as SocketGuildUser;
 
             if (user.VoiceChannel is null)
             {
-                await ReplyAsync(default,default, new EmbedBuilder()
+                await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
                     .WithDescription("You need to connect to a voice channel.")
                     .WithCurrentTimestamp()
@@ -92,7 +92,7 @@ namespace maicy_bot_core.MaicyModule
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name, "YT",user.Id);
+                user.VoiceChannel.Name, "YT", user.Id);
         }
 
         [Command("Restart")]
@@ -111,7 +111,7 @@ namespace maicy_bot_core.MaicyModule
                 return;
             }
 
-            var reply_msg = await maicy_music_service.restart_async(user.VoiceChannel , Context.Channel as ITextChannel);
+            var reply_msg = await maicy_music_service.restart_async(user.VoiceChannel, Context.Channel as ITextChannel);
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
@@ -165,7 +165,7 @@ namespace maicy_bot_core.MaicyModule
                 Context.Guild.Id,
                 user.VoiceChannel,
                 Context.Channel as ITextChannel,
-                user.VoiceChannel.Name, "SC" , user.Guild.Id);
+                user.VoiceChannel.Name, "SC", user.Guild.Id);
         }
 
         [Command("Clear"), Alias("s", "cl", "stop", "bersihken")]
@@ -198,10 +198,10 @@ namespace maicy_bot_core.MaicyModule
                 return;
             }
 
-            await maicy_music_service.remove_async(index , user.VoiceChannel , Context.Channel as ITextChannel);
+            await maicy_music_service.remove_async(index, user.VoiceChannel, Context.Channel as ITextChannel);
         }
 
-        [Command("Pause") , Alias("ps", "henti", "hentiken", "hentikeun", "sebat", "sebatdl", "sebatdulu")]
+        [Command("Pause"), Alias("ps", "henti", "hentiken", "hentikeun", "sebat", "sebatdl", "sebatdulu")]
         public async Task Pause()
         {
             var user = Context.User as SocketGuildUser;
@@ -214,7 +214,7 @@ namespace maicy_bot_core.MaicyModule
                     .Build());
         }
 
-        [Command("Resume"), Alias("con","res", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
+        [Command("Resume"), Alias("con", "res", "lanjut", "lanjutken", "lanjutkeun", "gasken", "gaskeun", "skuy")]
         public async Task Resume()
         {
             var user = Context.User as SocketGuildUser;
@@ -238,15 +238,13 @@ namespace maicy_bot_core.MaicyModule
                     .WithDescription(reply_msg)
                     .WithCurrentTimestamp()
                     .Build());
-
-            await maicy_music_service.now_async(default);
         }
 
         [Command("Volume"), Alias("v", "vol", "suara")]
         public async Task Volume(int vol)
         {
             var user = Context.User as SocketGuildUser;
-            string reply_msg = await maicy_music_service.set_volume_async(vol , user.VoiceChannel);
+            string reply_msg = await maicy_music_service.set_volume_async(vol, user.VoiceChannel);
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
@@ -316,7 +314,7 @@ namespace maicy_bot_core.MaicyModule
         public async Task Queue()
         {
             Embed reply_msg = maicy_music_service.queue_async(null);
-            await ReplyAsync(default,default,reply_msg);
+            await ReplyAsync(default, default, reply_msg);
         }
 
         [Command("Page"), Alias("halaman")]
@@ -331,6 +329,19 @@ namespace maicy_bot_core.MaicyModule
         {
             var user = Context.User as SocketGuildUser;
             string reply_msg = maicy_music_service.shuffle_async(user.VoiceChannel);
+
+            await ReplyAsync(default, default, new EmbedBuilder()
+                    .WithColor(Color.Green)
+                    .WithDescription(reply_msg)
+                    .WithCurrentTimestamp()
+                    .Build());
+        }
+
+        [Command("Autoplay"), Alias("Auto", "otomatis")]
+        public async Task Autoplay()
+        {
+            var user = Context.User as SocketGuildUser;
+            string reply_msg = maicy_music_service.auto_check(user.VoiceChannel);
 
             await ReplyAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)

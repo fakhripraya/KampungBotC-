@@ -118,6 +118,7 @@ namespace maicy_bot_core.MaicyServices
             Gvar.list_loop_track = null;
             Gvar.loop_flag = false;
             Gvar.first_track = 0;
+            Gvar.toggle_auto = false;
 
             return;
         }
@@ -132,12 +133,53 @@ namespace maicy_bot_core.MaicyServices
             {
                 if (player.IsPlaying)
                 {
+                    if (reason == TrackEndReason.Replaced)
+                    {
+                        await now_async(default);
+                    }
+
                     return;
                 }
 
                 if (!player.IsPaused && player.IsPlaying)
                 {
                     return;
+                }
+
+                if (Gvar.toggle_auto is true)
+                {
+                    var results = await lava_rest_client.SearchYouTubeAsync(track.Title);
+
+                    if (results.LoadType == LoadType.NoMatches
+                    || results.LoadType == LoadType.LoadFailed
+                    || results.Tracks.Count() == 0)
+                    {
+                        results = await lava_rest_client.SearchYouTubeAsync(track.Author);
+
+                        if (results.LoadType == LoadType.NoMatches
+                            || results.LoadType == LoadType.LoadFailed
+                            || results.Tracks.Count() == 0)
+                        {
+                            await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                                .WithColor(Color.Green)
+                                                .WithDescription("Autoplay matching failed , trying to fetch a next song from current queue")
+                                                .WithCurrentTimestamp()
+                                                .Build());
+                        }
+                    }
+
+                    if (results.LoadType != LoadType.NoMatches
+                    || results.LoadType != LoadType.LoadFailed
+                    || results.Tracks.Count() != 0)
+                    {
+                        Random random = new Random();
+                        int track_random = random.Next(0, results.Tracks.Count());
+
+                        track = results.Tracks.ElementAtOrDefault(track_random);
+                        await player.PlayAsync(track);
+                        await now_async(default);
+                        return;
+                    }
                 }
 
                 if (Gvar.loop_flag is true && (Gvar.loop_track != null || Gvar.list_loop_track != null))
@@ -256,6 +298,31 @@ namespace maicy_bot_core.MaicyServices
                 Gvar.list_loop_track = lava_player.Queue.Items.ToList();
                 Gvar.loop_flag = true;
                 return "Loop On";
+            }
+        }
+
+        //autoplay check
+        public string auto_check(SocketVoiceChannel voice_channel)
+        {
+            if (lava_player == null)
+            {
+                return "There are no track playing at this time.";
+            }
+
+            if (lava_player.VoiceChannel != voice_channel)
+            {
+                return "Please join the voice channel the bot is in to trigger autoplay";
+            }
+
+            if (Gvar.toggle_auto is true)
+            {
+                Gvar.toggle_auto = false;
+                return "Autoplay Off";
+            }
+            else
+            {
+                Gvar.toggle_auto = true;
+                return "Autoplay On";
             }
         }
 
@@ -1316,7 +1383,16 @@ namespace maicy_bot_core.MaicyServices
                     return "Nothing in queue";
                 }
 
-                await lava_player.SkipAsync();
+
+                if (Gvar.toggle_auto)
+                {
+                    await lava_player.StopAsync();
+                }
+                else
+                {
+                    await lava_player.SkipAsync();
+                }
+
                 return $"Successfully skipped {old_track.Title}";
             }
             catch (Exception ex)

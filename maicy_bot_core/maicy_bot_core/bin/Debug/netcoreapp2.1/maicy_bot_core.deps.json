@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "42c2b63b93b9dfb3b6b0c93a46b5b186f54d0649"
+    "signature": "2f5cb5ed6a69ff00682846a9cff0698cd16afe9b"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,6 +9,7 @@
       "maicy_bot_core/1.0.0": {
         "dependencies": {
           "Discord.Net": "2.1.1",
+          "KSoft.Net": "2.3.2",
           "Newtonsoft.Json": "12.0.3",
           "SpotifyAPI.Web.Auth": "4.2.2",
           "Victoria": "4.0.8",
@@ -98,6 +99,17 @@
           }
         }
       },
+      "KSoft.Net/2.3.2": {
+        "dependencies": {
+          "RestSharp": "106.6.10"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/KSoft.Net.dll": {
+            "assemblyVersion": "2.3.2.0",
+            "fileVersion": "2.3.2.0"
+          }
+        }
+      },
       "LtGt/1.0.2": {
         "dependencies": {
           "Sprache": "2.2.0"
@@ -134,6 +146,14 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
+      "RestSharp/106.6.10": {
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {
+            "assemblyVersion": "106.6.10.0",
+            "fileVersion": "106.6.10.0"
           }
         }
       },
@@ -503,6 +523,13 @@
       "path": "embedio/2.9.2",
       "hashPath": "embedio.2.9.2.nupkg.sha512"
     },
+    "KSoft.Net/2.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zGUNEJxtdmMkQInS7aNM57YWOnk9MAc5qQhj2u8iCHDaoa1nfhBw70Ft0TjrjGHWlCz0wyZTXqJxpH0UkNgYSQ==",
+      "path": "ksoft.net/2.3.2",
+      "hashPath": "ksoft.net.2.3.2.nupkg.sha512"
+    },
     "LtGt/1.0.2": {
       "type": "package",
       "serviceable": true,
@@ -537,6 +564,13 @@
       "sha512": "sha512-aTRmXwR5xYu+mWxE8r8W1DWnL02SeV8LwdQMsLwTWP8OZgrCCyTqvOAe5hRb1VNQYXjln7qr0PKpSyO/pcc19Q==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "RestSharp/106.6.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MMLyolW6zkWNmEvJrrpTRmNaDRm6/KJBceb15U9uD6ZBEdySXNB3WCP/cWb8YmLUQoRhlIz9hbsnqfI6v3xKgQ==",
+      "path": "restsharp/106.6.10",
+      "hashPath": "restsharp.106.6.10.nupkg.sha512"
     },
     "SpotifyAPI.Web/4.2.2": {
       "type": "package",
