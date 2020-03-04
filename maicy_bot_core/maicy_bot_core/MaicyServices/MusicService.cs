@@ -511,28 +511,6 @@ namespace maicy_bot_core.MaicyServices
                 {
                     if (search.Contains("playlist?list="))
                     {
-                        int _chars = search.Count() - 34;
-
-                        var playlist_id = search.Substring(_chars, 34);
-                        var client = new YoutubeClient();
-                        var playlist = await client.GetPlaylistAsync(playlist_id);
-
-                        if (playlist == null)
-                        {
-                            await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription("Can't find playlist")
-                                        .WithCurrentTimestamp()
-                                        .Build());
-                            return;
-                        }
-
-                        await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription($"Adding {playlist.Author} playlist to the queue. Please wait.")
-                                        .WithCurrentTimestamp()
-                                        .Build());
-
                         results = await lava_rest_client.SearchTracksAsync(search);
 
                         if (results.LoadType == LoadType.NoMatches
@@ -546,6 +524,12 @@ namespace maicy_bot_core.MaicyServices
                                         .Build());
                             return;
                         }
+
+                        await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                        .WithColor(Color.Green)
+                                        .WithDescription($"Adding {results.PlaylistInfo.Name} playlist to the queue. Please wait.")
+                                        .WithCurrentTimestamp()
+                                        .Build());
 
                         Gvar.playlist_load_flag = true;
 
@@ -574,7 +558,7 @@ namespace maicy_bot_core.MaicyServices
                         await now_async(default);
                         await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                                         .WithColor(Color.Green)
-                                        .WithDescription($"{playlist.Author} playlist has been added to the queue")
+                                        .WithDescription($"{results.PlaylistInfo.Name} playlist has been added to the queue")
                                         .WithCurrentTimestamp()
                                         .Build());
 
@@ -595,88 +579,186 @@ namespace maicy_bot_core.MaicyServices
                 {
                     await get_access();
 
-                    string[] collection = search.Split('/');
-
-                    string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
-                    
-                    FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
-
-                    if (sp_playlist.Tracks.Total > 200)
+                    if (search.Contains("https://open.spotify.com/playlist/"))
                     {
-                        await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription("Cannot add a playlist with more than 200 songs in it")
-                                        .WithCurrentTimestamp()
-                                        .Build());
-                        return;
-                    }
+                        string[] collection = search.Split('/');
 
-                    var temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.")
-                                        .WithCurrentTimestamp()
-                                        .Build());
+                        string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
 
-                    Gvar.playlist_load_flag = true;
+                        FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
 
-                    int load_count = 0;
-
-                    foreach (var sp_item in sp_playlist.Tracks.Items)
-                    {
-                        if (load_count % 5 == 0)
+                        if (sp_playlist.Tracks.Total > 200)
                         {
-                            if (load_count > 0)
+                            await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription("Cannot add a playlist with more than 200 songs in it")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+                            return;
+                        }
+
+                        var temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"Adding {sp_playlist.Owner.DisplayName} playlist to the queue. Please wait.")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+
+                        Gvar.playlist_load_flag = true;
+
+                        int load_count = 0;
+
+                        foreach (var sp_item in sp_playlist.Tracks.Items)
+                        {
+                            if (load_count % 5 == 0)
                             {
-                                await temp_msg.DeleteAsync();
-                                temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.")
-                                        .WithCurrentTimestamp()
-                                        .Build());
+                                if (load_count > 0)
+                                {
+                                    await temp_msg.DeleteAsync();
+                                    temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"{load_count} / {sp_playlist.Tracks.Items.Count()} tracks loaded.")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+                                }
                             }
-                        }
 
-                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Name + " " + sp_item.Track.Artists.FirstOrDefault().Name);
+                            results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Name + " " + sp_item.Track.Artists.FirstOrDefault().Name);
 
-                        if (results.LoadType == LoadType.NoMatches
-                            || results.LoadType == LoadType.LoadFailed
-                            || results.Tracks.Count() == 0)
-                        {
-                            load_count++;
-                            continue;
-                        }
-
-                        if (lava_player.IsPlaying)
-                        {
-                            lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
-
-                            if (Gvar.list_loop_track != null)
+                            if (results.LoadType == LoadType.NoMatches
+                                || results.LoadType == LoadType.LoadFailed
+                                || results.Tracks.Count() == 0)
                             {
-                                Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                                load_count++;
+                                continue;
+                            }
+
+                            if (lava_player.IsPlaying)
+                            {
+                                lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
+
+                                if (Gvar.list_loop_track != null)
+                                {
+                                    Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                                }
+                                else
+                                {
+                                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                                }
                             }
                             else
                             {
-                                Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                                await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
+                                Gvar.loop_track = results.Tracks.FirstOrDefault();
                             }
+                            load_count++;
                         }
-                        else
-                        {
-                            await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
-                            Gvar.loop_track = results.Tracks.FirstOrDefault();
-                        }
-                        load_count++;
+
+                        await temp_msg.DeleteAsync();
+                        await now_async(default);
+                        await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+
+                        Gvar.playlist_load_flag = false;
+                        return;
                     }
+                    else if (search.Contains("https://open.spotify.com/album/"))
+                    {
+                        string[] collection = search.Split('/');
 
-                    await temp_msg.DeleteAsync();
-                    await now_async(default);
-                    await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                        .WithColor(Color.Green)
-                                        .WithDescription($"{sp_playlist.Owner.DisplayName} playlist has been added to the queue")
-                                        .WithCurrentTimestamp()
-                                        .Build());
+                        string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
 
-                    Gvar.playlist_load_flag = false;
-                    return;
+                        FullAlbum sp_album = _spotify.GetAlbum(spotify_id[0], market: "");
+
+                        if (sp_album.Tracks.Total > 200)
+                        {
+                            await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription("Cannot add an album with more than 200 songs in it")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+                            return;
+                        }
+
+                        var temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"Adding {sp_album.Name} album to the queue. Please wait.")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+
+                        Gvar.playlist_load_flag = true;
+
+                        int load_count = 0;
+
+                        foreach (var sp_item in sp_album.Tracks.Items)
+                        {
+                            if (load_count % 5 == 0)
+                            {
+                                if (load_count > 0)
+                                {
+                                    await temp_msg.DeleteAsync();
+                                    temp_msg = await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"{load_count} / {sp_album.Tracks.Items.Count()} tracks loaded.")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+                                }
+                            }
+
+                            results = await lava_rest_client.SearchYouTubeAsync(sp_item.Name + " " + sp_item.Artists.FirstOrDefault().Name);
+
+                            if (results.LoadType == LoadType.NoMatches
+                                || results.LoadType == LoadType.LoadFailed
+                                || results.Tracks.Count() == 0)
+                            {
+                                load_count++;
+                                continue;
+                            }
+
+                            if (lava_player.IsPlaying)
+                            {
+                                lava_player.Queue.Enqueue(results.Tracks.FirstOrDefault());
+
+                                if (Gvar.list_loop_track != null)
+                                {
+                                    Gvar.list_loop_track.Add(results.Tracks.FirstOrDefault());
+                                }
+                                else
+                                {
+                                    Gvar.list_loop_track = lava_player.Queue.Items.ToList();
+                                }
+                            }
+                            else
+                            {
+                                await lava_player.PlayAsync(results.Tracks.FirstOrDefault());
+                                Gvar.loop_track = results.Tracks.FirstOrDefault();
+                            }
+                            load_count++;
+                        }
+
+                        await temp_msg.DeleteAsync();
+                        await now_async(default);
+                        await lava_player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                            .WithColor(Color.Green)
+                                            .WithDescription($"{sp_album.Name} album has been added to the queue")
+                                            .WithCurrentTimestamp()
+                                            .Build());
+
+                        Gvar.playlist_load_flag = false;
+                        return;
+                    }
+                    else if (search.Contains("https://open.spotify.com/track/"))
+                    {
+                        string[] collection = search.Split('/');
+
+                        string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
+
+                        FullTrack sp_track = _spotify.GetTrack(spotify_id[0], market: "");
+
+                        results = await lava_rest_client.SearchYouTubeAsync(sp_track.Artists.FirstOrDefault().Name + " " + sp_track.Name);
+                    }
                 }
 
                 if (results.LoadType == LoadType.NoMatches

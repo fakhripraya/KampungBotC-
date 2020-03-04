@@ -36,7 +36,7 @@ namespace maicy_bot_core.MaicyModule
                 "\n" +
                 "`Play` [Play song/playlist from YouTube]\n" +
                 "`Soundcloud` [Play song from Soundcloud]\n" +
-                "`Spotify` [Play playlist from Spotify]\n" +
+                "`Spotify` [Play song/playlist/album from Spotify]\n" +
                 "\n" +
                 "`Resume` [Resume current playback]\n" +
                 "`Pause` [Pause current playback]\n" +
