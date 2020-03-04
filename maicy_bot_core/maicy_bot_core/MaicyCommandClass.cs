@@ -51,20 +51,20 @@ namespace maicy_bot_core
                 return;
             }
 
-            if (!user_message.HasStringPrefix("-", ref arg_pos)) // eh
-            {
-                return;
-            }
+            //if (!user_message.HasStringPrefix("-", ref arg_pos)) // eh
+            //{
+            //    return;
+            //}
 
             //if (!user_message.HasStringPrefix("my!", ref arg_pos)) // maicy
             //{
             //    return;
             //}
 
-            //if (!user_message.HasStringPrefix("euy!", ref arg_pos)) // euy
-            //{
-            //    return;
-            //}
+            if (!user_message.HasStringPrefix("euy!", ref arg_pos)) // euy
+            {
+                return;
+            }
 
             //if (!user_message.HasStringPrefix("cc", ref arg_pos)) // cave
             //{

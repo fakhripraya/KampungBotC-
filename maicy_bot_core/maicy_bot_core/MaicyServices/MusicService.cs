@@ -75,7 +75,7 @@ namespace maicy_bot_core.MaicyServices
 
                 text_channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithDescription("All user left, Trying to disconnect.")
+                    .WithDescription("All user left, Disconnecting.")
                     .WithCurrentTimestamp()
                     .Build());
 
@@ -146,42 +146,6 @@ namespace maicy_bot_core.MaicyServices
                     return;
                 }
 
-                if (Gvar.toggle_auto is true)
-                {
-                    var results = await lava_rest_client.SearchYouTubeAsync(track.Title);
-
-                    if (results.LoadType == LoadType.NoMatches
-                    || results.LoadType == LoadType.LoadFailed
-                    || results.Tracks.Count() == 0)
-                    {
-                        results = await lava_rest_client.SearchYouTubeAsync(track.Author);
-
-                        if (results.LoadType == LoadType.NoMatches
-                            || results.LoadType == LoadType.LoadFailed
-                            || results.Tracks.Count() == 0)
-                        {
-                            await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
-                                                .WithColor(Color.Green)
-                                                .WithDescription("Autoplay matching failed , trying to fetch a next song from current queue")
-                                                .WithCurrentTimestamp()
-                                                .Build());
-                        }
-                    }
-
-                    if (results.LoadType != LoadType.NoMatches
-                    || results.LoadType != LoadType.LoadFailed
-                    || results.Tracks.Count() != 0)
-                    {
-                        Random random = new Random();
-                        int track_random = random.Next(0, results.Tracks.Count());
-
-                        track = results.Tracks.ElementAtOrDefault(track_random);
-                        await player.PlayAsync(track);
-                        await now_async(default);
-                        return;
-                    }
-                }
-
                 if (Gvar.loop_flag is true && (Gvar.loop_track != null || Gvar.list_loop_track != null))
                 {
                     if (!player.Queue.TryDequeue(out var item)
@@ -224,6 +188,42 @@ namespace maicy_bot_core.MaicyServices
                     if (!player.Queue.TryDequeue(out var item)
                         || !(item is LavaTrack next_track))
                     {
+                        if (Gvar.toggle_auto is true)
+                        {
+                            var results = await lava_rest_client.SearchYouTubeAsync(track.Title);
+
+                            if (results.LoadType == LoadType.NoMatches
+                            || results.LoadType == LoadType.LoadFailed
+                            || results.Tracks.Count() == 0)
+                            {
+                                results = await lava_rest_client.SearchYouTubeAsync(track.Author);
+
+                                if (results.LoadType == LoadType.NoMatches
+                                    || results.LoadType == LoadType.LoadFailed
+                                    || results.Tracks.Count() == 0)
+                                {
+                                    await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
+                                                        .WithColor(Color.Green)
+                                                        .WithDescription("Autoplay matching failed , trying to fetch a next song from current queue")
+                                                        .WithCurrentTimestamp()
+                                                        .Build());
+                                }
+                            }
+
+                            if (results.LoadType != LoadType.NoMatches
+                            || results.LoadType != LoadType.LoadFailed
+                            || results.Tracks.Count() != 0)
+                            {
+                                Random random = new Random();
+                                int track_random = random.Next(0, results.Tracks.Count());
+
+                                track = results.Tracks.ElementAtOrDefault(track_random);
+                                await player.PlayAsync(track);
+                                await now_async(default);
+                                return;
+                            }
+                        }
+
                         await player.TextChannel.SendMessageAsync(default, default, new EmbedBuilder()
                             .WithColor(Color.Green)
                             .WithDescription("There are no more tracks in the queue. Disconnecting")
@@ -311,7 +311,7 @@ namespace maicy_bot_core.MaicyServices
 
             if (lava_player.VoiceChannel != voice_channel)
             {
-                return "Please join the voice channel the bot is in to trigger autoplay";
+                return "Please join the voice channel the bot is in to toggle autoplay";
             }
 
             if (Gvar.toggle_auto is true)
@@ -503,7 +503,6 @@ namespace maicy_bot_core.MaicyServices
                                         .WithDescription("Please join the voice channel the bot is in to queue track.")
                                         .WithCurrentTimestamp()
                                         .Build());
-                    lava_player = null;
                     return;
                 }
 
@@ -599,7 +598,7 @@ namespace maicy_bot_core.MaicyServices
                     string[] collection = search.Split('/');
 
                     string[] spotify_id = collection[collection.Count() - 1].Split("?si=");
-
+                    
                     FullPlaylist sp_playlist = _spotify.GetPlaylist(spotify_id[0], fields: "", market: "");
 
                     if (sp_playlist.Tracks.Total > 200)
@@ -637,7 +636,7 @@ namespace maicy_bot_core.MaicyServices
                             }
                         }
 
-                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Artists.FirstOrDefault().Name + " " + sp_item.Track.Name);
+                        results = await lava_rest_client.SearchYouTubeAsync(sp_item.Track.Name + " " + sp_item.Track.Artists.FirstOrDefault().Name);
 
                         if (results.LoadType == LoadType.NoMatches
                             || results.LoadType == LoadType.LoadFailed
@@ -728,7 +727,7 @@ namespace maicy_bot_core.MaicyServices
 
                 await channel.SendMessageAsync(default, default, new EmbedBuilder()
                     .WithColor(Color.Green)
-                    .WithDescription($"Error while removing track , {ex.Message}")
+                    .WithDescription($"Error , {ex.Message}")
                     .WithCurrentTimestamp()
                     .Build());
 
